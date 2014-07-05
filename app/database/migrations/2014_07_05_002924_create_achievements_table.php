@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateOrganizationsTable extends Migration {
+class CreateAchievementsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -11,13 +11,12 @@ class CreateOrganizationsTable extends Migration {
 	 * @return void
 	 */
 	public function up() {
-		Schema::create('organizations', function(Blueprint $table) {
+		Schema::create('achievements', function(Blueprint $table) {
 			$table -> increments('id');
-			$table -> string('name') -> nullable();
+			$table -> string('title') -> nullable();
 			$table -> text('description') -> nullable();
-			$table -> string('slug') -> nullable();
-			$table -> text('picture') -> nullable();
-			$table -> timestamps();
+			$table -> integer('required_points') -> nullable();
+			$table -> text('picture') -> nullable();			
 		});
 	}
 
@@ -27,7 +26,7 @@ class CreateOrganizationsTable extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		Schema::drop('organizations');
+		Schema::drop('achievements');
 	}
 
 }
