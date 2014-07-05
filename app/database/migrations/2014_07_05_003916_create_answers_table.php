@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateAnswerQuizTable extends Migration {
+class CreateAnswersTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -11,7 +11,7 @@ class CreateAnswerQuizTable extends Migration {
 	 * @return void
 	 */
 	public function up() {
-		Schema::create('answer_quiz', function(Blueprint $table) {
+		Schema::create('answers', function(Blueprint $table) {
 			$table -> increments('id');
 			$table -> integer('quiz_id') -> unsigned() -> index();
 			$table -> foreign('quiz_id') -> references('id') -> on('quizes') -> onDelete('cascade');
