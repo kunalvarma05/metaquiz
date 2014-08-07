@@ -10,11 +10,11 @@ jQuery(document).ready(function() {
 	//On Connection Establish
 	chat.on('connect', function() {
 		//Get the user's friends
-		jQuery.getJSON('ajax/user/friends', function(data) {
+		jQuery.getJSON('ajax/user/friends', function(friends) {
 			//Emit data to the server with the current user id to mark the user as online and friends of the current user to determine which friends are online
 			chat.emit('init', {
 				user_id : current_user_id,
-				friends : data
+				friends : friends
 			});
 		});
 	});
@@ -48,9 +48,13 @@ jQuery(document).ready(function() {
 		log("friend online: " + friend_id);
 	});
 
+	//When a friend goes offline
 	chat.on('friend_offline', function(friend_id) {
+		//Find the user in the friends online widget
 		var ele = jQuery(".friends-online-widget").find("[data-user-id=" + friend_id + "]");
+		//If the user exists
 		if (ele.length) {
+			//Remove user's listing
 			ele.remove();
 		}
 		log("friend offline: " + friend_id);
