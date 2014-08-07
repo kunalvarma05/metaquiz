@@ -1,0 +1,1 @@
+!function(n){var r={};n.fn.inject=function(n){var t=this.html();return r[t]=Handlebars.compile(t),r[t](n)}}(jQuery);

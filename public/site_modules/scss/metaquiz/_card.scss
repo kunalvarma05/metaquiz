@@ -1,0 +1,70 @@
+/**
+ *   Card
+ */
+
+//Card
+.card{  
+  max-width: 300px;
+  width: 100%;
+  margin: auto;    
+  //Card Header
+  .card-header{
+    text-align: center;
+    color: lighten($body-bg, 40%);
+    padding: 10px;
+  }
+  //Card Inside
+  .card-inside{ 
+    background: rgba(255,255,255,0.9);   
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.3);
+    border-radius: 3px;    
+    //Card Thumb
+    .card-thumb{                  
+      padding: 20px;
+      //Img
+      img{
+        background: #fff;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: solid 1px #ccc;
+        box-shadow: inset 0px 2px 3px rgba(0,0,0,0.09), 0px 1px 0px #fff;
+        padding: 10px;                  
+        display: block;
+        margin: auto;
+      }   
+      //Thumb Title
+      .thumb-title{
+        font-size: 16px;
+        color: lighten($body-bg, 15%);
+        text-align: center;
+        display: block;
+        margin: 0;
+        padding-top: 20px;
+      }   
+    }
+    //Card Body
+    .card-body{
+      background: #fff;      
+      padding: 20px;      
+      border-top: solid 1px #ddd;
+      //Form
+      form{
+        //Label
+        label{
+          color: lighten($body-bg, 15%);
+        }
+      }
+    }
+    //Card Footer
+    .card-footer{
+      border-top: solid 1px #ddd;      
+      padding: 10px 20px;
+      //A
+      a{
+        color: lighten($body-bg, 20%);
+        text-shadow: 0px 1px 0px #fff;
+      }
+    }
+  }
+}

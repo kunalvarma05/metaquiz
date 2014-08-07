@@ -79,3 +79,29 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+/*
+|--------------------------------------------------------------------------
+| Require The Helpers File
+|--------------------------------------------------------------------------
+|
+| Next we will load the helpers file for the application. This gives us
+| a nice separate location to store our helpers and
+| definitions instead of putting them all in the main routes file.
+|
+*/
+
+require app_path().'/helpers.php';
+
+
+/*
+|--------------------------------------------------------------------------
+| Require The Composers File
+|--------------------------------------------------------------------------
+|
+| Next we will load the composers file for the application. This gives us
+| a nice separate location to store our view composers
+|
+*/
+
+require app_path() . "/composers/composers.php";

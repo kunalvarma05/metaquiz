@@ -1,0 +1,79 @@
+/**
+ *   Extras
+ */
+//No Margin
+.no-margin{
+  margin: 0 !important;
+}
+//Text Large
+.text-large{
+  font-size: 20px;
+}
+//Dropdown Caret Fix
+.dropdown-menu:before {
+  position: absolute;
+  top: -7px;
+  left: 9px;
+  display: inline-block;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #ccc;
+  border-left: 7px solid transparent;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  content: '';
+}
+
+.dropdown-menu:after {
+  position: absolute;
+  top: -6px;
+  left: 10px;
+  display: inline-block;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #ffffff;
+  border-left: 6px solid transparent;
+  content: '';
+}
+.navbar .navbar-right > li > .dropdown-menu:before, .navbar .nav > li > .dropdown-menu.navbar-right{
+  &:before{
+    right: 12px; left: auto;
+  }
+}
+.navbar .navbar-right > li > .dropdown-menu:after, .navbar .nav > li > .dropdown-menu.navbar-right{
+  &:after{
+    right: 13px; left: auto;
+  }
+}
+
+//Activation Card
+.activation-card{
+  margin-top: 7% !important;
+}
+
+//Small Alert
+.alert-sm{
+  padding: 10px;
+}
+//Flash Message
+.flash-message {
+  position: fixed;
+  top: 0;
+  max-width: 600px;
+  width: 100%;
+  left: 50%;
+  margin-left: -300px;
+  text-align: center;
+  background: #F8F8F8;
+  border-radius: 0 0 2px 2px;
+  padding: 10px;
+  font-weight: 700;
+  color: #7888B0;
+  box-shadow: 0 2px 10px rgba(0,0,0,.2);
+  text-shadow: 0 1px 0 #fff;
+}
+
+//Column Heading
+.column-heading {
+  padding: 8px 2px;
+  color: #9797B3;
+  font-weight: bold;
+  font-size: 11px;
+}
