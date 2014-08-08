@@ -1,9 +1,30 @@
 <?php
 
+use MetaQuiz\Repositories\User\UserInterface;
+use MetaQuiz\Service\Form\User\UserForm;
+use MetaQuiz\Service\Form\Activate\ActivateForm;
+
 class UsersController extends \BaseController {
 
-	public function connect() {
+	//User Repo
+	protected $user;
 
+	//User Form
+	protected $userForm;
+
+	//Activate Form
+	protected $activateForm;
+
+	public function __construct(UserInterface $user, UserForm $userForm, ActivateForm $activateForm) {
+		//The User Interface
+		$this -> user = $user;
+		//The UserForm Class
+		$this -> userForm = $userForm;
+		//The ActivateForm Class
+		$this -> activateForm = $activateForm;
+	}
+
+	public function connect() {
 		/**
 		 * Obtain an access token.
 		 */
@@ -98,23 +119,27 @@ class UsersController extends \BaseController {
 	 */
 	public function activate() {
 		$code = Input::only('code');
-		$validator = Validator::make($code, array('code' => "required"));
-		if ($validator -> passes()) {
-			$user = User::find(Auth::user() -> id);
-			$activation = $user -> activation() -> where('code', '=', $code) -> first();
-			if ($activation) {
-				$user -> is_activated = true;
-				if ($user -> save()) {
-					return Redirect::to('/') -> with('flash-message', "Awesome! Your account was activated successfully.");
-				} else {
-					return $user -> errors();
-				}
-			} else {
-				return Redirect::back() -> with('error', "Incorrect Activation Code");
-			}
+		$id = Auth::user() -> id;
+		if ($this -> activateForm -> activate($id, $code)) {
+			return Redirect::back() -> with('flash-message', "Awesome! Your account was activated successfully.");
 		} else {
-			return Redirect::back() -> with('error', $validator -> messages() -> first());
+			return Redirect::back() -> with('error', $this -> activateForm -> errors() -> first());
 		}
+	}
+
+	/**
+	 * Get friends of the logged in user
+	 */
+	public function getFriends() {
+		return $this -> user -> getFriends(Auth::user() -> id);
+
+	}
+
+	/**
+	 * Get info of the user from the given id
+	 */
+	public function getInfo($id) {
+		return $this -> user -> getInfo($id);
 	}
 
 }
