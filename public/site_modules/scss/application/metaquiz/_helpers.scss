@@ -1,0 +1,27 @@
+/**
+ *   Helpers
+ */
+//Truncate the overlapping text and add ellipsis
+.truncate {    
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+//Make the element block
+.block {
+  display: block;
+}
+
+%vertical-align {
+  position: relative;  
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+//Hide an element
+.no-show{
+  display: none;
+}

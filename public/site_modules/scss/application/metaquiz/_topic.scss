@@ -1,0 +1,79 @@
+/**
+ *   Topic
+ */
+
+//Topic
+.topic{
+  background: #f5f5f5;
+  color: #81819f !important;
+  display: block;
+  padding: 10px;
+  border-radius: 3px;
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+  margin-bottom: 15px;
+  border: solid 2px transparent;
+  @extend .clearfix;    
+  //Topic Thumb
+  .topic-thumb{    
+    padding: 10px;    
+    width: 40px;
+    text-align: center;
+    margin-right: 10px;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-block;
+    background: $brand-warning;
+    color: #fff;
+  } 
+  //Topic Text          
+  .topic-text{
+    display: inline-block;    
+    font-size: 14px;
+    font-weight: bold;
+    width: 70%;
+    line-height: 1;
+    @extend .truncate;         
+  }  
+  //Arrow
+  .arrow{
+    padding: 15px 0;
+    margin-right: 5px;
+    transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -ms-transition: 0.2s ease all;
+    -o-transition: 0.2s ease all;
+  }
+  //Hover
+  &:hover{
+    .arrow{
+      margin-right: 0;
+    }
+  }
+  //Active/Open
+  &.active, &.open{
+    border-color: darken($body-bg, 10%);
+    box-shadow: none;
+    .arrow{
+      margin-right: 0;
+    }
+  }
+}
+//Topic Group
+.topic-group{
+  margin-bottom: 15px;
+}
+//Sub Menu Collapse
+.sub-menu-collapse {
+  background: darken($body-bg, 10%);
+  padding: 5px;
+  margin: -15px auto;
+  margin-bottom: 15px;
+  width: 70%;
+  border-radius: 0 0 3px 3px;
+  //Pane
+  .pane{
+    padding: 5px;
+  }
+}

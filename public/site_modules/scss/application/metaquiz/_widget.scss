@@ -1,0 +1,57 @@
+/**
+ *   Widget
+ */
+
+//Widget
+.widget{
+  margin: 10px; 
+  overflow: hidden; 
+  position: relative;
+  //Widget Title
+  .widget-title{
+    color: #8D8DE0;
+    margin-bottom: 5px;    
+  }
+  //Widget Body
+  .widget-body{
+    //widget Item
+    .widget-item{
+      padding: 2px 5px;
+      border-radius: 2px;
+      font-size: 11px;
+      //Hover
+      &:hover{
+        background: rgba(0,0,0,0.2);
+      }      
+      //A        
+      a{
+        color: #8282A0;
+        padding: 5px 0;
+        display: block;             
+        max-height: 44px;
+        overflow: hidden;
+        //widget Item Image
+        .widget-item-image{                                     
+          width: 20px;
+          height: 20px;          
+          display: inline-block;
+          margin-right: 3px;
+          border-radius: 2px;
+        }
+        //widget Item Text
+        .widget-item-text{         
+          //Online
+          .online{
+            background: $brand-success;
+            border-radius: 50%;
+            width: 6px;
+            height: 6px;
+            display: inline-block;
+            margin: 7px 0;
+            float: right;            
+          }
+        }
+      }
+    }
+  }
+}
