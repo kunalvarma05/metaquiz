@@ -315,7 +315,7 @@ a.bg-info:hover{background-color:#afdaee}
 a.bg-warning:hover{background-color:#f7ecb5}
 .bg-danger{background-color:#f2dede}
 a.bg-danger:hover{background-color:#e4b9b9}
-.page-header{padding-bottom:9px;margin:40px 0 20px;border-bottom:1px solid #eee}
+.page-header{padding-bottom:9px;margin:10px 0 20px;border-bottom:1px solid #eee}
 ol,ul{margin-top:0;margin-bottom:10px}
 ol ol,ol ul,ul ol,ul ul{margin-bottom:0}
 .list-inline,.list-unstyled{padding-left:0;list-style:none}
