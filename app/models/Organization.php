@@ -5,17 +5,17 @@ class Organization extends \Eloquent {
 
 	//Students
 	public function students() {
-		return $this -> hasMany('User', 'organization_id') -> where('type', '=', 'student');
+		return $this -> hasMany('User', 'organization_id') -> where('accountable_type', '=', 'Student');
 	}
 
 	//Teachers
 	public function teachers() {
-		return $this -> hasMany('User', 'organization_id') -> where('type', '=', 'teacher');
+		return $this -> hasMany('User', 'organization_id') -> where('accountable_type', '=', 'Teacher');
 	}
 
 	//Admins
 	public function admins() {
-		return $this -> hasMany('User', 'organization_id') -> where('type', '=', 'admin');
+		return $this -> hasMany('User', 'organization_id') -> where('accountable_type', '=', 'Admin');
 	}
 
 	//Courses

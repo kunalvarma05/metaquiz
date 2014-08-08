@@ -51,7 +51,7 @@
 		@include('app.partials.templates')
 		<!--End: Template-->
 		<!--Scripts-->
-		<input type="hidden" id="current_user" value="{{Auth::user()->id}}">		
+		<input type="hidden" id="current_user" value="{{Auth::user()->id}}">
 		<?= javascript_include_tag() ?>
 		<!--End: Scripts-->
 	</body>

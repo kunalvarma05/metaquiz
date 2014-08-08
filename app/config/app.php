@@ -78,7 +78,7 @@ return array(
 	|
 	*/
 
-	'key' => 'YourSecretKey!!!',
+	'key' => 'V!Cqvhf-h8Dpv-L2%$N1rKzd#Ez9!vz2',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
@@ -122,6 +122,8 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',		
 		'SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider',
+		'MetaQuiz\Service\Form\FormServiceProvider',		
+		'MetaQuiz\Repositories\RepositoryServiceProvider',
 
 	),
 

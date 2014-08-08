@@ -9,7 +9,7 @@
 					<a href="#">What is MetaQuiz</a>
 				</li>
 				<li>
-					<a href="#">Contact</a>
+					<a href="{{route('organization-apply')}}">Apply</a>
 				</li>
 			</ul>
 		</div>

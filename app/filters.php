@@ -95,8 +95,42 @@ Route::filter('activated', function() {
 	}
 });
 
+/**
+ * Ajax Filter
+ * Aborts the request if the route isn't accessed through an AJAX Call
+ */
 Route::filter('ajax', function() {
 	if (!Request::ajax()) {
+		return App::abort('404');
+	}
+});
+
+/**
+ * Admin
+ * Checks whether the logged in user is Admin of an Organization
+ */
+Route::filter('admin', function() {
+	if (Auth::user() -> accountable_type !== "Admin") {
+		return App::abort('404');
+	}
+});
+
+/**
+ * Teacher
+ * Checks whether the logged in user is a Teacher of an Organization
+ */
+Route::filter('teacher', function() {
+	if (Auth::user() -> accountable_type !== "Teacher") {
+		return App::abort('404');
+	}
+});
+
+/**
+ * Student
+ * Checks whether the logged in user is a Student of an Organization
+ */
+Route::filter('student', function() {
+	if (Auth::user() -> accountable_type !== "Student") {
 		return App::abort('404');
 	}
 });
