@@ -13,3 +13,9 @@ Route::get('login/{id?}', array('as' => "login", 'before' => "guest", 'uses' => 
  * Handle the data from Facebook Connect Callback
  */
 Route::get('connect', array('as' => "connect", "uses" => "UsersController@connect"));
+
+/**
+ * Logout
+ * The Logout URL
+ */
+Route::get('logout', array('as' => "logout", 'before' => "auth", 'uses' => "RoutesController@logoutRoute"));

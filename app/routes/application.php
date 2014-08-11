@@ -13,10 +13,5 @@ Route::group(array('before' => "auth", 'prefix' => "app"), function() {
 	 * Subjects Route
 	 * The Subjects Page
 	 */
-	Route::get('subjects', array('as' => "subjects", "uses" => "ApplicationsController@subjectsPage"));
-	/**
-	 * Logout
-	 * The Logout URL
-	 */
-	Route::get('logout', array('as' => "logout", 'before' => "auth", 'uses' => "RoutesController@logoutRoute"));
+	Route::get('subjects', array('as' => "subjects", "uses" => "ApplicationsController@subjectsPage"));	
 });
