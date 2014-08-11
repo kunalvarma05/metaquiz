@@ -15,21 +15,22 @@ Route::group(array('before' => 'activated'), function() {
 	 * Routes for AJAX Requests
 	 */
 	if (Request::ajax()) {
-		require_once app_path() . "/routes/ajax.php";
+		require_once app_path('routes') . "/ajax.php";
 	}
 
 	/**
 	 * Authentication Routes
 	 * Routes that handle the authentication views and logic
 	 */
-	require_once app_path() . "/routes/authentication.php";
+	require_once app_path('routes') . "/authentication.php";
 
 	/**
 	 * Auth Routes
 	 * These routes require the user to be logged in
 	 */
-	require_once app_path() . "/routes/auth.php";
+	require_once app_path('routes') . "/auth.php";
 });
+
 /**
  * Account Activation Form
  */
