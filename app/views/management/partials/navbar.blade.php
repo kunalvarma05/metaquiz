@@ -12,7 +12,12 @@
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="main-navbar-collapse">
-			<ul class="nav navbar-nav">				
+			<ul class="nav navbar-nav">
+				@if(Entrust::can('manage_courses'))
+				<li class="{{HTML::activeState('admin-courses')}}">
+					<a href="{{route('admin-courses')}}">Courses</a>
+				</li>
+				@endif
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
