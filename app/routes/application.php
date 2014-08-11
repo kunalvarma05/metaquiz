@@ -3,7 +3,7 @@
  * Auth Routes
  * These routes require the user to be logged in
  */
-Route::group(array('before' => "auth"), function() {
+Route::group(array('before' => "auth", 'prefix' => "app"), function() {
 	/**
 	 * Home Route
 	 * The Home Page
