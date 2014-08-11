@@ -7,7 +7,8 @@
 		"laravel/framework": "4.2.*",
 		"sammyk/laravel-facebook-sdk": "~1.1",
 		"laravelbook/ardent": "2.*",
-		"iron-io/iron_mq": "3.*@dev"
+		"iron-io/iron_mq": "3.*@dev",
+		"zizaco/entrust": "1.2.*@dev"
 	},
 	"require-dev": {
 		"codesleeve/asset-pipeline": "dev-master",
