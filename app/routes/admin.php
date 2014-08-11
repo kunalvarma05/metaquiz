@@ -8,7 +8,7 @@ Route::group(array('before' => "auth", 'prefix' => "admin"), function() {
 	 * Home Route
 	 * The Home Page
 	 */
-	Route::get('admin', array('as' => "admin", 'uses' => "AdminsController@dashboard"));
+	Route::get('/', array('as' => "admin", 'uses' => "AdminsController@dashboard"));
 
 	/**
 	 * Courses Route
