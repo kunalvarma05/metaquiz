@@ -12,10 +12,7 @@
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="main-navbar-collapse">
-			<ul class="nav navbar-nav">
-				<li>
-					<a href="{{route('organization.courses.index', array(Auth::user()->organization->id))}}">Courses</a>
-				</li>
+			<ul class="nav navbar-nav">				
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">

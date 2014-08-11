@@ -38,4 +38,10 @@ Route::group(array('before' => 'activated'), function() {
 	 * These routes require the user to be a Student
 	 */
 	require_once app_path('routes') . "/application.php";
+
+	/**
+	 * Admin Routes
+	 * These routes require the user to be an Admin
+	 */
+	require_once app_path('routes') . "/admin.php";
 });
