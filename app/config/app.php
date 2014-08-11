@@ -124,6 +124,7 @@ return array(
 		'SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider',
 		'MetaQuiz\Service\Form\FormServiceProvider',		
 		'MetaQuiz\Repositories\RepositoryServiceProvider',
+		'Zizaco\Entrust\EntrustServiceProvider'
 
 	),
 
@@ -191,7 +192,8 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-		'Facebook' => 'SammyK\LaravelFacebookSdk\FacebookFacade',
+		'Facebook' 		  => 'SammyK\LaravelFacebookSdk\FacebookFacade',
+		'Entrust'  		  => 'Zizaco\Entrust\EntrustFacade'
 
 	),
 
