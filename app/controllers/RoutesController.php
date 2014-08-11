@@ -7,8 +7,7 @@ class RoutesController extends BaseController {
 	 */
 	public function baseRoute() {
 		//If the user is logged in
-		if (Auth::check()) {
-			return Redirect::to(URL::route('home'));
+		if (Auth::check()) {			
 			$type = Auth::user() -> accountable_type;
 			switch ($type) {
 				case 'Student' :
