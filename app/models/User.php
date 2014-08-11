@@ -1,5 +1,6 @@
 <?php
 
+use Zizaco\Entrust\HasRole;
 use LaravelBook\Ardent\Ardent;
 use Illuminate\Auth\UserTrait;
 use Illuminate\Auth\UserInterface;
@@ -8,7 +9,7 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 
 class User extends Ardent implements UserInterface, RemindableInterface {
 
-	use UserTrait, RemindableTrait;
+	use UserTrait, RemindableTrait, HasRole;
 
 	/**
 	 * The database table used by the model.
