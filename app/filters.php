@@ -109,28 +109,16 @@ Route::filter('ajax', function() {
  * Admin
  * Checks whether the logged in user is Admin of an Organization
  */
-Route::filter('admin', function() {
-	if (Auth::user() -> accountable_type !== "Admin") {
-		return App::abort('404');
-	}
-});
+Entrust::routeNeedsRole('admin/*', 'Admin');
 
 /**
  * Teacher
  * Checks whether the logged in user is a Teacher of an Organization
  */
-Route::filter('teacher', function() {
-	if (Auth::user() -> accountable_type !== "Teacher") {
-		return App::abort('404');
-	}
-});
+Entrust::routeNeedsRole('faculty/*', 'Teacher');
 
 /**
  * Student
  * Checks whether the logged in user is a Student of an Organization
  */
-Route::filter('student', function() {
-	if (Auth::user() -> accountable_type !== "Student") {
-		return App::abort('404');
-	}
-});
+Entrust::routeNeedsRole('app/*', 'Student');
