@@ -8,24 +8,24 @@ class RoutesController extends BaseController {
 	public function baseRoute() {
 		//If the user is logged in
 		if (Auth::check()) {
-			return Redirect::to('home');
+			return Redirect::to(URL::route('home'));
 			$type = Auth::user() -> accountable_type;
 			switch ($type) {
 				case 'Student' :
 					//Route to Home
-					return Redirect::to('home');
+					return Redirect::to(URL::route('home'));
 					break;
 				case 'Teacher' :
 					//Route to Faculty
-					return Redirect::to('faculty');
+					return Redirect::to(URL::route('faculty'));
 					break;
 				case 'Admin' :
 					//Route to Management
-					return Redirect::to('management');
+					return Redirect::to(URL::route('admin'));
 					break;
 				default :
 					//Route to Home
-					return Redirect::to('home');
+					return Redirect::to(URL::route('home'));
 					break;
 			}
 		} else {
