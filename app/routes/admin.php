@@ -8,5 +8,11 @@ Route::group(array('before' => "auth", 'prefix' => "admin"), function() {
 	 * Home Route
 	 * The Home Page
 	 */
-	Route::get('/', array('as' => "admin", 'uses' => "AdminsController@dashboard"));
+	Route::get('admin', array('as' => "admin", 'uses' => "AdminsController@dashboard"));
+
+	/**
+	 * Courses Route
+	 * The Courses Route
+	 */
+	Route::get('courses', array('as' => "admin-courses", 'uses' => "CoursesController@index"));
 });
