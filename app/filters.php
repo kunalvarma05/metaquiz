@@ -109,16 +109,16 @@ Route::filter('ajax', function() {
  * Admin
  * Checks whether the logged in user is Admin of an Organization
  */
-Entrust::routeNeedsRole('admin/*', 'Admin');
+Entrust::routeNeedsRole('/admin/*', 'Admin');
 
 /**
  * Teacher
  * Checks whether the logged in user is a Teacher of an Organization
  */
-Entrust::routeNeedsRole('faculty/*', 'Teacher');
+Entrust::routeNeedsRole('/faculty/*', 'Teacher');
 
 /**
  * Student
  * Checks whether the logged in user is a Student of an Organization
  */
-Entrust::routeNeedsRole('app/*', 'Student');
+Entrust::routeNeedsRole('/app/*', 'Student');
