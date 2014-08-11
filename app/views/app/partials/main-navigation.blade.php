@@ -1,10 +1,10 @@
 <div class="nav-main hidden-xs hidden-sm">
 	<ul>
 		<li>
-			<a href="{{url('/')}}" class="logo"><img src="assets/images/logo.png" alt="MetaQuiz"></a>
+			<a href="{{url('/')}}" class="logo"><img src="{{url('assets/images/logo.png')}}" alt="MetaQuiz"></a>
 		</li>
 		<li class="{{HTML::activeState('home')}}">
-			<a href="{{url('home')}}" data-toggle="tooltip" data-placement="right" class="icon-home home-icon" title="Home"></a>
+			<a href="{{route('home')}}" data-toggle="tooltip" data-placement="right" class="icon-home home-icon" title="Home"></a>
 		</li>
 		<li class="{{HTML::activeState('subjects')}}">
 			<a href="{{route('subjects')}}" data-toggle="tooltip" data-placement="right" class="icon-grid subject-icon" title="Subjects"></a>
