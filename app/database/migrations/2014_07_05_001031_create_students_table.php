@@ -12,8 +12,11 @@ class CreateStudentsTable extends Migration {
 	 */
 	public function up() {
 		Schema::create('students', function(Blueprint $table) {
-			$table -> increments('id');
-			$table -> string('roll_no') -> nullable();					
+			$table -> increments('id') -> index();
+			$table -> string('roll_no') -> nullable();
+			$table -> integer('course_id') -> nullable() -> unsigned();
+			$table -> foreign('course_id') -> references('id') -> on('courses') -> onDelete('cascade');
+			$table -> timestamps();
 		});
 	}
 

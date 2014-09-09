@@ -1,0 +1,9 @@
+//= require alert.js
+//= require button.js
+//= require collapse.js
+//= require dropdown.js
+//= require tab.js
+//= require transition.js
+//= require modal.js
+//= require tooltip.js
+//= require popover.js

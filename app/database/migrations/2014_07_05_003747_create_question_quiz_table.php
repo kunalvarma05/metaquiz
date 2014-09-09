@@ -12,7 +12,7 @@ class CreateQuestionQuizTable extends Migration {
 	 */
 	public function up() {
 		Schema::create('question_quiz', function(Blueprint $table) {
-			$table -> increments('id');
+			$table -> increments('id') -> index();
 			$table -> integer('question_id') -> unsigned() -> index();
 			$table -> foreign('question_id') -> references('id') -> on('questions') -> onDelete('cascade');
 			$table -> integer('quiz_id') -> unsigned() -> index();

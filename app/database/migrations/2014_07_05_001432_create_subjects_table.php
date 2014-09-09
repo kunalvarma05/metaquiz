@@ -12,12 +12,12 @@ class CreateSubjectsTable extends Migration {
 	 */
 	public function up() {
 		Schema::create('subjects', function(Blueprint $table) {
-			$table -> increments('id');
+			$table -> increments('id') -> index();
 			$table -> string('name') -> nullable();
 			$table -> text('description') -> nullable();
+			$table -> string('icon') -> nullable();
 			$table -> string('slug') -> nullable();
-			$table -> text('picture') -> nullable();
-			$table -> integer('course_id') -> unsigned() -> nullable();
+			$table -> integer('course_id') -> nullable() -> unsigned();
 			$table -> foreign('course_id') -> references('id') -> on('courses') -> onDelete('cascade');
 			$table -> timestamps();
 		});

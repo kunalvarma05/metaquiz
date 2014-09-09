@@ -12,9 +12,9 @@ class CreateQuestionsTable extends Migration {
 	 */
 	public function up() {
 		Schema::create('questions', function(Blueprint $table) {
-			$table -> increments('id');
+			$table -> increments('id') -> index();
 			$table -> text('title') -> nullable();
-			$table -> integer('chapter_id') -> unsigned() -> nullable();
+			$table -> integer('chapter_id') -> nullable() -> unsigned();
 			$table -> foreign('chapter_id') -> references('id') -> on('chapters') -> onDelete('cascade');
 			$table -> timestamps();
 		});

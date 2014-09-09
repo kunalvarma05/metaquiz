@@ -1,7 +1,7 @@
 <?php
 namespace MetaQuiz\Service\Form\Activate;
 
-use MetaQuiz\Repositories\User\UserInterface;
+use MetaQuiz\Repositories\Activation\ActivationInterface;
 use Hash;
 
 class ActivateForm {
@@ -18,17 +18,17 @@ class ActivateForm {
 	protected $validator;
 
 	/**
-	 * User Repository
-	 * @var \MetaQuiz\Repo\User\UserInterface
+	 * Activation Repository
+	 * @var \MetaQuiz\Repo\Activation\ActivationInterface
 	 */
-	protected $user;
+	protected $activation;
 
 	/**
 	 * Constructor
 	 */
-	public function __construct(ActivateFormValidator $validator, UserInterface $user) {
+	public function __construct(ActivateFormValidator $validator, ActivationInterface $activation) {
 		$this -> validator = $validator;
-		$this -> user = $user;
+		$this -> activation = $activation;
 	}
 
 	/**
@@ -37,10 +37,11 @@ class ActivateForm {
 	 * @return bool
 	 */
 	public function activate($id, $code) {
-		if (!$this -> valid($code)) {
+		if (!$this -> valid(array('code' => $code))) {
 			return false;
 		}
-		return $this -> user -> activate($id, $code);
+		$activation = $this -> activation -> activate($id, $code);
+		return $activation;
 	}
 
 	/**

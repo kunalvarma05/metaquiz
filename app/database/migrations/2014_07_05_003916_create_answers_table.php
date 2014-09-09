@@ -12,7 +12,9 @@ class CreateAnswersTable extends Migration {
 	 */
 	public function up() {
 		Schema::create('answers', function(Blueprint $table) {
-			$table -> increments('id');
+			$table -> increments('id') -> index();
+			$table -> integer('quiz_id') -> unsigned() -> index();
+			$table -> foreign('quiz_id') -> references('id') -> on('quizes') -> onDelete('cascade');
 			$table -> integer('quiz_question_id') -> unsigned() -> index();
 			$table -> foreign('quiz_question_id') -> references('id') -> on('question_quiz') -> onDelete('cascade');
 			$table -> integer('user_id') -> unsigned() -> index();
@@ -29,7 +31,7 @@ class CreateAnswersTable extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		Schema::drop('answer_quiz');
+		Schema::drop('answers');
 	}
 
 }

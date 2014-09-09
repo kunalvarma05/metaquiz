@@ -26,7 +26,7 @@ HTML::macro('activeState', function($route) {
 function bodyClass() {
 	$class = "";
 	if (Auth::guest()) {
-		$class = "splash";
+		$class = "no-user";
 	}
 	return $class;
 }
@@ -42,31 +42,30 @@ function arrToObj($array = array()) {
 
 /**
  * uploadPath
- * @param $directory String
+ * @param $type String
  * @return $path String
  */
-function uploadPath($directory = 'picture') {
-	$uploadDir = base_path() . "/uploads/";
-	switch ($directory) {
-		case 'picture' :
-			return $uploadDir . "pictures/";
-			break;
-		case 'attachment' :
-			return $uploadDir . "attachments/";
-			break;
+function uploadPath($type) {
+	$uploadDir = base_path() . "/uploads/pictures";
+	switch ($type) {
+		case 'user' :
+		return $uploadDir . "/" . Config::get('user.folder') . "/";
+		break;
+		case 'organization' :
+		return $uploadDir . "/" . Config::get('organization.folder') . "/";
+		break;
 		default :
-			return $uploadDir . "pictures/";
-			break;
+		return $uploadDir . "misc/";
+		break;
 	}
 }
 
 /**
- * uploadProfilePic
+ * uploadFacebookImage
  * @param $image String
  * @param $title String
- * @return $title String
  */
-function uploadProfilePic($image, $title) {
+function uploadFacebookImage($image, $title=null) {
 	$fname = "";
 	if (is_null($title)) {
 		$fname = Str::random(10) . time() . ".jpg";
@@ -74,7 +73,7 @@ function uploadProfilePic($image, $title) {
 		$fname = $title . ".jpg";
 	}
 	$picture = file_get_contents($image);
-	$file = uploadPath('picture') . $fname;
+	$file = uploadPath('user') . $fname;
 	file_put_contents($file, $picture);
 	return $fname;
 }
@@ -85,7 +84,7 @@ function uploadProfilePic($image, $title) {
  * @return $url String
  */
 function profilePic($pic = null) {
-	$storagePath = "/assets/pictures/";
+	$storagePath = "/assets/pictures/" . Config::get('user.folder') . "/";
 	if (is_null($pic) || empty($pic)) {
 		return url('/') . $storagePath . Config::get('user.defaultPicture');
 	} else {
@@ -94,25 +93,52 @@ function profilePic($pic = null) {
 }
 
 /**
- * uploadImage
- * @param $image (object)
+ * orgPic
+ * @param $pic String
+ * @return $url String
  */
-
-function uploadImage($image, $title = null) {
-	$fname = "";
-	if (is_null($title)) {
-		$fname = Str::random(10) . time() . ".jpg";
+function orgPic($pic = null) {
+	$storagePath = "/assets/pictures/" . Config::get('organization.folder') . "/";
+	if (is_null($pic) || empty($pic)) {
+		return url('/') . $storagePath . Config::get('organization.defaultPicture');
 	} else {
-		$fname = $title . ".jpg";
+		return url('/') . $storagePath . $pic;
 	}
-	$image -> move(upload_url('picture'), $fname);
-	return $fname;
 }
 
 /**
- * User Rank
- * @param $rank (int)
+ * uploadProfilePic
+ * @param $image (object)
+ * @param $title (string) optional
  */
-function userRank($rank) {
 
+function uploadProfilePic($image, $type, $title = null) {
+	if ($image -> isValid()) {
+		$fname = "";
+		if (is_null($title)) {
+			$fname = Str::random(10) . time() . ".jpg";
+		} else {
+			$fname = $title . ".jpg";
+		}
+		$image -> move(uploadPath($type), $fname);
+		return $fname;
+	}
+}
+
+function deleteProfilePic($image, $type){
+	if(!is_null($image)) {
+		$file = uploadPath($type) . $image;
+		if(File::exists($file)){
+			return File::delete($file);
+		}
+	}
+}
+
+/**
+ * Generate a random code
+ * @param  string $key Key to Hash
+ * @return String  The obfuscated hashed key
+ */
+function randomCode($key, $length = 8){
+	return substr(md5(microtime().rand().$key), 0, $length);
 }

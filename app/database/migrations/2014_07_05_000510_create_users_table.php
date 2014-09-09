@@ -12,14 +12,16 @@ class CreateUsersTable extends Migration {
 	 */
 	public function up() {
 		Schema::create('users', function(Blueprint $table) {
-			$table -> increments('id');
+			$table -> increments('id') -> index();
 			$table -> string('name') -> nullable();
 			$table -> string('email') -> nullable();
+			$table -> string('username') -> nullable();
 			$table -> text('password') -> nullable();
-			$table -> text('picture') -> nullable();
-			$table -> string('type') -> nullable();
 			$table -> string('fbid') -> nullable();
-			$table -> integer('organization_id') -> unsigned() -> nullable();
+			$table -> boolean('is_activated') -> nullable();
+			$table -> integer('accountable_id') -> unsigned();
+			$table -> string('accountable_type') -> nullable();
+			$table -> integer('organization_id') -> nullable() -> unsigned();
 			$table -> foreign('organization_id') -> references('id') -> on('organizations') -> onDelete('cascade');
 			$table -> timestamps();
 		});

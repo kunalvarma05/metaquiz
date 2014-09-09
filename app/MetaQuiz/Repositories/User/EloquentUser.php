@@ -1,32 +1,52 @@
 <?php
 namespace MetaQuiz\Repositories\User;
 
+use MetaQuiz\Repositories\AbstractEloquentRepository;
+use MetaQuiz\Repositories\Activity\ActivityInterface;
 use MetaQuiz\Service\Cache\CacheInterface;
 use Illuminate\Database\Eloquent\Model;
 use Redirect;
+use Activity;
 
-class EloquentUser implements UserInterface {
+class EloquentUser extends AbstractEloquentRepository implements UserInterface {
 
 	//The user object
-	protected $user;
+	protected $model;
 
 	//The Cache Object
 	protected $cache;
 
+	//The Activity Object
+	protected $activity;
+
 	//Class Dependency: Eloquent Model
-	public function __construct(Model $user, CacheInterface $cache) {
-		//Set the object
-		$this -> user = $user;
+	public function __construct(Model $model, ActivityInterface $activity, CacheInterface $cache) {
+		//Set the objects
+		$this -> model = $model;
 		$this -> cache = $cache;
+		$this -> activity = $activity;
 	}
 
 	/**
 	 * All
-	 * Get All the Users
-	 * @return object Object of the users information
+	 * Get all the users
+	 * @param array $with
+	 * @return User Collection
 	 */
-	public function all() {
-		return $this -> user -> all();
+	public function all($with = array()) {
+		//Generate the key
+		$key = md5('users.all');
+		//Check if it already exists
+		if ($this -> cache -> has($key)) {
+			//Return from cache
+			return $this -> cache -> get($key);
+		}
+		//Else query the data source
+		$users = parent::all($with);
+		//Store Cache
+		$this -> cache -> put($key, $users);
+		//And return
+		return $users;
 	}
 
 	/**
@@ -35,16 +55,16 @@ class EloquentUser implements UserInterface {
 	 * @param string Username of the user
 	 * @return object Object of user information
 	 */
-	public function byUsername($username) {
+	public function byUsername($username, $with = array()) {
 		//Generate the key
-		$key = md5('username.' . $username);
+		$key = md5('user.username.' . $username);
 		//Check if it already exists
 		if ($this -> cache -> has($key)) {
 			//Return from cache
 			return $this -> cache -> get($key);
 		}
 		//Else query the data source
-		$user = $this -> user -> where('username', $username) -> firstOrFail();
+		$user = $this -> getFirstBy('username', $username, $with);
 		//Store Cache
 		$this -> cache -> put($key, $user);
 		//And return
@@ -52,55 +72,25 @@ class EloquentUser implements UserInterface {
 	}
 
 	/**
-	 * getFriends
-	 * Get a the friends of the user
-	 * @param Integer ID of the user
-	 * @return object Object of user information
+	 * The Activity feed of a given user
+	 * @param  int $id The UserID
 	 */
-	public function getFriends($id) {
-		$user = $this -> user -> find($id);
-		$key = md5("user_friends_info_" . $user -> id);
-		if (!$this -> cache -> has($key)) {
-			$friends = $user -> friends() -> get() -> toArray();
-			$this -> cache -> put($key, $friends, 60);
-		}
-		return array_fetch($this -> cache -> get($key), 'friend_two');
+	public function feed($id) {
+		$feed = $this->activity->whereIn('user_id', function($query) use ($id) {
+			$query->select('friend_id')
+			->from('friends')
+			->where('user_id', $id)->where('status','accepted');
+		})->orWhere('user_id', $id)->get();
+		return $feed;
 	}
 
 	/**
-	 * getInfo
-	 * Get a the info of the given user
-	 * @param Integer ID of the user
-	 * @return object Object of user information
+	 * Get the friends of the user
+	 * @param  int $id   UserID
+	 * @param  array $with Related Models
 	 */
-	public function getInfo($id) {
-		$key = md5("user_info_" . $id);
-		if (!$this -> cache -> has($key)) {
-			$user = $this -> user -> findOrFail($id);
-			$this -> cache -> put($key, $user, 60);
-		}
-		return $this -> cache -> get($key);
-	}
-
-	/**
-	 * byID
-	 * Get a Single user by ID
-	 * @param Integer ID of the user
-	 * @return object Object of user information
-	 */
-
-	public function byID($id) {
-		//Generate the key
-		$key = md5('id.' . $id);
-		//Check if it already exists
-		if ($this -> cache -> has($key)) {
-			//Return from cache
-			return $this -> cache -> get($key);
-		}
-		$user = $this -> user -> findOrFail($id);
-		//Store Cache
-		$this -> cache -> put($key, $user);
-		return $user;
+	public function getFriends($id, array $with = array()){
+		return $this->requireByID($id, $with)->friends()->where('status','accepted')->get();
 	}
 
 	/**
@@ -110,32 +100,10 @@ class EloquentUser implements UserInterface {
 	 * @return bool
 	 */
 	public function create(array $input) {
-		$user = $this -> user -> create($input);
-		if (!$user) {
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Activate
-	 * Activate a User
-	 * @param Integer $id
-	 * @param String $code
-	 */
-	public function activate($id, $code) {
-		$user = $this -> user -> find($id);
-		$activation = $user -> activation() -> where('code', '=', $code) -> first();
-		if ($activation) {
-			$user -> is_activated = true;
-			if ($user -> save()) {
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return Redirect::back() -> with('error', "The entered code is incorrect!");
-		}
+		//Create the model
+		$user = $this -> model -> create($input);
+		//Return the user
+		return $user;
 	}
 
 }

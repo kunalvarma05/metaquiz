@@ -12,10 +12,12 @@ class CreateActivationsTable extends Migration {
 	 */
 	public function up() {
 		Schema::create('activations', function(Blueprint $table) {
-			$table -> increments('id');
+			$table -> increments('id') -> index();
 			$table -> text('code') -> nullable();
-			$table -> integer('user_id') -> unsigned() -> index();
-			$table -> foreign('user_id') -> references('id') -> on('users') -> onDelete('cascade');
+			$table -> integer('activable_id') -> nullable() -> unsigned();
+			$table -> string('activable_type') -> nullable();
+			$table -> integer('organization_id') -> nullable() -> unsigned();
+			$table -> foreign('organization_id') -> references('id') -> on('organizations') -> onDelete('cascade');
 			$table -> timestamps();
 		});
 	}

@@ -1,94 +1,77 @@
 <?php
 namespace MetaQuiz\Repositories\Organization;
 
+use MetaQuiz\Repositories\AbstractEloquentRepository;
 use MetaQuiz\Service\Cache\CacheInterface;
 use Illuminate\Database\Eloquent\Model;
 
-class EloquentOrganization implements OrganizationInterface {
+class EloquentOrganization extends AbstractEloquentRepository implements OrganizationInterface {
 
-	//The Org object
-	protected $org;
+	/**
+	 * $model The Eloquent model
+	 * @var Illuminate\Database\Eloquent\Model
+	 */
+	protected $model;
 
-	//The User Object
-	protected $user;
-
-	//The Cache Object
+	/**
+	 * $cache The Cache Interface
+	 * @var MetaQuiz\Service\Cache\CacheInterface
+	 */
 	protected $cache;
 
-	//Class Dependency: Eloquent Model
-	public function __construct(Model $org, Model $user, CacheInterface $cache) {
+	/**
+	 * __construct Create a new Eloquent Organization
+	 * @param Illuminate\Database\Eloquent\Model          $model The Eloquent Model
+	 * @param MetaQuiz\Service\Cache\CacheInterface $cache The Cache Interface
+	 * @return void
+	 */
+	public function __construct(Model $model, CacheInterface $cache) {
 		//Set the object
-		$this -> org = $org;
-		$this -> user = $user;
+		$this -> model = $model;
 		$this -> cache = $cache;
-	}
+	}	
 
 	/**
-	 * All
-	 * Get All the Organizations
-	 * @return object Object of the Organizations information
+	 * all Fetch all the organizations
+	 * @param  array $with Related Models for Eager Loading
+	 * @return Object The Organization Collection
 	 */
-	public function all() {
-		return $this -> org -> all();
-	}
+	public function all($with = array()) {
+		//Generate the key
+		$key = md5('organziations.all');
+		//Check if it already exists
+		if ($this -> cache -> has($key)) {
+			//Return from cache
+			return $this -> cache -> get($key);
+		}
+		//Else query the data source
+		$organizations = parent::all($with);
+		//Store Cache
+		$this -> cache -> put($key, $organizations);
+		//And return
+		return $organizations;
+	}	
 
 	/**
-	 * byID
-	 * Get a Single Organization by ID
-	 * @param Integer ID of the Organization
-	 * @return object Object of Organization information
+	 * bySlug Get a Single organization by Slug
+	 * @param string $slug Slug of the organization
+	 * @return Object Organization Collection
 	 */
-	public function byID($id) {
-		return $this -> org -> findOrFail($id);
-	}
+	public function bySlug($slug, $with = array()) {			
+		//Else query the data source
+		$organization = $this -> getFirstBy('slug', $slug, $with);
+		//Return		
+		return $organization;
+	}	
 
 	/**
-	 * bySlug
-	 * Get a Single Organization by Slug
-	 * @param string Slug of the Organization
-	 * @return object Object of Organization information
-	 */
-	public function bySlug($slug) {
-		return $this -> org -> where('slug', $slug) -> first();
-	}
-
-	/**
-	 * getTeachers
-	 * Get a the teachers of the Organization
-	 * @param Integer ID of the Organization
-	 * @return object Object of Organization information
-	 */
-	public function getTeachers($id) {
-		return $this -> org -> findOrFail($id) -> teachers() -> get();
-	}
-
-	/**
-	 * getStudents
-	 * Get a the students of the Organization
-	 * @param Integer ID of the Organization
-	 * @return object Object of Organization information
-	 */
-	public function getStudents($id) {
-		return $this -> org -> findOrFail($id) -> students() -> get();
-	}
-
-	/**
-	 * getCourses
-	 * Get a the courses of the Organization
-	 * @param Integer ID of the Organization
-	 * @return object Object of Organization information
-	 */
-	public function getCourses($id) {
-		return $this -> org -> findOrFail($id) -> courses() -> get();
-	}
-
-	/**
-	 * Create
-	 * Create a Organization
-	 * @param Input Data to be stored
-	 * @return bool
+	 * create Create a organization
+	 * @param Array $input Input Data to be stored
+	 * @return The Newly created Organization Model Instance
 	 */
 	public function create(array $input) {
+		//Return the Model Create method
+		return $this -> model -> create($input);
 	}
 
 }

@@ -15,6 +15,6 @@ class ActivateFormValidator extends AbstractValidator {
 	 * Custom Validation Messages
 	 * @var Array
 	 */
-	protected $messages = array('code.exists' => "The entered authentication code doesn't exist");
+	protected $messages = array('code.exists' => "The entered activation code doesn't exist");
 
 }

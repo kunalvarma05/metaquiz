@@ -1,9 +1,18 @@
 <?php
 
+/**
+ * 	The Option Class
+ */
 class Option extends \Eloquent {
-	protected $fillable = array();
+	/**
+	 * The Fillable Fields
+	 */
+	protected $fillable = array('title','is_answer','question_id');
 
-	//Question
+	/**
+	 * The Question the option belongs to
+	 * @return Question Collection
+	 */
 	public function question() {
 		return $this -> belongsTo('Question', 'question_id');
 	}

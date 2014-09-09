@@ -39,7 +39,7 @@ return array(
 	|
 	*/
 
-	'timezone' => 'UTC',
+	'timezone' => 'Asia/Kolkata',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -120,13 +120,17 @@ return array(
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
-		'Illuminate\Workbench\WorkbenchServiceProvider',		
-		'SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider',
-		'MetaQuiz\Service\Form\FormServiceProvider',		
+		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'MetaQuiz\Repositories\RepositoryServiceProvider',
-		'Zizaco\Entrust\EntrustServiceProvider'
-
-	),
+		'MetaQuiz\Service\Form\FormServiceProvider',
+		'MetaQuiz\Events\EventServiceProvider',
+		'SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider',
+		'Zizaco\Entrust\EntrustServiceProvider',
+		'Cviebrock\EloquentSluggable\SluggableServiceProvider',
+		'Codesleeve\LaravelStapler\LaravelStaplerServiceProvider',
+		'Maatwebsite\Excel\ExcelServiceProvider',
+		'DaveJamesMiller\Breadcrumbs\ServiceProvider',
+		),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -193,8 +197,11 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 		'Facebook' 		  => 'SammyK\LaravelFacebookSdk\FacebookFacade',
-		'Entrust'  		  => 'Zizaco\Entrust\EntrustFacade'
+		'Entrust'  		  => 'Zizaco\Entrust\EntrustFacade',
+		'Debugbar' 		  => 'Barryvdh\Debugbar\Facade',
+		'Excel' => 'Maatwebsite\Excel\Facades\Excel',
+		'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
 
-	),
+		),
 
 );

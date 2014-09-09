@@ -12,11 +12,12 @@ class CreateOptionsTable extends Migration {
 	 */
 	public function up() {
 		Schema::create('options', function(Blueprint $table) {
-			$table -> increments('id');
+			$table -> increments('id') -> index();
 			$table -> text('title') -> nullable();
 			$table -> boolean('is_answer') -> nullable();
-			$table -> integer('question_id') -> unsigned() -> nullable();
-			$table -> foreign('question_id') -> references('id') -> on('questions') -> onDelete('cascade');			
+			$table -> integer('question_id') -> nullable() -> unsigned();
+			$table -> foreign('question_id') -> references('id') -> on('questions') -> onDelete('cascade');
+			$table -> timestamps();			
 		});
 	}
 

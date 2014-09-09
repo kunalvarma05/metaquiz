@@ -16,7 +16,8 @@ class CreateQuizUserTable extends Migration {
 			$table -> integer('quiz_id') -> unsigned() -> index();
 			$table -> foreign('quiz_id') -> references('id') -> on('quizes') -> onDelete('cascade');
 			$table -> integer('user_id') -> unsigned() -> index();
-			$table -> foreign('user_id') -> references('id') -> on('users') -> onDelete('cascade');			
+			$table -> foreign('user_id') -> references('id') -> on('users') -> onDelete('cascade');
+			$table -> boolean('is_challenger') -> nullable();
 			$table -> timestamps();
 		});
 	}

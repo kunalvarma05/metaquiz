@@ -12,10 +12,12 @@ class CreateChallengesTable extends Migration {
 	 */
 	public function up() {
 		Schema::create('challenges', function(Blueprint $table) {
-			$table -> increments('id');
+			$table -> increments('id') -> index();
 			$table -> string('status') -> nullable();
-			$table -> integer('challenger_id') -> unsigned() -> nullable();
+			$table -> integer('challenger_id') -> nullable() -> unsigned();
 			$table -> foreign('challenger_id') -> references('id') -> on('users') -> onDelete('cascade');
+			$table -> integer('opponent_id') -> nullable() -> unsigned();
+			$table -> foreign('opponent_id') -> references('id') -> on('users') -> onDelete('cascade');
 			$table -> timestamps();
 		});
 	}

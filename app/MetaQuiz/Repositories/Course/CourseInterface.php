@@ -4,41 +4,39 @@ namespace MetaQuiz\Repositories\Course;
 interface CourseInterface {
 
 	/**
-	 * All
-	 * Get All the courses
-	 * @return object Object of the courses information
+	 * all Fetch all the Courses
+	 * @param  array $with Related Models for Eager Loading
+	 * @return Object The Course Collection
 	 */
-	public function all();
+	public function all($with = array());
 
 	/**
-	 * byID
-	 * Get a Single course by ID
-	 * @param Integer ID of the course
-	 * @return object Object of course information
+	 * byID Find Course by ID
+	 * @param  Integer $id   The ID of the Course
+	 * @param  array  $with Related Models for Eager Loading
+	 * @return Object The Course Collection
 	 */
-	public function byID($id);
+	public function byID($id, $with = array());
 
 	/**
-	 * bySlug
-	 * Get a Single course by Slug
-	 * @param string Slug of the course
-	 * @return object Object of course information
+	 * requireByID Get a single Course by ID and show if not found
+	 * @param Integer ID of the Course
+	 * @param Array $with [Related Models for Eager Loading]
+	 * @return Object Course Collection
 	 */
-	public function bySlug($slug);
+	public function requireByID($id, $with = array());
 
 	/**
-	 * getSubjects
-	 * Get a the subjects of the course
-	 * @param Integer ID of the course
-	 * @return object Object of subject information
+	 * bySlug Get a Single Course by Slug
+	 * @param string $slug Slug of the Course
+	 * @return Object Course Collection
 	 */
-	public function getSubjects($id);
+	public function bySlug($slug, $with = array());	
 
 	/**
-	 * Create
-	 * Create a course
-	 * @param Input Data to be stored
-	 * @return bool
+	 * create Create a Course
+	 * @param Array $input Input Data to be stored
+	 * @return The Newly created Course Model Instance
 	 */
 	public function create(array $input);
 

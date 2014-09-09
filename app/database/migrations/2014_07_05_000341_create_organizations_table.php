@@ -16,7 +16,6 @@ class CreateOrganizationsTable extends Migration {
 			$table -> string('name') -> nullable();
 			$table -> text('description') -> nullable();
 			$table -> string('slug') -> nullable();
-			$table -> text('picture') -> nullable();
 			$table -> timestamps();
 		});
 	}

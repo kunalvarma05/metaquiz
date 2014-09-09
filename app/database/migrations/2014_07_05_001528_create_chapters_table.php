@@ -12,12 +12,12 @@ class CreateChaptersTable extends Migration {
 	 */
 	public function up() {
 		Schema::create('chapters', function(Blueprint $table) {
-			$table -> increments('id');
+			$table -> increments('id') -> index();
 			$table -> string('name') -> nullable();
 			$table -> text('description') -> nullable();
+			$table -> string('icon') -> nullable();
 			$table -> string('slug') -> nullable();
-			$table -> text('picture') -> nullable();
-			$table -> integer('subject_id') -> unsigned() -> nullable();
+			$table -> integer('subject_id') -> nullable() -> unsigned();
 			$table -> foreign('subject_id') -> references('id') -> on('subjects') -> onDelete('cascade');
 			$table -> timestamps();
 		});

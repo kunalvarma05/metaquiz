@@ -12,10 +12,11 @@ class CreateStatsTable extends Migration {
 	 */
 	public function up() {
 		Schema::create('stats', function(Blueprint $table) {
-			$table -> increments('id');
+			$table -> increments('id') -> index();
 			$table -> integer('points') -> nullable();
-			$table -> integer('user_id') -> unsigned() -> nullable();
-			$table -> foreign('user_id') -> references('id') -> on('users') -> onDelete('cascade');			
+			$table -> integer('user_id') -> nullable() -> unsigned();
+			$table -> foreign('user_id') -> references('id') -> on('users') -> onDelete('cascade');
+			$table -> timestamps();
 		});
 	}
 

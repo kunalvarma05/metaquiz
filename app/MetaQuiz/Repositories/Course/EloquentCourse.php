@@ -1,84 +1,77 @@
 <?php
 namespace MetaQuiz\Repositories\Course;
 
+use MetaQuiz\Repositories\AbstractEloquentRepository;
 use MetaQuiz\Service\Cache\CacheInterface;
 use Illuminate\Database\Eloquent\Model;
 
-class EloquentCourse implements CourseInterface {
+class EloquentCourse extends AbstractEloquentRepository implements CourseInterface {
 
 	/**
-	 * The Course object
-	 * @var $course
+	 * $model The Eloquent model
+	 * @var Illuminate\Database\Eloquent\Model
 	 */
-	protected $course;
+	protected $model;
 
 	/**
-	 * The User Object
-	 * @var $user
-	 */
-	protected $user;
-
-	/**
-	 * The Cache Object
-	 * @var $cache
+	 * $cache The Cache Interface
+	 * @var MetaQuiz\Service\Cache\CacheInterface
 	 */
 	protected $cache;
 
-	//Class Dependency: Eloquent Model
-	public function __construct(Model $course, Model $user, CacheInterface $cache) {
+	/**
+	 * __construct Create a new Eloquent Course
+	 * @param Illuminate\Database\Eloquent\Model          $model The Eloquent Model
+	 * @param MetaQuiz\Service\Cache\CacheInterface $cache The Cache Interface
+	 * @return void
+	 */
+	public function __construct(Model $model, CacheInterface $cache) {
 		//Set the object
-		$this -> course = $course;
-		$this -> user = $user;
+		$this -> model = $model;
 		$this -> cache = $cache;
 	}
 
 	/**
-	 * All
-	 * Get All the courses
-	 * @return object Object of the courses information
+	 * all Fetch all the Courses
+	 * @param  array $with Related Models for Eager Loading
+	 * @return Object The Course Collection
 	 */
-	public function all() {
-		return $this -> course -> all();
+	public function all($with = array()) {
+		//Generate the key
+		$key = md5('courses.all');
+		//Check if it already exists
+		if ($this -> cache -> has($key)) {
+			//Return from cache
+			return $this -> cache -> get($key);
+		}
+		//Else query the data source
+		$Courses = parent::all($with);
+		//Store Cache
+		$this -> cache -> put($key, $Courses);
+		//And return
+		return $Courses;
 	}
 
 	/**
-	 * byID
-	 * Get a Single course by ID
-	 * @param Integer ID of the course
-	 * @return object Object of course information
+	 * bySlug Get a Single Course by Slug
+	 * @param string $slug Slug of the Course
+	 * @return Object Course Collection
 	 */
-	public function byID($id) {
-		return $this -> course -> findOrFail($id);
+	public function bySlug($slug, $with = array()) {
+		//Else query the data source
+		$Course = $this -> getFirstBy('slug', $slug, $with);
+		//Return
+		return $Course;
 	}
 
 	/**
-	 * bySlug
-	 * Get a Single course by Slug
-	 * @param string Slug of the course
-	 * @return object Object of course information
-	 */
-	public function bySlug($slug) {
-		return $this -> course -> where('slug', $slug) -> first();
-	}
-
-	/**
-	 * getCourses
-	 * Get a the subjects of the course
-	 * @param Integer ID of the subjects
-	 * @return object Object of subject information
-	 */
-	public function getSubjects($id) {
-		return $this -> course -> findOrFail($id) -> subjects() -> get();
-	}
-
-	/**
-	 * Create
-	 * Create a course
-	 * @param Input Data to be stored
-	 * @return The Created Model Instance
+	 * create Create a Course
+	 * @param Array $input Input Data to be stored
+	 * @return The Newly created Course Model Instance
 	 */
 	public function create(array $input) {
-		return $this -> course -> create($input);
+		//Return the Model Create method
+		return $this -> model -> create($input);
 	}
 
 }

@@ -46,8 +46,14 @@ abstract class AbstractValidator implements ValidableInterface {
 	 * Set data to validate
 	 * @return \MetaQuiz\Service\Validation\AbstractValidator
 	 */
-	public function with(array $data) {
+	public function with(array $data, array $rules = array(), array $messages = array()) {
 		$this -> data = $data;
+		if(!empty($rules)){
+			$this->rules = $rules;
+		}
+		if(!empty($messages)){
+			$this->messages = $messages;
+		}
 		return $this;
 	}
 

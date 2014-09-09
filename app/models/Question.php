@@ -1,30 +1,43 @@
 <?php
 
+/**
+ * The Question Class
+ */
 class Question extends \Eloquent {
-	protected $fillable = array();
+	/**
+	 * The Fillable Fields
+	 */
+	protected $fillable = array('title','chapter_id');
 
-	//Chapter
+	/**
+	 * The Chapter the Question belongs to
+	 * @return Chapter Collection
+	 */
 	public function chapter() {
 		return $this -> belongsTo('Chapter', 'chapter_id');
 	}
 
-	//Options
+	/**
+	 * The Options of this Question
+	 * @return Option Collection
+	 */
 	public function options() {
 		return $this -> hasMany('Option', 'question_id');
 	}
+	/**
+	 * The Answer of this question
+	 * @return Option Collection
+	 */
+	public function answer(){
+		return $this -> hasOne('Option','question_id')->where('is_answer', true);
+	}
 
-	//Quizes
+	/**
+	 * The Quizes the Question belongs tom
+	 * @return Quiz Collection
+	 */
 	public function quizes() {
 		return $this -> belongsToMany('Quiz');
-	}
-
-	public function answer() {
-		return $this -> hasMany('Answer');
-	}
-
-	//Quiz Question
-	public function quizQuestion() {
-		return $this -> hasMany('quizQuestion');
 	}
 
 }

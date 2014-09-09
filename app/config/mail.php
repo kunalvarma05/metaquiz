@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => "info@metaquiz.in", 'name' => "MetaQuiz"),
+	'from' => array('address' => "kunal@pracly.com", 'name' => "MetaQuiz"),
 
 	/*
 	|--------------------------------------------------------------------------

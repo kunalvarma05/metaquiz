@@ -77,12 +77,23 @@ require app_path() . '/filters.php';
  |--------------------------------------------------------------------------
  |
  | Next we will load the helpers file for the application. This gives us
- | a nice separate location to store our helpers and
- | definitions instead of putting them all in the main routes file.
+ | a nice separate location to store our helpers and definitions.
  |
  */
 
 require app_path() . '/helpers.php';
+
+/*
+ |--------------------------------------------------------------------------
+ | Require The Observers File
+ |--------------------------------------------------------------------------
+ |
+ | Next we will load the observers file for the application. This gives us
+ | a nice separate location to store our observers and definitions.
+ |
+ */
+
+require app_path('observers') . '/observers.php';
 
 /*
  |--------------------------------------------------------------------------

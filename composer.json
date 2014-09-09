@@ -1,23 +1,29 @@
 {
-	"name": "laravel/laravel",
-	"description": "The Laravel Framework.",
-	"keywords": ["framework", "laravel"],
+	"name": "kunalvarma05/MetaQuiz",
+	"description": "The MetaQuiz.",
+	"keywords": ["platform", "realtime", "quiz", "challenge"],
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
 		"sammyk/laravel-facebook-sdk": "~1.1",
 		"laravelbook/ardent": "2.*",
 		"iron-io/iron_mq": "3.*@dev",
-		"zizaco/entrust": "1.2.*@dev"
+		"zizaco/entrust": "1.2.*@dev",
+		"cviebrock/eloquent-sluggable": "2.*",
+		"codesleeve/asset-pipeline": "dev-master",
+		"codesleeve/laravel-stapler": "dev-master",
+		"guzzlehttp/guzzle": "~4.0",
+		"hashids/hashids": "0.3.*@dev",
+		"maatwebsite/excel": "1.*",
+		"davejamesmiller/laravel-breadcrumbs": "2.2.2"
 	},
 	"require-dev": {
-		"codesleeve/asset-pipeline": "dev-master",
 		"way/generators": "2.*",
 		"barryvdh/laravel-ide-helper": "1.*",
 		"barryvdh/laravel-debugbar": "1.*"
 	},
 	"autoload": {
-		"classmap": ["app/commands", "app/controllers", "app/models", "app/database/migrations", "app/database/seeds", "app/tests/TestCase.php"],
+		"classmap": ["app/commands", "app/controllers", "app/models", "app/database/migrations", "app/database/seeds", "app/tests/TestCase.php", "app/observers"],
 		"psr-0": {
 			"MetaQuiz": "app"
 		}
@@ -30,5 +36,6 @@
 	"config": {
 		"preferred-install": "dist"
 	},
-	"minimum-stability": "stable"
+	"minimum-stability": "dev",
+	"prefer-stable": true
 }

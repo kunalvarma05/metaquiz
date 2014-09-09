@@ -6,7 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 class AddRememberTokenColumnToUsersTable extends Migration {
 
 	/**
-	 * Run the migrations.
+	 * Run the migrations
 	 *
 	 * @return void
 	 */

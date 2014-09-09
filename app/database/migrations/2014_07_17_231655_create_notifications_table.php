@@ -14,10 +14,10 @@ class CreateNotificationsTable extends Migration {
 		Schema::create('notifications', function(Blueprint $table) {
 			$table -> increments('id') -> index();
 			$table -> string('message');
-			$table -> integer('user_id') -> unsigned() -> index();
+			$table -> integer('user_id') -> nullable() -> unsigned();
 			$table -> foreign('user_id') -> references('id') -> on('users') -> onDelete('cascade');
 			$table -> integer('targetable_id') -> unsigned();
-			$table -> string('targetable_type');
+			$table -> string('targetable_type') -> nullable();
 			$table -> timestamps();
 		});
 	}

@@ -6,45 +6,35 @@ class RoutesController extends BaseController {
 	 * Base Route Handler
 	 */
 	public function baseRoute() {
-		//If the user is logged in
-		if (Auth::check()) {			
-			$type = Auth::user() -> accountable_type;
+		if (Auth::check()) {
+			$user = Auth::user();
+			if ($user -> hasRole('Admin')) {
+				return Redirect::to(URL::route('admin'));
+			}
+			$type = $user -> accountable_type;
 			switch ($type) {
-				case 'Student' :
-					//Route to Home
-					return Redirect::to(URL::route('home'));
+				case 'Manager' :
+					return Redirect::to(URL::route('management'));
 					break;
-				case 'Teacher' :
-					//Route to Faculty
+				case 'Faculty' :
 					return Redirect::to(URL::route('faculty'));
 					break;
-				case 'Admin' :
-					//Route to Management
-					return Redirect::to(URL::route('admin'));
+				case 'Student' :
+					return Redirect::to(URL::route('app'));
 					break;
 				default :
-					//Route to Home
-					return Redirect::to(URL::route('home'));
+					return View::make('splash.splash');
 					break;
 			}
-		} else {
-			//Route to Splash Page
-			return View::make('splash');
 		}
+		return View::make('splash.splash');
 	}
 
 	/**
 	 * Facebook Connect Route Handler
 	 */
-	public function facebookRoute($id = null) {
-		//Only for testing, to be moved inside a controller for production
-		if (isset($id) && !empty($id)) {
-			$user = User::findOrFail($id);
-			Auth::login($user);
-			return Redirect::to('/');
-		} else {
-			return Redirect::to(Facebook::getLoginUrl());
-		}
+	public function facebookRoute() {
+		return Redirect::to(Facebook::getLoginUrl());
 	}
 
 	/**

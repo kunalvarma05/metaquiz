@@ -7,7 +7,7 @@ interface ValidableInterface {
 	 * @param array Input to be validated
 	 * @return \MetaQuiz\Service\Validation\ValidableInterface
 	 */
-	public function with(array $input);
+	public function with(array $input, array $rules, array $messages);
 
 	/**
 	 * Test if validation passes
@@ -19,5 +19,5 @@ interface ValidableInterface {
 	 * Retrive validation errors
 	 * @return array Array of errors
 	 */
-	public function errors();	
+	public function errors();
 }

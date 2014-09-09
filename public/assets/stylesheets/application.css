@@ -1510,7 +1510,7 @@ td.visible-print,th.visible-print{display:table-cell!important}}
 .nav-main.come-in{display:block!important}
 .nav-main ul,.nav-main ul li{margin:0;padding:0}
 .nav-main ul li.active a{text-decoration:none;background:rgba(0,0,0,.3)}
-.nav-main ul li a{display:block;padding:20px 15px;margin:10px 0;font-size:25px;text-align:center;line-height:1.3;transition:all .3s linear;-webkit-transition:all .3s linear;-mos-transition:all .3s linear;-ms-transition:all .3s linear;-o-transition:all .3s linear}
+.nav-main ul li a{display:block;padding:20px 15px;margin:10px 0;font-size:25px;text-align:center;line-height:1.3;transition:all .3s linear;-webkit-transition:all .3s linear;-moz-transition:all .3s linear;-ms-transition:all .3s linear;-o-transition:all .3s linear}
 .nav-main ul li a.logo,.nav-main ul li a.organization{margin:0;padding:15px}
 .nav-main ul li a.logo img,.nav-main ul li a.organization img{width:40px}
 .nav-main ul li a:focus,.nav-main ul li a:hover{text-decoration:none;background:rgba(0,0,0,.3);outline:0}
@@ -1574,19 +1574,6 @@ td.visible-print,th.visible-print{display:table-cell!important}}
 .widget .widget-body .widget-item a .widget-item-text .online{background:#08c06a;border-radius:50%;width:6px;height:6px;display:inline-block;margin:7px 0;float:right}
 .user-modal .user-pic{width:200px;height:200px;border:1px solid #ddd;padding:10px;border-radius:50%}
 .user-modal .actions{margin-top:15px}
-.splash{background:url(head.png) no-repeat #fff 50% 100%!important}
-.splash .container{max-width:900px;width:100%;margin:auto}
-.splash .container .header{margin-top:3%}
-.splash .container .header .logo{font-size:16px}
-.splash .container .header .logo img{width:40px;margin-top:-3px}
-.splash .container .header .logo a{color:#777}
-.splash .container .header .nav{margin-top:15px}
-.splash .container .header .nav li a{color:#777}
-.splash .container .intro{margin-top:80px}
-.splash .container .intro h2{font-size:44px;font-weight:lighter;color:#666}
-.splash .container .intro p{margin-top:15px;color:#999;font-size:16px}
-.splash .container .intro .signup-button{margin-top:10px;padding:12px 30px;border-radius:3px;font-weight:700;border-bottom:solid 2px #068f4d;text-shadow:0 -1px 0 #068f4d}
-.splash .container .intro .signup-button.loading{background:url(loader.gif) no-repeat #fff 50% 50%;text-shadow:none;color:transparent;border:1px solid #ddd!important}
 /*! perfect-scrollbar - v0.4.10
 * http://noraesae.github.com/perfect-scrollbar/
 * Copyright (c) 2014 Hyeonje Alex Jun; Licensed MIT */

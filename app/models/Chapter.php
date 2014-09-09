@@ -1,16 +1,34 @@
 <?php
+use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+/**
+ * The Chapter Class
+ */
+class Chapter extends \Eloquent implements SluggableInterface {
+	//The Sluggable Trait
+	use SluggableTrait;
 
-class Chapter extends \Eloquent {
-	protected $fillable = array();
+	/**
+	 * The fillable fields
+	 */
+	protected $fillable = array('name', 'description', 'subject_id', 'slug');
 
-	//Subject
+	protected $sluggable = array('build_from' => 'name', 'save_to' => 'slug', );
+
+	/**
+	 * The Subject the Chapter belongs to
+	 * @return Subject Collection
+	 */
 	public function subject() {
 		return $this -> belongsTo('Subject', 'subject_id');
 	}
 
-	//Questions
+	/**
+	 * Questions in the Chapter
+	 * @return Question Collection
+	 */
 	public function questions() {
-		return $this -> hasMany('Questions', 'chapter_id');
+		return $this -> hasMany('Question', 'chapter_id');
 	}
 
 }

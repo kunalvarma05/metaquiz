@@ -1,18 +1,20 @@
 <?php
 /**
  * Admin Routes
- * These routes require the user to be an Admin
  */
-Route::group(array('before' => "auth", 'prefix' => "admin"), function() {
+Route::group(array('prefix' => "admin", 'before' => "auth|admin_role|has-password|activated"), function() {
 	/**
-	 * Home Route
-	 * The Home Page
+	 * The Index Page
 	 */
 	Route::get('/', array('as' => "admin", 'uses' => "AdminsController@dashboard"));
 
 	/**
-	 * Courses Route
-	 * The Courses Route
+	 * Organizations
 	 */
-	Route::get('courses', array('as' => "admin-courses", 'uses' => "CoursesController@index"));
+	Route::resource('organizations', "AdminOrganizationsController");
+
+	/**
+	 * Organization Courses
+	 */
+	Route::resource('organizations.courses', "AdminCoursesController");
 });

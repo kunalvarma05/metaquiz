@@ -1,31 +1,50 @@
 <?php
+use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+/**
+ * The Organization Class
+ */
+class Organization extends \Eloquent implements SluggableInterface {
+	//The Sluggable Trait
+	use SluggableTrait;
 
-class Organization extends \Eloquent {
-	protected $fillable = array();
+	/**
+	 * The Fillable Fields
+	 */
+	protected $fillable = array('name','description','picture','slug');
 
-	//Students
+	protected $sluggable = array('build_from' => 'name', 'save_to' => 'slug', );
+
+	/**
+	 * The Students of this Organization
+	 * @return User Collection
+	 */
 	public function students() {
-		return $this -> hasMany('User', 'organization_id') -> where('accountable_type', '=', 'Student');
+		return $this -> hasMany('User', 'organization_id')->where('accountable_type', 'Student');
 	}
 
-	//Teachers
-	public function teachers() {
-		return $this -> hasMany('User', 'organization_id') -> where('accountable_type', '=', 'Teacher');
+	/**
+	 * The Faculty of this Organization
+	 * @return User Collection
+	 */
+	public function faculties() {
+		return $this -> hasMany('User', 'organization_id')->where('accountable_type', 'Faculty');
 	}
 
-	//Admins
-	public function admins() {
-		return $this -> hasMany('User', 'organization_id') -> where('accountable_type', '=', 'Admin');
+	/**
+	 * The Manager of this Organization
+	 * @return User Collection
+	 */
+	public function manager() {
+		return $this -> hasOne('User', 'organization_id')->where('accountable_type', 'Manager');
 	}
 
-	//Courses
+	/**
+	 * The Courses of this Organization
+	 * @return Course Collection
+	 */
 	public function courses() {
 		return $this -> hasMany('Course', 'organization_id');
-	}
-
-	//Creator
-	public function creator() {
-		return $this -> hasOne('User', 'creator_id');
 	}
 
 }

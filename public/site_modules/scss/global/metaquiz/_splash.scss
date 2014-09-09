@@ -1,0 +1,107 @@
+.splash-page{
+  .container{
+      max-width: 1020px;
+      width: 100%;
+      margin: auto;
+  }
+  background: url(images/splash.png) #fff;
+  background-position-y: 100%;
+  .splash-intro{
+    background: #fff;  
+    padding-bottom: 20px;        
+  //Header
+    .header{         
+      background: #fff;      
+      padding: 20px 0;   
+      margin-top: 20px;   
+      .logo{
+        margin-top: 7px;
+        margin-bottom: 0;
+        font-weight: 700;
+        font-size: 22px;      
+        img{      
+          width: 60px;
+          margin-top: -5px;
+          border-right: solid 1px #eee;
+          margin-right: 7px;
+          padding-right: 10px;          
+        }
+        a{
+          color:#8694a0;           
+          text-decoration: none;        
+        }     
+      }
+      .nav{
+        margin-top: 8px;
+        li{
+          a{
+            color: #777;
+            //active
+            &.active{
+              background: #eee;
+            }
+            //hover
+            &:hover{
+              background: transparent;
+              color: #555;
+            }
+          }
+        }
+      }
+    }
+    //splash hero
+    .splash-hero{
+      margin-top: 8%;
+      p{
+        margin-top: 10px;
+        margin-left: 5px;
+        color: #8694a0;
+        font-weight: 400;
+        letter-spacing: 0.3px;
+        font-size: 18px;
+      }       
+      .splash-tagline{
+        h2{
+          font-size: 50px;
+          font-weight: 700;
+          color: #4e5666;
+        }
+      }
+      .splash-buttons{       
+        margin-top: 10px;
+        text-align: right;   
+        .btn{
+          margin-top: 10px;
+          margin-right: 10px;
+          padding: 12px 30px;
+          border-radius: 3px;
+          font-weight: bold;
+          //signup button
+          &.signup-button{
+            //border-bottom: solid 2px darken($brand-primary, 10%);
+            //text-shadow: 0px -1px 0px darken($brand-primary, 10%);
+            &.loading{
+              background: url(loader.gif) no-repeat #fff 50% 50%;
+              text-shadow: none;
+              color: transparent;
+              border: solid 1px #ddd !important;
+            }
+          }                    
+        }
+        .email-signup{
+            margin-right: 10px;
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+            font-weight: bold;
+            color: #777;
+            font-size: 14px;            
+        }
+      }
+    }         
+  }
+  //splash post intro
+  .splash-post-intro{
+    margin-top: 80px;        
+  }  
+}
