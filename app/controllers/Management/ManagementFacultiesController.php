@@ -37,7 +37,7 @@ class ManagementFacultiesController extends \BaseController {
 		$organization = $this->org->requireByID($organization_id, array('faculties', 'faculties.accountable'));
 		$faculties = $organization->faculties;
 		$pageTitle = $organization->name . " - Faculties";
-		return View::make('management.faculties.index', compact('pageTitle','organization','faculties'));
+		return View::make('backend.faculties.index', compact('pageTitle','organization','faculties'));
 	}
 
 
@@ -53,7 +53,7 @@ class ManagementFacultiesController extends \BaseController {
 				$subjects[$subject->id] = $subject->name;
 			}
 		}
-		return View::make('management.faculties.create', compact('pageTitle','organization','courses', 'subjects'));
+		return View::make('backend.faculties.create', compact('pageTitle','organization','courses', 'subjects'));
 	}
 
 
@@ -101,7 +101,7 @@ class ManagementFacultiesController extends \BaseController {
 		$organization = $this->org->requireByID($organization_id);
 		$faculty = $organization->faculties()->findOrFail($user_id);
 		$pageTitle = $faculty->name;
-		return View::make('management.faculties.show', compact('pageTitle','organization','faculty'));
+		return View::make('backend.faculties.show', compact('pageTitle','organization','faculty'));
 	}
 
 
@@ -119,7 +119,7 @@ class ManagementFacultiesController extends \BaseController {
 			}
 		}
 		$assignedSubjects = array_pluck($faculty->accountable->subjects, 'id');
-		return View::make('management.faculties.edit', compact('pageTitle','organization','faculty', 'subjects','assignedSubjects'));
+		return View::make('backend.faculties.edit', compact('pageTitle','organization','faculty', 'subjects','assignedSubjects'));
 	}
 
 

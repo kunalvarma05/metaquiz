@@ -33,7 +33,7 @@ class ManagementController extends \BaseController {
 	 */
 	public function dashboard() {
 		$pageTitle = "Dashboard";
-		return View::make('management.dashboard', compact('pageTitle'));
+		return View::make('backend.dashboard', compact('pageTitle'));
 	}
 
 }

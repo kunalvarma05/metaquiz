@@ -1,0 +1,126 @@
+//a
+a, a:hover{
+	text-decoration: none;
+}
+//btn
+.btn{
+	border: none !important;
+}
+//btn default
+.btn-default{
+	text-shadow: none;
+}
+
+
+//Container-sm
+.container-sm{
+	max-width: $container-sm;
+	width: 100%;
+	margin: auto;
+}
+
+//Container-xs
+.container-xs{
+	max-width: $container-sm / 1.5;
+	width: 100%;
+	margin: auto;
+}
+
+//Big Text
+.text-big{
+  font-size: 40px;
+}
+
+//Image 16
+.img-16{
+  width: 16px;
+  height: 16px;
+}
+
+//Image 32
+.img-32{
+  width: 32px;
+  height: 32px;
+}
+
+//Image 64
+.img-64{
+  width: 64px;
+  height: 64px;
+}
+
+//Image 120
+.img-120{
+  width: 120px;
+  height: 120px;
+}
+
+//Display Block
+.block{
+  display: block;
+}
+
+//help-block
+.help-block{
+  color: #888;
+}
+//page header
+.page-header{
+  //form
+  form{
+    margin-left: 5px;
+  }
+}
+
+//page center
+.from-top{
+  padding-top: 8%;
+}
+
+//page center 1
+.from-top-1{
+  padding-top: 1%;
+}
+
+//page center 2
+.from-top-2{
+  padding-top: 2%;
+}
+
+//page center 3
+.from-top-3{
+  padding-top: 3%;
+}
+
+//page center 4
+.from-top-4{
+  padding-top: 4%;
+}
+//page center 5
+.from-top-5{
+  padding-top: 5%;
+}
+
+//page center 6
+.from-top-6{
+  padding-top: 6%;
+}
+
+//page center 7
+.from-top-7{
+  padding-top: 7%;
+}
+
+//ground clear
+.ground-clear{
+  padding-bottom: 3%;
+}
+//no margin
+.no-margin{
+  margin: 0 !important;
+}
+
+//well-sm
+.well-sm{
+  padding: 5px;
+}

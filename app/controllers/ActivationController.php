@@ -33,6 +33,8 @@ class ActivationController extends \BaseController {
 		$code = Input::get('code');
 		$activatedUser = $this -> activateForm -> activate(Auth::user() -> id, $code);
 		if ($activatedUser) {
+			$role = Role::where('name',$activatedUser->accountable_type)->first();
+			$activatedUser->attachRole($role);
 			if($activatedUser->accountable_type === "Faculty"){
 				$data = array('faculty' => $activatedUser->name, 'organization' => $activatedUser->organization->name, 'name' => $activatedUser->organization->manager->name, 'email' => $activatedUser->organization->manager->email);
 				Event::fire('faculty.join', array($data));
@@ -41,7 +43,6 @@ class ActivationController extends \BaseController {
 		} else {
 			return Redirect::back() -> withErrors($this -> activateForm -> errors());
 		}
-
 	}
 
 }

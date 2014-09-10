@@ -44,7 +44,7 @@ class ManagementChaptersController extends BaseController {
 		$subject = $course->subjects()->findOrFail($subject_id);
 		$chapters = $subject->chapters()->get();
 		$pageTitle = $subject->name . " - Chapters";
-		return View::make('management.chapters.index', compact('pageTitle','organization','course','subject','chapters'));
+		return View::make('backend.chapters.index', compact('pageTitle','organization','course','subject','chapters'));
 	}
 
 
@@ -55,7 +55,7 @@ class ManagementChaptersController extends BaseController {
 		$course = $organization->courses()->findOrFail($course_id);
 		$subject = $course->subjects()->findOrFail($subject_id);
 		$pageTitle = $subject->name . " | Create Chapter";
-		return View::make('management.chapters.create', compact('pageTitle','organization','course','subject'));
+		return View::make('backend.chapters.create', compact('pageTitle','organization','course','subject'));
 	}
 
 
@@ -84,7 +84,7 @@ class ManagementChaptersController extends BaseController {
 		$subject = $course->subjects()->findOrFail($subject_id);
 		$chapter = $subject->chapters()->findOrFail($id);
 		$pageTitle = $subject->name;
-		return View::make('management.chapters.show', compact('pageTitle','organization','course','subject','chapter'));
+		return View::make('backend.chapters.show', compact('pageTitle','organization','course','subject','chapter'));
 	}
 
 
@@ -96,7 +96,7 @@ class ManagementChaptersController extends BaseController {
 		$subject = $course->subjects()->findOrFail($subject_id);
 		$chapter = $subject->chapters()->findOrFail($id);
 		$pageTitle = "Edit " . $chapter->name;
-		return View::make('management.chapters.edit', compact('pageTitle','organization','course','subject','chapter'));
+		return View::make('backend.chapters.edit', compact('pageTitle','organization','course','subject','chapter'));
 	}
 
 

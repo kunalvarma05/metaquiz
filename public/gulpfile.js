@@ -79,25 +79,25 @@ gulp.task('buildGlobalCSS', function() {
 });
 
 /**
- * Build Management CSS
+ * Build backend CSS
  * Steps
- * - Takes the master.scss file from management folder
+ * - Takes the master.scss file from backend folder
  * - Compiles the sass to css
  * - Autoprefixes the properties with various vendor prefixes
- * - Renames to management.css
+ * - Renames to backend.css
  * - Checks the size
  * - Minifies the CSS
  * - Checks the size
  * - Stores to the given destination
  */
-gulp.task('buildManagementCSS', function() {
-	return gulp.src('site_modules/scss/management/master.scss')
+gulp.task('buildBackendCSS', function() {
+	return gulp.src('site_modules/scss/backend/master.scss')
 	.pipe(sass())
 	.pipe(autoprefixer('last 1 version', 'ie 9'))
-	.pipe(rename('assets/stylesheets/management.css'))
+	.pipe(rename('assets/stylesheets/backend.css'))
 	.pipe(size())
 	.pipe(minifycss({
-		keepBreaks : true
+		keepBreaks : false
 	}))
 	.pipe(size())
 	.pipe(gulp.dest(''));
@@ -131,9 +131,9 @@ gulp.task('buildJS', function() {
 gulp.task('watch', function() {
 	gulp.watch('site_modules/scss/application/**/*.scss', ['buildAppCSS']);
 	gulp.watch('site_modules/scss/global/**/*.scss', ['buildGlobalCSS']);
-	gulp.watch('site_modules/scss/management/**/*.scss', ['buildManagementCSS']);
+	gulp.watch('site_modules/scss/backend/**/*.scss', ['buildBackendCSS']);
 	gulp.watch('site_modules/javascript/**/*.js', ['buildJS']);
 });
 
 //Default Task
-gulp.task('default', ['cleanCSS','cleanJS','buildAppCSS','buildGlobalCSS','buildManagementCSS','buildJS','watch']);
+gulp.task('default', ['cleanCSS','cleanJS','buildAppCSS','buildGlobalCSS','buildBackendCSS','buildJS','watch']);

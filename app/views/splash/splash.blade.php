@@ -3,7 +3,7 @@
 <div class="splash-intro">
 	<div class="container">
 		<div class="header clearfix">
-			<h1 class="pull-left logo"><a href="#"><img src="assets/images/logo.png" alt="MetaQuiz"> MetaQuiz</a></h1>
+			<h1 class="pull-left logo"><a href="#"><img src="{{asset('assets/images/logo.png')}}" alt="MetaQuiz"> MetaQuiz</a></h1>
 			<ul class="nav pull-right nav-pills">
 				<li>
 					<a href="#">Tour</a>

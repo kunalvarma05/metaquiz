@@ -1,0 +1,50 @@
+//Sub Header
+.sub-header{
+	background: #fff;
+	border-bottom: solid 1px #ddd;
+	padding: 10px 0;
+	//sub-header-title
+	.sub-header-title{
+		//title
+		.title{
+			margin: 0;
+			color: $gray;
+			font-size: 15px;
+			font-weight: bold;
+		}
+		//breadcrumb
+		.breadcrumb{
+			margin: 0;
+			margin-top: 3px;
+			padding: 0;
+			color: #999;
+			//li
+			li{
+				list-style: none;
+				display: inline-block;
+				&:after{
+					content:" > ";
+					margin: 0 2px;
+					display: inline-block;
+				}
+				&:last-child:after{
+					content: "";
+				}
+				//a
+				a{
+					text-decoration: none;
+					font-weight: normal;
+					color: #999;
+					//hover
+					&:hover{
+						color: $brand-primary;
+					}
+				}
+			}
+		}
+	}
+	//sub-header-actions
+	.sub-header-actions{
+		text-align: right;
+	}
+}

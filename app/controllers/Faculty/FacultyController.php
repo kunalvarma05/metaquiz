@@ -15,7 +15,7 @@ class FacultyController extends \BaseController {
 	 */
 	public function dashboard() {
 		$pageTitle = "Dashboard";
-		return View::make('faculty.dashboard', compact('pageTitle'));
+		return View::make('backend.dashboard', compact('pageTitle'));
 	}
 
 }

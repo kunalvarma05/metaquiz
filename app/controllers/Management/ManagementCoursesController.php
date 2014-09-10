@@ -31,7 +31,7 @@ class ManagementCoursesController extends \BaseController {
 		$organization = $this->org->requireByID($organization_id);
 		$courses = $organization->courses()->get();
 		$pageTitle = $organization->name . " - Courses";
-		return View::make('management.courses.index', compact('pageTitle','organization','courses'));
+		return View::make('backend.courses.index', compact('pageTitle','organization','courses'));
 	}
 
 
@@ -40,7 +40,7 @@ class ManagementCoursesController extends \BaseController {
 		$organization_id = Auth::user()->organization_id;
 		$organization = $this->org->requireByID($organization_id);
 		$pageTitle = $organization->name . " | Create Course";
-		return View::make('management.courses.create', compact('pageTitle','organization'));
+		return View::make('backend.courses.create', compact('pageTitle','organization'));
 	}
 
 
@@ -63,7 +63,7 @@ class ManagementCoursesController extends \BaseController {
 		$organization = $this->org->requireByID($organization_id);
 		$course = $organization->courses()->with('subjects')->findOrFail($id);
 		$pageTitle = $course->name;
-		return View::make('management.courses.show', compact('pageTitle','organization','course'));
+		return View::make('backend.courses.show', compact('pageTitle','organization','course'));
 	}
 
 
@@ -73,7 +73,7 @@ class ManagementCoursesController extends \BaseController {
 		$organization = $this->org->requireByID($organization_id);
 		$course = $organization->courses()->findOrFail($id);
 		$pageTitle = "Edit " . $course->name;
-		return View::make('management.courses.edit', compact('pageTitle','organization','course'));
+		return View::make('backend.courses.edit', compact('pageTitle','organization','course'));
 	}
 
 

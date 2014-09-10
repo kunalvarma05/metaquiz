@@ -47,9 +47,9 @@ class ManagementQuestionsController extends BaseController {
 		$course = $organization->courses()->findOrFail($course_id);
 		$subject = $course->subjects()->findOrFail($subject_id);
 		$chapter = $subject->chapters()->findOrFail($chapter_id);
-		$questions = $chapter->questions()->with(array('options'))->simplePaginate(30);
+		$questions = $chapter->questions()->simplePaginate(20);
 		$pageTitle = $subject->name . " - Questions";
-		return View::make('management.questions.index', compact('pageTitle','organization','course','subject','chapter','questions'));
+		return View::make('backend.questions.index', compact('pageTitle','organization','course','subject','chapter','questions'));
 	}
 
 
@@ -61,7 +61,7 @@ class ManagementQuestionsController extends BaseController {
 		$subject = $course->subjects()->findOrFail($subject_id);
 		$chapter = $subject->chapters()->findOrFail($chapter_id);
 		$pageTitle = $subject->name . " | Add Question";
-		return View::make('management.questions.create', compact('pageTitle','organization','course','subject', 'chapter'));
+		return View::make('backend.questions.create', compact('pageTitle','organization','course','subject', 'chapter'));
 	}
 
 
@@ -96,25 +96,27 @@ class ManagementQuestionsController extends BaseController {
 		$chapter = $subject->chapters()->findOrFail($chapter_id);
 		$question = $chapter->questions()->findOrFail($id);
 		$pageTitle = $subject->name;
-		return View::make('management.questions.show', compact('pageTitle','organization','course','subject','chapter', 'question'));
+		return View::make('backend.questions.show', compact('pageTitle','organization','course','subject','chapter', 'question'));
 	}
 
 
 	public function edit($course_id, $subject_id, $chapter_id, $id)
 	{
+		App::abort(404);
 		$organization_id = Auth::user()->organization_id;
 		$organization = $this->org->requireByID($organization_id);
 		$course = $organization->courses()->findOrFail($course_id);
 		$subject = $course->subjects()->findOrFail($subject_id);
 		$chapter = $subject->chapters()->findOrFail($chapter_id);
 		$question = $chapter->questions()->findOrFail($id);
-		$pageTitle = "Edit " . $chapter->name;
-		return View::make('management.questions.edit', compact('pageTitle','organization','course','subject','chapter'));
+		$pageTitle = "Edit " . $question->title;
+		return View::make('backend.questions.edit', compact('pageTitle','organization','course','subject','chapter','question'));
 	}
 
 
 	public function update($course_id, $subject_id, $chapter_id, $id)
 	{
+		App::abort(404);
 		$input = Input::only(array('name', 'description'));
 		$organization_id = Auth::user()->organization_id;
 		$organization = $this->org->requireByID($organization_id);
@@ -139,9 +141,9 @@ class ManagementQuestionsController extends BaseController {
 		$subject = $course->subjects()->findOrFail($subject_id);
 		$chapter = $subject->chapters()->findOrFail($chapter_id);
 		$question = $chapter->questions()->findOrFail($id);
-		$delete = $chapter->delete();
+		$delete = $question->delete();
 		if($delete){
-			return Redirect::to(URL::route('management.courses.subjects.Questions.index', array($course->id, $subject->id)));
+			return Redirect::to(URL::route('management.courses.subjects.questions.index', array($course->id, $subject->id)));
 		}else{
 			return Redirect::back();
 		}
@@ -160,7 +162,7 @@ class ManagementQuestionsController extends BaseController {
 		$course = $organization->courses()->findOrFail($course_id);
 		$subject = $course->subjects()->findOrFail($subject_id);
 		$chapter = $subject->chapters()->findOrFail($chapter_id);
-		return View::make('management.questions.import', compact('pageTitle','organization','course','subject','chapter'));
+		return View::make('backend.questions.import', compact('pageTitle','organization','course','subject','chapter'));
 	}
 
 	/**
@@ -207,7 +209,7 @@ class ManagementQuestionsController extends BaseController {
 					if(File::exists($upload)){
 						File::delete($upload);
 					}
-					return Redirect::to(URL::route('management.courses.subjects.chapters.questions.import', array($course->id, $subject->id, $chapter->id)));
+					return Redirect::to(URL::route('management.courses.subjects.chapters.questions', array($course->id, $subject->id, $chapter->id)));
 				}else{
 					if(File::exists($upload)){
 						File::delete($upload);

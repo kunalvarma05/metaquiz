@@ -1,6 +1,11 @@
 <?php
 
 Route::get('test', function(){
+// since we connect to default setting localhost
+// and 6379 port there is no need for extra
+// configuration. If not then you can specify the
+// scheme, host and port to connect as an array
+// to the constructor.
 	Debugbar::measure('publish', function(){
 		try {
 			$single_server = array(

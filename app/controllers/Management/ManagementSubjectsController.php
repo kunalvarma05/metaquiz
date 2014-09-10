@@ -36,9 +36,10 @@ class ManagementSubjectsController extends \BaseController {
 	{
 		$organization_id = Auth::user()->organization_id;
 		$organization = $this->org->requireByID($organization_id);
-		$course = $organization->courses()->with('subjects')->findOrFail($course_id);
+		$course = $organization->courses()->with('subjects','subjects.chapters')->findOrFail($course_id);
+		$subjects = $course->subjects;
 		$pageTitle = $course->name . " - Subjects";
-		return View::make('management.subjects.index', compact('pageTitle','organization','course'));
+		return View::make('backend.subjects.index', compact('pageTitle','organization','course','subjects'));
 	}
 
 
@@ -48,7 +49,7 @@ class ManagementSubjectsController extends \BaseController {
 		$organization = $this->org->requireByID($organization_id);
 		$course = $organization->courses()->findOrFail($course_id);
 		$pageTitle = $course->name . " | Create Subject";
-		return View::make('management.subjects.create', compact('pageTitle','organization','course'));
+		return View::make('backend.subjects.create', compact('pageTitle','organization','course'));
 	}
 
 
@@ -75,7 +76,7 @@ class ManagementSubjectsController extends \BaseController {
 		$course = $organization->courses()->findOrFail($course_id);
 		$subject = $course->subjects()->with('chapters')->findOrFail($id);
 		$pageTitle = $subject->name;
-		return View::make('management.subjects.show', compact('pageTitle','organization','course','subject'));
+		return View::make('backend.subjects.show', compact('pageTitle','organization','course','subject'));
 	}
 
 
@@ -86,7 +87,7 @@ class ManagementSubjectsController extends \BaseController {
 		$course = $organization->courses()->findOrFail($course_id);
 		$subject = $course->subjects()->findOrFail($id);
 		$pageTitle = "Edit " . $subject->name;
-		return View::make('management.subjects.edit', compact('pageTitle','organization','course','subject'));
+		return View::make('backend.subjects.edit', compact('pageTitle','organization','course','subject'));
 	}
 
 
