@@ -7,7 +7,7 @@ class Student extends \Eloquent {
 	/**
 	 * The Fillable Fields
 	 */
-	protected $fillable = array();
+	protected $fillable = array("roll_no", "course_id", 'organization_id');
 
 	/**
 	 * The User account

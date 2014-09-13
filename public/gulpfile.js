@@ -6,8 +6,8 @@ var sass = require('gulp-sass');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var include = require('gulp-include');
-var size = require('gulp-filesize');
 var clean = require('gulp-clean');
+//var size = require('gulp-filesize');
 
 /**
  * Clean CSS
@@ -45,11 +45,9 @@ gulp.task('buildAppCSS', function() {
 	.pipe(sass())
 	.pipe(autoprefixer('last 1 version', 'ie 9'))
 	.pipe(rename('assets/stylesheets/application.css'))
-	.pipe(size())
 	.pipe(minifycss({
-		keepBreaks : true
+		keepBreaks : false
 	}))
-	.pipe(size())
 	.pipe(gulp.dest(''));
 });
 
@@ -70,11 +68,9 @@ gulp.task('buildGlobalCSS', function() {
 	.pipe(sass())
 	.pipe(autoprefixer('last 1 version', 'ie 9'))
 	.pipe(rename('assets/stylesheets/global.css'))
-	.pipe(size())
 	.pipe(minifycss({
-		keepBreaks : true
+		keepBreaks : false
 	}))
-	.pipe(size())
 	.pipe(gulp.dest(''));
 });
 
@@ -95,11 +91,9 @@ gulp.task('buildBackendCSS', function() {
 	.pipe(sass())
 	.pipe(autoprefixer('last 1 version', 'ie 9'))
 	.pipe(rename('assets/stylesheets/backend.css'))
-	.pipe(size())
 	.pipe(minifycss({
 		keepBreaks : false
 	}))
-	.pipe(size())
 	.pipe(gulp.dest(''));
 });
 
@@ -117,10 +111,8 @@ gulp.task('buildBackendCSS', function() {
 gulp.task('buildJS', function() {
 	gulp.src('site_modules/javascript/*.js')
 	.pipe(include())
-	.pipe(size())
 	.pipe(uglify())
 	.pipe(gulp.dest('assets/javascripts/'))
-	.pipe(size())
 	.on('error', gutil.log);
 });
 

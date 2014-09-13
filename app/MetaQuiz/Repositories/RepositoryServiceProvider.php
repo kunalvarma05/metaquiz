@@ -10,6 +10,7 @@ use MetaQuiz\Repositories\Course\EloquentCourse;
 use MetaQuiz\Repositories\Subject\EloquentSubject;
 use MetaQuiz\Repositories\Chapter\EloquentChapter;
 use MetaQuiz\Repositories\Faculty\EloquentFaculty;
+use MetaQuiz\Repositories\Student\EloquentStudent;
 use MetaQuiz\Repositories\Question\EloquentQuestion;
 use MetaQuiz\Repositories\Activity\EloquentActivity;
 use MetaQuiz\Repositories\Activation\EloquentActivation;
@@ -109,6 +110,17 @@ class RepositoryServiceProvider extends ServiceProvider {
 		 */
 		$faculty = $this -> app -> bind('MetaQuiz\Repositories\Faculty\FacultyInterface', function($app) {
 			return new EloquentFaculty(new \Faculty, new AppCache($app['cache'], 60));
+		});
+
+		/**
+		 * Student Repo
+		 *
+		 * StudentInterface
+		 * - Student
+		 * - AppCache
+		 */
+		$student = $this -> app -> bind('MetaQuiz\Repositories\Student\StudentInterface', function($app) {
+			return new EloquentStudent(new \Student, new AppCache($app['cache'], 60));
 		});
 
 		/**

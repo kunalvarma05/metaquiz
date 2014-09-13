@@ -1,3 +1,7 @@
+//body
+body{
+  padding-bottom: 0 !important;
+}
 //a
 a, a:hover{
 	text-decoration: none;
@@ -123,4 +127,9 @@ a, a:hover{
 //well-sm
 .well-sm{
   padding: 5px;
+}
+
+//Alert sm
+.alert-sm{
+  padding: 10px 15px;
 }

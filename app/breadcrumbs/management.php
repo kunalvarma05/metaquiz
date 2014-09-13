@@ -154,3 +154,30 @@ Breadcrumbs::register('management-faculty-edit', function($breadcrumbs, $faculty
     $breadcrumbs->parent('management-faculty', $faculty);
     $breadcrumbs->push('Edit', route('management.faculties.edit'));
 });
+
+/***********************
+* students
+************************/
+//students
+Breadcrumbs::register('management-students', function($breadcrumbs) {
+    $breadcrumbs->parent('management-dashboard');
+    $breadcrumbs->push('students', route('management.students.index'));
+});
+
+//faculty
+Breadcrumbs::register('management-student', function($breadcrumbs, $student) {
+    $breadcrumbs->parent('management-students');
+    $breadcrumbs->push($student->name, route('management.students.show', $student->id));
+});
+
+//Create student
+Breadcrumbs::register('management-students-create', function($breadcrumbs) {
+    $breadcrumbs->parent('management-students');
+    $breadcrumbs->push('New', route('management.students.create'));
+});
+
+//Edit student
+Breadcrumbs::register('management-student-edit', function($breadcrumbs, $student) {
+    $breadcrumbs->parent('management-student', $student);
+    $breadcrumbs->push('Edit', route('management.students.edit'));
+});

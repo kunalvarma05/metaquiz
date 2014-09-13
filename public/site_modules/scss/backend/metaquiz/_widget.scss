@@ -1,0 +1,82 @@
+//Widget
+.widget{
+	@extend .brick;
+	//Dark Dashboard Widgets
+	&.dark-widget{
+		background: darken($brand-secondary, 10%);
+		border: none;
+		color: #fff;
+		//widget-header
+		.widget-header{
+			border: none;
+			//title
+			.title{
+				text-shadow: 0px 1px 0px rgba(0,0,0,0.5);
+			}
+		}
+	}
+	//Widget Header
+	.widget-header{
+		@extend .clearfix;
+		border-bottom: solid 1px #ddd;
+		padding: 10px;
+		//title
+		.title{
+			font-weight: bold;
+			display: inline-block;
+			float: left;
+			line-height: 25px;
+		}
+		//Actions
+		.widget-actions{
+			float: right;
+			line-height: 24px;
+		}
+	}
+	//Widget Content
+	.widget-content{
+		//Widget List
+		.widget-list{
+			//Widget List Item
+			.widget-list-item{
+				background: rgba(0,0,0,0.2);
+				position: relative;
+				//border-bottom: solid 1px rgba(0,0,0,0.4);
+				padding: 10px;
+				//Odd Elements
+				&:nth-child(odd){
+					background: rgba(0,0,0,0.3);
+				}
+				//Widget List Content
+				.widget-list-content{
+					position: relative;
+					//Img
+					img{
+						background: #fff;
+						padding: 3px;
+					}
+					//Widget List Title
+					.widget-list-title{
+						font-size: 13px;
+						font-weight: bold;
+						color: $brand-info;
+					}
+					//Widget List Info
+					.widget-list-info{
+						color: rgba(255,255,255,0.5);
+						margin-top: 5px;
+					}
+					//Widget List Rank
+					.widget-list-rank{
+						position: absolute;
+						bottom: -15px;
+						right: 1px;
+						color: rgba(255,255,255,0.2);
+						font-size: 45px;
+						font-weight: lighter;
+					}
+				}
+			}
+		}
+	}
+}

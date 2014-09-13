@@ -11,6 +11,14 @@
 @section('main-content')
 <div class="create-chapter-page from-top-6">
 	<div class="container container-xs">
+		<div class="alert">
+			<p>
+				<b>To bulk add questions, please use our easy-to-use Importer</b>
+			</p>
+			<p>
+			<a href="{{route('management.courses.subjects.chapters.questions.import', array($course->id, $subject->id, $chapter->id))}}" class="btn btn-info"><span class="glyphicon glyphicon-upload"></span> Import Questions</a>
+			</p>
+		</div>
 	{{Form::open(array('route' => array("management.courses.subjects.chapters.questions.store", $course->id, $subject->id, $chapter->id), 'class' => "form", 'method' => "post"))}}
 	@if($errors->count())
 	<div class="alert alert-danger text-center well-sm">

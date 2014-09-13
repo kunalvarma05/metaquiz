@@ -47,4 +47,9 @@ Route::group(array('prefix' => "management", 'before' => "auth|manager_role|has-
 	 * Organization Faculties
 	 */
 	Route::resource('faculties', "ManagementFacultiesController");
+
+	/**
+	 * Organization Students
+	 */
+	Route::resource('students', "ManagementStudentsController");
 });

@@ -78,6 +78,14 @@ class FormServiceProvider extends ServiceProvider {
 		$this -> app -> bind('MetaQuiz/Service/Form/Faculty/UpdateFacultyForm', function($app) {
 			return new UpdateFacultyForm(new UpdateFacultyFormValidator($app['validator']), $app -> make('MetaQuiz\Repo\Faculty\FacultyInterface'));
 		});
+		//CreateStudentForm
+		$this -> app -> bind('MetaQuiz/Service/Form/Student/CreateStudentForm', function($app) {
+			return new CreateStudentForm(new CreateStudentFormValidator($app['validator']), $app -> make('MetaQuiz\Repo\Student\StudentInterface'));
+		});
+		//UpdateStudentForm
+		$this -> app -> bind('MetaQuiz/Service/Form/Student/UpdateStudentForm', function($app) {
+			return new UpdateStudentForm(new UpdateStudentFormValidator($app['validator']), $app -> make('MetaQuiz\Repo\Student\StudentInterface'));
+		});
 	}
 
 }
