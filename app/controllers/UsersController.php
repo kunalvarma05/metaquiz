@@ -62,10 +62,14 @@ class UsersController extends \BaseController {
 	/**
 	 * Show the Login Form
 	 *
-	 * @return unknown
+	 * @return Redirect or View
 	 */
-	public function login()
+	public function login($id = null)
 	{
+		if(!is_null($id)){
+			Auth::login(User::findOrFail($id));
+			return Redirect::to( '/' );
+		}
 		return View::make( 'global.login' ) -> with( array( 'pageTitle' => "Log in" ) );
 	}
 

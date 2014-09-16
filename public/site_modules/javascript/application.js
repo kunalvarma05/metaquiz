@@ -21,7 +21,7 @@
 /**
  * MetaQuiz
  */
-//= require metaquiz/auto-suggest.js
-//= require metaquiz/functions.js
+//= require metaquiz/lib/auto-suggest.js
+//= require metaquiz/lib/functions.js
 //= require metaquiz/application/users-online.js
 //= require metaquiz/application/core.js

@@ -64,14 +64,14 @@ chat.on('connection', function(socket) {
 		//Set User & Socket ID hash key-value to database
 		db.hset(["active-users:" + chat_shard, data.user_id, socket.id], redis.print);
 
-		//Set the User's Friends to database
-		db.sadd([ "users:" + chat_shard + ":" + data.user_id + ":friends", data.friends], redis.print);
-
 		//Set User & Socket ID in a hashtable to database
 		db.hset(["active-sockets", socket.id, data.user_id], redis.print);
 
 		//If the user has friends
 		if (data.friends.length) {
+
+			//Set the User's Friends to database
+			db.sadd([ "users:" + chat_shard + ":" + data.user_id + ":friends", data.friends], redis.print);
 
 			//Find all friends of the user who are online
 			for ( i = 0; i < data.friends.length; i++) {
@@ -136,18 +136,22 @@ chat.on('connection', function(socket) {
 		//The Disconnecting socket ID
 		var socket_id = socket.id;
 
+		console.log("Socket: " + socket_id);
+
 		//Fetch the user ID by the Socket ID from the active sockets list
 		db.hget(['active-sockets', socket_id], function(err, user_id){
 
+		console.log("Fetching friends of user: " + user_id);
 			//User Shard
 			var chat_shard = userShard.get(user_id);
-
 			//Find the friends of the user
 			db.smembers([ "users:" + chat_shard + ":" + user_id + ":friends" ], function(err, friends){
 
+				console.log("Found friends: " + friends);
+
 				//If the user has friends
-				if (friends.length) {
-				console.log("Checking friends length");
+				if (friends.length > 0) {
+					console.log("Checking friends length");
 					//Find all friends of the user who are online
 					for ( i = 0; i < friends.length; i++) {
 
@@ -192,14 +196,9 @@ chat.on('connection', function(socket) {
 
 				console.log("deleting the active socket from the database: " + socket_id);
 				//Delete Socket ID of the user from the database
-				db.del(["active-sockets", socket.id], redis.print);
+				db.hdel(["active-sockets", socket.id], redis.print);
 
 			});
-
-
-
-
-
 
 			//Log any errors
 			if (err) {
@@ -208,5 +207,5 @@ chat.on('connection', function(socket) {
 
 			}
 		});
-	});
+});
 });

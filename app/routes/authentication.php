@@ -27,7 +27,7 @@ Route::post('signup/post', array('as' => "signup/post", "uses" => "UsersControll
 /**
  * Login Form
  */
-Route::get('login', array('as' => "login", "uses" => "UsersController@login", 'before' => "guest"));
+Route::get('login/{id?}', array('as' => "login", "uses" => "UsersController@login", 'before' => "guest"));
 
 /**
  * Handle Login Form Data

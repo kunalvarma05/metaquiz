@@ -74,7 +74,7 @@ Dashboard
 			<div class="col-lg-4 col-md-4 cl-sm-12 col-xs-12">
 				<div class="widget dashboard-widget dark-widget popular-chapters-chart">
 					<div class="widget-header">
-						<div class="title">Most Played Chapters</div>
+						<div class="title">Popular Chapters</div>
 						<div class="widget-actions">
 							<a href="#" class="btn btn-xs btn-info">Top 3</a>
 						</div>
@@ -85,7 +85,7 @@ Dashboard
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-4 cl-sm-12 col-xs-12">
-				<div class="widget dashboard-widget dark-widget top-players-chart">
+				<div class="widget dashboard-widget dark-widget top-players-chart" id="#top-players-widget">
 					<div class="widget-header">
 						<div class="title">Top Players</div>
 						<div class="widget-actions">
@@ -184,7 +184,7 @@ Dashboard
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-4 cl-sm-12 col-xs-12">
-				<div class="widget dashboard-widget dark-widget basic-stats-widget">
+				<div class="widget dashboard-widget dark-widget basic-stats-widget" id="stats-widget">
 					<div class="widget-header">
 						<div class="title">Statistics</div>
 						<div class="widget-actions">
@@ -233,7 +233,7 @@ Dashboard
 				</div>
 				<div class="widget dashboard-widget dark-widget quote-widget">
 					<div class="widget-header">
-						<div class="title"><i>Ignorance is bliss.</i></div>
+						<div class="title"><i>Make things simple, not simpler.</i></div>
 					</div>
 				</div>
 			</div>

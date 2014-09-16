@@ -17,4 +17,4 @@
 /********************
  * Backend
  ********************/
- //= require ./metaquiz/backend/core.js
+// = require ./metaquiz/backend/core.js
