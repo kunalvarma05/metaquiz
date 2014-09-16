@@ -15,4 +15,9 @@ Route::group(array('prefix' => "app", 'before' => "auth|student_role|has-passwor
 	 * The Subjects Page
 	 */
 	Route::get('subjects', array('as' => "app.subjects", 'uses' => "ApplicationsController@subjects"));
+
+	/**
+	 * The Friends Page
+	 */
+	Route::get('friends', array('as' => "app.friends", 'uses' => "ApplicationsController@friends"));
 });

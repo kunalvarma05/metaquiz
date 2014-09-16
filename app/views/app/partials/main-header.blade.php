@@ -1,5 +1,5 @@
 <!--Page-Title-->
-<h4 class="page-title"><a href="#" class="glyphicon glyphicon-align-justify text-large toggle-navigation visible-xs visible-sm hidden-lg hidden-md"></a> Home </h4>
+<h4 class="page-title"><a href="#" class="glyphicon glyphicon-align-justify text-large toggle-navigation visible-xs visible-sm hidden-lg hidden-md"></a> {{$pageTitle or "MetaQuiz"}} </h4>
 <!--End: Page-Title-->
 <!--User-Account-Menu-->
 <div class="pull-right">

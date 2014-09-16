@@ -12,10 +12,5 @@
 			@include('app.subjects.subjects')
 		</div>
 	</div>
-	<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-		<div class="chapter-list no-show" id="chapter-list">
-			@include('app.subjects.chapters')
-		</div>
-	</div>
 </div>
 @stop

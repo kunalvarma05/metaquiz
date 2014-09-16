@@ -20,34 +20,6 @@ jQuery(document).ready(function() {
 		}
 	});
 
-	//Course Toggle
-	jQuery('.course-list').find('.topic').on('click', function() {
-		var target = jQuery(this).attr('href');
-		var parent = jQuery(this).data('parent');
-		jQuery(parent).find('.subject-collapse').slideUp(100);
-		jQuery(parent).slideToggle(0).find(target).delay(100).slideDown(100);
-	});
-
-	//Submenu Toggle
-	jQuery('.toggle-sub-menu').on('click', function() {
-		var target = jQuery(this).attr('href');
-		jQuery('.sub-menu-collapse').slideUp(100);
-		jQuery(target).delay(100).slideToggle(100);
-	});
-
-	//Chapter Toogle
-	jQuery('.toggle-chapter').on('click', function() {
-		var target = jQuery(this).attr('href');
-		var parent = jQuery(this).data('parent');
-		jQuery(parent).find('.subject-collapse').slideUp(100);
-		jQuery(parent).slideDown(0).find(target).delay(100).slideDown(100);
-	});
-	//Topic Active State
-	jQuery('.topic.multi-state').click(function() {
-		jQuery('.topic.multi-state').removeClass('active');
-		jQuery(this).toggleClass('active');
-	});
-
 	//User Performance Chart
 	jQuery('.user-performance-chart').circliful();
 
