@@ -12,11 +12,11 @@
 		<li>
 			<a href="#" data-toggle="tooltip" data-placement="right" class="icon-trophy achievement-icon" title="Achievements"></a>
 		</li>
-		<li>
+		<li class="{{HTML::activeState('app.friends')}}">
 			@if(count($friend_requests) > 0)
 				<span class="count">{{count($friend_requests)}}</span>
 			@endif
-			<a href="#" data-toggle="tooltip" data-placement="right" class="icon-users friend-icon" title="Friends"></a>
+			<a href="{{route('app.friends')}}" data-toggle="tooltip" data-placement="right" class="icon-users friend-icon" title="Friends"></a>
 		</li>
 		<li>
 			<a href="#" data-toggle="tooltip" data-placement="right" class="icon-calendar history-icon" title="History"></a>

@@ -7,7 +7,7 @@ class Quiz extends \Eloquent {
 	/**
 	 * The Fillable Fields
 	 */
-	protected $fillable = array();
+	protected $fillable = array('status', 'type', 'user_id');
 
 	/**
 	 * The Table
@@ -23,11 +23,11 @@ class Quiz extends \Eloquent {
 	}
 
 	/**
-	 * All the users in the quiz
-	 * @return Users Collection
+	 * The user playing/played the quiz
+	 * @return User Collection
 	 */
-	public function users() {
-		return $this -> belongsToMany('User');
+	public function user() {
+		return $this -> belongsTo('User');
 	}
 
 	/**
