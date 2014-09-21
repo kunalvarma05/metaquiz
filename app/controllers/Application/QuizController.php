@@ -121,7 +121,11 @@ class QuizController extends \BaseController {
 	 */
 	public function play($quiz_id)
 	{
-		//
+		$quiz = Auth::user()->quizes()->where('status','unfinished')->findOrFail($quiz_id);
+		$pageTitle = "Play Quiz";
+		$bodyClass = "play-quiz-body";
+		$questions = $quiz->questionsAsked()->with(array('question','question.options'))->get();
+		return View::make('app.quiz.play', compact('pageTitle','quiz','questions', 'bodyClass'));
 	}
 
 	/**

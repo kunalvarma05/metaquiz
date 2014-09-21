@@ -1,0 +1,120 @@
+.play-quiz-body{
+	//sidebar, nav-main, main-header
+	.sidebar, .nav-main, .main-header{
+		display: none;
+	}
+}
+//Quiz
+.play-quiz-page{
+	position: relative;
+	.circliful{
+		margin: auto;
+	}
+	.circle-text{
+		color: #fff;
+	}
+	//Quiz Canvas
+	.quiz-canvas{
+		margin: auto;
+		margin-top: 2%;
+		margin-bottom: 120px;
+		max-width: 90%;
+		//Quiz Question
+		.quiz-question{
+			background: rgba(0,0,0,0.3);
+			color: lighten($body-bg, 40%);
+			font-size: 20px;
+			font-weight: lighter;
+			text-align: center;
+			padding: 20px 15px;
+			border-radius: 3px;
+		}
+		//Quiz Question Options
+		.quiz-question-options{
+			margin-top: 15px;
+			//Quiz Question Option
+			.quiz-question-option{
+				cursor: pointer;
+				padding: 25px 20px;
+				border-radius: 3px;
+				background: rgba(255,255,255,0.9);
+				font-size: 18px;
+				font-weight: bold;
+				text-align: center;
+				color: lighten($body-bg, 5%);
+				margin: 15px 0;
+				transition: all 0.3s linear;
+				//hover
+				&:hover{
+					box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+				}
+			}
+		}
+	}
+	//Quiz User Score Card
+	.quiz-user-score-card{
+		background: rgba(55, 55, 85, 0.8);
+		color: lighten($body-bg, 30%);
+		padding: 20px;
+		border-radius: 3px;
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 10000;
+		max-height: 100px;
+		//Quiz User Progress
+		.quiz-user-progress{
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			margin: 0;
+			height: 100%;
+			background: rgba(255,255,255,0.2);
+			box-shadow: none;
+		}
+		//Quiz User Pic
+		.quiz-user-pic{
+			padding: 0;
+			margin-top: 5px;
+			width: 6%;
+			//Img
+			img{
+				@extend .img-circle;
+				width: 44px;
+				height: 44px;
+				border: solid 2px rgba(0,0,0,0.4);
+			}
+		}
+		//Quiz User Performance
+		.quiz-user-performance{
+			padding: 0;
+			//Quiz User Info
+			.quiz-user-info{
+				font-size: 20px;
+				padding-top: 14px;
+				//quiz user name
+				.quiz-user-name{
+					color: rgba(255,255,255,0.9);
+				}
+				//quiz user level
+				.quiz-user-level{
+					color: rgba(255,255,255,0.4);
+				}
+			}
+		}
+		//Quiz User Score
+		.quiz-user-score{
+			border: solid 3px $brand-success;
+			border-radius: 3px;
+			color: #fff;
+			padding: 5px 10px 10px 10px;
+			font-size: 30px;
+			margin: 0;
+			text-align: center;
+			float: right;
+			line-height: 1;
+		}
+	}
+}

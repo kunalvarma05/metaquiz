@@ -10,7 +10,7 @@
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 		<?= stylesheet_link_tag() ?>
 	</head>
-	<body>
+	<body class="{{bodyClass()}} {{$bodyClass or ""}}">
 		<!--Site-->
 		<div class="site">
 			<!--Nav-Main-->

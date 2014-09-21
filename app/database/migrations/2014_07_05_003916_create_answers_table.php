@@ -15,8 +15,8 @@ class CreateAnswersTable extends Migration {
 			$table -> increments('id') -> index();
 			$table -> integer('quiz_id') -> unsigned() -> index();
 			$table -> foreign('quiz_id') -> references('id') -> on('quizes') -> onDelete('cascade');
-			$table -> integer('quiz_question_id') -> unsigned() -> index();
-			$table -> foreign('quiz_question_id') -> references('id') -> on('question_quiz') -> onDelete('cascade');
+			$table -> integer('question_quiz_id') -> unsigned() -> index();
+			$table -> foreign('question_quiz_id') -> references('id') -> on('question_quiz') -> onDelete('cascade');
 			$table -> integer('user_id') -> unsigned() -> index();
 			$table -> foreign('user_id') -> references('id') -> on('users') -> onDelete('cascade');
 			$table -> integer('option_id') -> unsigned() -> index();

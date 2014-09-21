@@ -18,8 +18,8 @@ class Quiz extends \Eloquent {
 	 * All the questions asked in the quiz
 	 * @return Questions Collection
 	 */
-	public function questions() {
-		return $this -> belongsToMany('Question');
+	public function questionsAsked() {
+		return $this -> hasMany('QuestionQuiz');
 	}
 
 	/**

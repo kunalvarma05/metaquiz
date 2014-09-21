@@ -142,3 +142,20 @@ function deleteProfilePic($image, $type){
 function randomCode($key, $length = 8){
 	return substr(md5(microtime().rand().$key), 0, $length);
 }
+
+/**
+ * Get the level of the user
+ * @param  int $points The points of the user
+ * @return String         The level of the user
+ */
+function userLevel($points){
+	switch ($points) {
+		case $points <= 0:
+		return "1";
+		break;
+
+		default:
+		return "1";
+		break;
+	}
+}

@@ -19,7 +19,7 @@ class Answer extends \Eloquent {
 	 * @return QuizQuestion Collection
 	 */
 	public function quizQuestion() {
-		return $this -> belongsTo('QuizQuestion', 'quiz_question_id');
+		return $this -> belongsTo('QuizQuestion', 'question_quiz_id');
 	}
 
 	/**

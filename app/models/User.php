@@ -72,11 +72,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 
 	/**
-	 * All the quizes the user has participated in
+	 * All the quizes the user has played
 	 * @return Quiz Collection
 	 */
 	public function quizes() {
-		return $this -> belongsToMany('Quiz');
+		return $this -> hasMany('Quiz');
 	}
 
 	/**

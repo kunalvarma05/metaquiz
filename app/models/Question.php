@@ -29,7 +29,7 @@ class Question extends \Eloquent {
 	 * @return Option Collection
 	 */
 	public function answer(){
-		return $this -> hasOne('Option','question_id')->where('is_answer', true);
+		return $this -> hasOne('Answer')->where('is_answer', true);
 	}
 
 	/**
