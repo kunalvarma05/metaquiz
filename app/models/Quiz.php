@@ -19,7 +19,7 @@ class Quiz extends \Eloquent {
 	 * @return Questions Collection
 	 */
 	public function questionsAsked() {
-		return $this -> hasMany('QuestionQuiz');
+		return $this -> belongsToMany('Question');
 	}
 
 	/**

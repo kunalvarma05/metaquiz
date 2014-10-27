@@ -7,18 +7,21 @@
 //Quiz
 .play-quiz-page{
 	position: relative;
-	.circliful{
+	max-width: 700px;
+	margin: auto;
+	//Quiz Question Timer
+	.quiz-question-timer{
+		width: 200px;
+		height: 200px;
 		margin: auto;
-	}
-	.circle-text{
-		color: #fff;
+		display: block;
+		color: lighten($body-bg, 50%);
 	}
 	//Quiz Canvas
 	.quiz-canvas{
 		margin: auto;
 		margin-top: 2%;
 		margin-bottom: 120px;
-		max-width: 90%;
 		//Quiz Question
 		.quiz-question{
 			background: rgba(0,0,0,0.3);
@@ -46,39 +49,32 @@
 				transition: all 0.3s linear;
 				//hover
 				&:hover{
-					box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+					box-shadow: 0px 1px 3px rgba(0,0,0,0.7);
+				}
+				//active
+				&.active{
+					background: #fff;
+					box-shadow: 0px 1px 4px rgba(0,0,0,0.8);
 				}
 			}
 		}
 	}
 	//Quiz User Score Card
 	.quiz-user-score-card{
-		background: rgba(55, 55, 85, 0.8);
+		background: rgba(0,0,0, 0.4);
 		color: lighten($body-bg, 30%);
 		padding: 20px;
 		border-radius: 3px;
-		position: fixed;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		z-index: 10000;
-		max-height: 100px;
 		//Quiz User Progress
 		.quiz-user-progress{
-			position: absolute;
-			left: 0;
-			right: 0;
-			top: 0;
 			margin: 0;
-			height: 100%;
-			background: rgba(255,255,255,0.2);
+			margin-top: 10px;
 			box-shadow: none;
 		}
 		//Quiz User Pic
 		.quiz-user-pic{
 			padding: 0;
 			margin-top: 5px;
-			width: 6%;
 			//Img
 			img{
 				@extend .img-circle;
@@ -100,7 +96,7 @@
 				}
 				//quiz user level
 				.quiz-user-level{
-					color: rgba(255,255,255,0.4);
+					color: rgba(255,255,255,0.5);
 				}
 			}
 		}

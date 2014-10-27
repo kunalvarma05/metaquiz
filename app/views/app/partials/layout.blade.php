@@ -6,6 +6,7 @@
 		<meta name="description" content="Challenge. Play. Learn.">
 		<meta name="author" content="Creation Machine">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="_token" content="{{ csrf_token() }}"/>
 		<link rel="shortcut icon" href="/favicon.ico">
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 		<?= stylesheet_link_tag() ?>
@@ -53,6 +54,7 @@
 		<!--Scripts-->
 		<input type="hidden" id="current_user" value="{{Auth::user()->id}}">
 		<?= javascript_include_tag() ?>
+		@yield('extra-footer')
 		<!--End: Scripts-->
 	</body>
 </html>

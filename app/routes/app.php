@@ -36,5 +36,14 @@ Route::group(array('prefix' => "app", 'before' => "auth|student_role|has-passwor
 	 */
 	Route::get('quiz/play/{quiz_id}',array('as' => "app.quiz.play", 'uses' => "QuizController@play") );
 
+	/**
+	 * Unanswered Asked Questions
+	 */
+	Route::any('quiz/questions', array('as' => "app.quiz.getQuestions", 'uses' => "QuizController@getQuestion"));
+
+	/**
+	 * Quiz Check Answer
+	 */
+	Route::any('quiz/check/answer', array('as' => "app.quiz.checkAnswer", 'uses' => "QuizController@checkAnswer"));
 
 });

@@ -10,6 +10,11 @@ class Option extends \Eloquent {
 	protected $fillable = array('title','is_answer','question_id');
 
 	/**
+	 * The Hidden Fields
+	 */
+	protected $hidden = array('is_answer');
+
+	/**
 	 * The Question the option belongs to
 	 * @return Question Collection
 	 */

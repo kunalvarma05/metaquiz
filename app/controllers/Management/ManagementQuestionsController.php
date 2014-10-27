@@ -204,20 +204,20 @@ class ManagementQuestionsController extends BaseController {
 								}
 							});
 						});
-					}
+}
 
-					if(File::exists($upload)){
-						File::delete($upload);
-					}
-					return Redirect::to(URL::route('management.courses.subjects.chapters.questions', array($course->id, $subject->id, $chapter->id)));
-				}else{
-					if(File::exists($upload)){
-						File::delete($upload);
-					}
-					return Redirect::back() -> withErrors(array("Invalid file type!"))->withInput();
-				}
-			}
-		}
+if(File::exists($upload)){
+	File::delete($upload);
+}
+return Redirect::to(URL::route('management.courses.subjects.chapters.questions', array($course->id, $subject->id, $chapter->id)));
+}else{
+	if(File::exists($upload)){
+		File::delete($upload);
 	}
+	return Redirect::back() -> withErrors(array("Invalid file type!"))->withInput();
+}
+}
+}
+}
 
 }

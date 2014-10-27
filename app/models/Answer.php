@@ -4,7 +4,7 @@ class Answer extends \Eloquent {
 	/**
 	 * The fillable fields
 	 */
-	protected $fillable = array();
+	protected $fillable = array("quiz_id","question_quiz_id","user_id","option_id");
 
 	/**
 	 * The Quiz this answer belongs to
@@ -19,7 +19,7 @@ class Answer extends \Eloquent {
 	 * @return QuizQuestion Collection
 	 */
 	public function quizQuestion() {
-		return $this -> belongsTo('QuizQuestion', 'question_quiz_id');
+		return $this -> belongsTo('QuestionQuiz', 'question_quiz_id');
 	}
 
 	/**
