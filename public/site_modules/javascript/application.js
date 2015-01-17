@@ -9,6 +9,11 @@
 //= require bootstrap/bootstrap.js
 
 /**
+ * Routes
+ */
+ //= require metaquiz/global/routes.js
+
+/**
  * Third Party
  */
 //= require third-party/socket.js
@@ -17,7 +22,7 @@
 //= require third-party/scroll.js
 //= require third-party/pie-chart.js
 //= require third-party/time.js
-////= require third-party/time-circle.js
+//= require third-party/time-circle.js
 
 /**
  * MetaQuiz

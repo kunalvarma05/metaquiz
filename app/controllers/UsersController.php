@@ -2,6 +2,7 @@
 use MetaQuiz\Repositories\User\UserInterface;
 use MetaQuiz\Service\Form\User\CreateUserForm;
 use MetaQuiz\Service\Form\User\SetPasswordForm;
+use MetaQuiz\Exceptions\UserNotFoundException;
 
 class UsersController extends \BaseController {
 
@@ -188,20 +189,31 @@ class UsersController extends \BaseController {
 		$data['email'] = $facebook_user['email'];
 		//Name
 		$data['name'] = $facebook_user['name'];
+		//Fetch the users profile image
+		if ( $facebook_user['picture']['is_silhouette'] ) {
+			$data['picture'] = null;
+		} else {
+			$data['picture'] = uploadFacebookImage( $facebook_user['picture']['url'] );
+		}
 
 		//Check if the user exists
-		$user = User::where( 'fbid', $data['fbid'] ) -> first();
+		$user = User::where('fbid', $data['fbid'])->orWhere("email", $data['email']) -> first();
 		if ( $user ) {
+			//Update the users info
+			$user -> name = $data['name'];
+			$user -> email = $data['email'];
+			$user -> fbid = $data['fbid'];
+			$user -> username = substr( $data['email'], 0, strpos( $data['email'], "@" ) );
+			$user -> picture = $data['picture'];
+			if($user->save()){
 			//User exists, log in the user
-			Auth::login( $user );
-			return Redirect::to( '/' );
-		} else {
-			//Fetch the users profile image
-			if ( $facebook_user['picture']['is_silhouette'] ) {
-				$data['picture'] = null;
-			} else {
-				$data['picture'] = uploadFacebookImage( $facebook_user['picture']['url'] );
+				Auth::login($user);
+				return Redirect::to('/');
+			}else{
+				throw new UserNotFoundException("User not found!");
+
 			}
+		} else {
 			//User doesn't exists, create the user
 			$user = new User;
 			$user -> name = $data['name'];

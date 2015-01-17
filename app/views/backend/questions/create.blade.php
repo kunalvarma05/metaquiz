@@ -26,18 +26,23 @@
 	</div>
 	@endif
 	<div class="form-group">
+		{{Form::label('title', 'Question')}}
 		{{Form::text('title', Input::old('title'), array('class' => "form-control input-lg", 'required' => "required", 'placeholder' => "Title"))}}
 	</div>
 	<div class="form-group">
+		{{Form::label('option_one', 'Option 1')}}
 		{{Form::text('option_one', Input::old('option_one'), array('class' => "form-control input-lg", 'required' => "required", 'placeholder' => "Option One"))}}
 	</div>
 	<div class="form-group">
+		{{Form::label('option_two', 'Option 2')}}
 		{{Form::text('option_two', Input::old('option_two'), array('class' => "form-control input-lg", 'required' => "required", 'placeholder' => "Option Two"))}}
 	</div>
 	<div class="form-group">
+		{{Form::label('option_three', 'Option 3')}}
 		{{Form::text('option_three', Input::old('option_three'), array('class' => "form-control input-lg", 'required' => "required", 'placeholder' => "Option Three"))}}
 	</div>
 	<div class="form-group">
+		{{Form::label('answer', 'Answer')}}
 		{{Form::text('answer', Input::old('answer'), array('class' => "form-control input-lg", 'required' => "required", 'placeholder' => "Answer"))}}
 	</div>
 	<div class="form-group">

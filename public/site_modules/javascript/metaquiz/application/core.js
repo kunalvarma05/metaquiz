@@ -12,14 +12,6 @@ jQuery(document).ready(function() {
 		jQuery(this).find(".dropdown-menu").first().stop(!0, !0).slideUp(200);
 	});
 
-	//Application Search Autosuggest
-	jQuery(".app-search").autoSuggest({
-		urlEndpoint : "results.json",
-		callback : function(e, n) {
-			jQuery(".search-results").inject(jQuery("#search-results-template"), n).slideDown(200);
-		}
-	});
-
 	//User Performance Chart
 	jQuery('.user-performance-chart').circliful();
 
@@ -28,11 +20,6 @@ jQuery(document).ready(function() {
 		container : "body"
 	});
 
-	//Challenge User Modal
-	jQuery('[data-pop="modal"]').click(function() {
-		var modal = jQuery(this).data('modal');
-		jQuery('#' + modal + "-modal").modal('show');
-	});
 
 	//Toggle Navigation
 	jQuery('.toggle-navigation').click(function() {

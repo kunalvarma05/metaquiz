@@ -62,7 +62,7 @@ jQuery(document).ready(function() {
 	//Loading button
 	jQuery('.btn-loading').click(function() {
 		jQuery(this).addClass('loading');
-	});		
+	});
 	//Check Strength
 	checkStrength('[type=password]');
 });

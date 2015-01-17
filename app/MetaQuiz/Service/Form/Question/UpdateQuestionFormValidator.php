@@ -9,7 +9,7 @@ class UpdateQuestionFormValidator extends AbstractValidator {
 	 * Validation Rules
 	 * @var Array
 	 */
-	protected $rules = array('name' => "required");
+	protected $rules = array('title' => "required", 'option_one' => "required", 'option_two' => "required", 'option_three' => "required", 'answer' => "required");
 
 	/**
 	 * Custom Validation Messages

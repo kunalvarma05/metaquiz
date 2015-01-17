@@ -19,7 +19,12 @@ Route::group(array('prefix' => "app", 'before' => "auth|student_role|has-passwor
 	/**
 	 * The Friends Page
 	 */
-	Route::get('friends', array('as' => "app.friends", 'uses' => "ApplicationsController@friends"));
+	Route::get('friends', array('as' => "app.friends", 'uses' => "FriendsController@index"));
+
+	/**
+	 * Add Friend
+	 */
+	Route::any('friends/add', array('as' => "app.friends.add", 'uses' => "FriendsController@store"));
 
 	/**
 	 * New Quiz Page
@@ -45,5 +50,15 @@ Route::group(array('prefix' => "app", 'before' => "auth|student_role|has-passwor
 	 * Quiz Check Answer
 	 */
 	Route::any('quiz/check/answer', array('as' => "app.quiz.checkAnswer", 'uses' => "QuizController@checkAnswer"));
+
+	/**
+	 * Quiz No Answer Choosen
+	 */
+	Route::any('quiz/no-answer-chosen', array('as' => "app.quiz.noAnswerChosen", 'uses' => "QuizController@noAnswerChosen"));
+
+	/**
+	 * Quiz Result
+	 */
+	Route::get('quiz/{quiz_id}/results', array('as' => "app.quiz.results", 'uses' => "QuizController@result"));
 
 });

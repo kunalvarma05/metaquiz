@@ -79,7 +79,7 @@ class EloquentUser extends AbstractEloquentRepository implements UserInterface {
 		$feed = $this->activity->whereIn('user_id', function($query) use ($id) {
 			$query->select('friend_id')
 			->from('friends')
-			->where('user_id', $id)->where('status','=','accepted');
+			->where('user_id', $id);
 		})->orWhere('user_id', $id)->get();
 		return $feed;
 	}
@@ -90,7 +90,16 @@ class EloquentUser extends AbstractEloquentRepository implements UserInterface {
 	 * @param  array $with Related Models
 	 */
 	public function getFriends($id, array $with = array()){
-		return $this->requireByID($id, $with)->friends()->where('status','accepted')->get();
+		return $this->requireByID($id, $with)->friends()->get();
+	}
+
+	/**
+	 * Get the friend requests of the user
+	 * @param  int $id   UserID
+	 * @param  array $with Related Models
+	 */
+	public function getFriendRequests($id, array $with = array()){
+		return $this->requireByID($id, $with)->friendRequests()->get();
 	}
 
 	/**

@@ -8,10 +8,19 @@
 	<div class="quiz-canvas">
 	</div>
 </div>
-<div class="quiz-result-page no-show">
-	<div class="alert alert-success alert-block text-center">
-		Congratulations! You've completed the quiz!
+<div class="quiz-marks">
+	<div class="clearfix">
+		<div class="quiz-points">
+			<span class="mark-count">{{$marks}}</span> XP
+		</div>
+		<div class="progress">
+			<div class="progress-bar" role="progressbar" style="height:{{$marks/50*100}}%;" aria-valuemin="0" aria-valuemax="100"></div>
+		</div>
 	</div>
+</div>
+<div class="text-center well-sm quiz-result-loader">
+	<img src='{{asset("assets/images/loader.svg")}}' alt="Loading...">
+	<div class="title">Generating Results</div>
 </div>
 <input type="hidden" id="quiz_id" value="{{$quiz->id}}">
 @stop

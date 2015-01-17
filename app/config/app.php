@@ -130,6 +130,7 @@ return array(
 		'Codesleeve\LaravelStapler\LaravelStaplerServiceProvider',
 		'Maatwebsite\Excel\ExcelServiceProvider',
 		'DaveJamesMiller\Breadcrumbs\ServiceProvider',
+		'Lord\Laroute\LarouteServiceProvider',
 		),
 
 	/*

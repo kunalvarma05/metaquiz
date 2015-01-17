@@ -15,7 +15,8 @@
 		"guzzlehttp/guzzle": "~4.0",
 		"hashids/hashids": "0.3.*@dev",
 		"maatwebsite/excel": "1.*",
-		"davejamesmiller/laravel-breadcrumbs": "2.2.2"
+		"davejamesmiller/laravel-breadcrumbs": "2.2.2",
+		"lord/laroute" : "1.*"
 	},
 	"require-dev": {
 		"way/generators": "2.*",

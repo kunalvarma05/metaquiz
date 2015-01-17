@@ -29,13 +29,13 @@
 					@yield('main')
 				</div>
 				<!--End: Main-Body-->
+				<!--Sidebar-->
+				<div class="sidebar hidden-xs hidden-sm">
+					@include('app.partials.sidebar')
+				</div>
+				<!--End: Sidebar-->
 			</div>
 			<!--End: Main-->
-			<!--Sidebar-->
-			<div class="sidebar hidden-xs hidden-sm">
-				@include('app.partials.sidebar')
-			</div>
-			<!--End: Sidebar-->
 		</div>
 		@if(Session::has('flash-message'))
 		<!--Flash Message-->

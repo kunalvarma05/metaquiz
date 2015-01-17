@@ -13,8 +13,8 @@
 			<a href="#" data-toggle="tooltip" data-placement="right" class="icon-trophy achievement-icon" title="Achievements"></a>
 		</li>
 		<li class="{{HTML::activeState('app.friends')}}">
-			@if(count($friend_requests) > 0)
-				<span class="count">{{count($friend_requests)}}</span>
+			@if($friend_requests > 0)
+				<span class="count">{{$friend_requests}}</span>
 			@endif
 			<a href="{{route('app.friends')}}" data-toggle="tooltip" data-placement="right" class="icon-users friend-icon" title="Friends"></a>
 		</li>

@@ -107,7 +107,7 @@ Breadcrumbs::register('management-questions', function($breadcrumbs, $course, $s
 //Question
 Breadcrumbs::register('management-question', function($breadcrumbs, $course, $subject, $chapter, $question) {
     $breadcrumbs->parent('management-questions', $course, $subject, $chapter);
-    $breadcrumbs->push($question->title, route('management.courses.subjects.chapters.show', $course->id, $subject->id, $chapter->id, $question->id));
+    $breadcrumbs->push($question->title, route('management.courses.subjects.chapters.questions.show', array($course->id, $subject->id, $chapter->id, $question->id)));
 });
 
 //Create Question
