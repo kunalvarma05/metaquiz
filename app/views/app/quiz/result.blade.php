@@ -1,9 +1,9 @@
 @extends('app.partials.layout')
 @section('extra-footer')
-{{javascript_include_tag('quiz-result.js')}}
+{{{javascript_include_tag('quiz-result.js')}}}
 <script type="text/javascript">
 var labels = ['Question 1', 'Question 2', 'Question 3', 'Question 4', 'Question 5'];
-var data = {{json_encode($marksPerQuestion)}};
+var data = {{{json_encode($marksPerQuestion)}}};
 quizResultChart(labels, data);
 </script>
 @stop
@@ -17,22 +17,27 @@ quizResultChart(labels, data);
 					<div id="questions-asked-carousel" class="questions-asked-carousel carousel slide" data-ride="carousel" data-interval="5000">
 						<div class="carousel-inner" role="listbox">
 							{{--Set the active flag as false--}}
-							<?php $active = "active"; ?>
+							<?php
+								$active = "active";
+								$qNo = 1;
+							?>
 							@foreach($questions_asked as $question)
-							<div class="item question-asked {{$active}}">
+							<div class="item question-asked {{{$active}}}">
 								<div class="question-answer clearfix">
-									<div class="marks"><span>{{$question->answer->marks}}</span> XP</div>
+									<div class="marks"><span>{{{$question->answer->marks}}}</span> XP</div>
 									@if(!$question->answer->attempted)
 									<div class="status">You didn't attemp this question</div>
 									@endif
-									<div class="time-taken"><span>{{$question->answer->time_taken}}</span> seconds</div>
+									<div class="time-taken"><span>{{{$question->answer->time_taken}}}</span> seconds</div>
 								</div>
 								<div class="quiz-question">
-									{{$question->question->title}}
+									Q.{{{$qNo}}}:  {{{$question->question->title}}}
 								</div>
 								<div class="question-options">
 									@foreach($question->question->options as $option)
-									<?php $optionClass = '';?>
+									<?php
+										$optionClass = '';
+									?>
 									{{--If the option is the one selected by the user and was attempted--}}
 									@if($question->answer->option_id === $option->id && $question->answer->attempted)
 									{{--If the option is correct answer--}}
@@ -56,13 +61,13 @@ quizResultChart(labels, data);
 									?>
 									@endif
 									@endif
-									<div class="question-option {{$optionClass}}">
-										{{$option->title}}
+									<div class="question-option {{{$optionClass}}}">
+										{{{$option->title}}}
 									</div>
 									@endforeach
 								</div>
 							</div>
-							<?php $active = ''; ?>
+							<?php $active = ''; $qNo++; ?>
 							@endforeach
 						</div>
 						<a class="left carousel-control" href="#questions-asked-carousel" role="button" data-slide="prev">
@@ -83,5 +88,5 @@ quizResultChart(labels, data);
 		</div>
 	</div>
 </div>
-<input type="hidden" id="quiz_id" value="{{$quiz->id}}">
+<input type="hidden" id="quiz_id" value="{{{$quiz->id}}}">
 @stop
