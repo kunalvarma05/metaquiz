@@ -133,7 +133,7 @@ class QuizController extends \BaseController {
 	}
 
 	/**
-	 * [ Generate results of a Quiz]
+	 * Generate results of a Quiz
 	 * @return Response
 	 */
 	public function result($quiz_id){

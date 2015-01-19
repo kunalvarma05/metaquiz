@@ -4,7 +4,7 @@ use MetaQuiz\Service\Form\User\CreateUserForm;
 use MetaQuiz\Service\Form\User\SetPasswordForm;
 use MetaQuiz\Exceptions\UserNotFoundException;
 
-class UsersController extends \BaseController {
+class AuthController extends \BaseController {
 
 	//User Repo
 	protected $user;

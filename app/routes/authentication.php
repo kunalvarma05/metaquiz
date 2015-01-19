@@ -12,27 +12,27 @@ Route::get('facebook/auth', array('as' => "facebook-connect", 'before' => "guest
 /**
  * Handle the data from Facebook Connect Callback
  */
-Route::get('connect', array('as' => "connect", "uses" => "UsersController@connect", 'before' => "guest"));
+Route::get('connect', array('as' => "connect", "uses" => "AuthController@connect", 'before' => "guest"));
 
 /**
  * Signup Form
  */
-Route::get('signup', array('as' => "signup", "uses" => "UsersController@create", 'before' => "guest"));
+Route::get('signup', array('as' => "signup", "uses" => "AuthController@signup", 'before' => "guest"));
 
 /**
  * Handle Signup Form Data
  */
-Route::post('signup/post', array('as' => "signup/post", "uses" => "UsersController@store", 'before' => "guest"));
+Route::post('signup/post', array('as' => "signup/post", "uses" => "AuthController@doSignup", 'before' => "guest"));
 
 /**
  * Login Form
  */
-Route::get('login/{id?}', array('as' => "login", "uses" => "UsersController@login", 'before' => "guest"));
+Route::get('login/{id?}', array('as' => "login", "uses" => "AuthController@login", 'before' => "guest"));
 
 /**
  * Handle Login Form Data
  */
-Route::post('login/post', array('as' => "login/post", "uses" => "UsersController@doLogin", 'before' => "guest"));
+Route::post('login/post', array('as' => "login/post", "uses" => "AuthController@doLogin", 'before' => "guest"));
 
 /**
  * Account Activation Form
@@ -48,13 +48,13 @@ Route::post('activate/post', array('as' => "activate/post", "uses" => "Activatio
  * Set Password
  * Ask the user to set a password, if haven't done already
  */
-Route::get('set/password', array('as' => "set-password", 'uses' => "UsersController@setPassword", 'before' => "auth|no-password"));
+Route::get('set/password', array('as' => "set-password", 'uses' => "AuthController@setPassword", 'before' => "auth|no-password"));
 
 /**
  * Store Password
  * Handle the password set form
  */
-Route::post('set/password/save', array('as' => "store-password", 'uses' => "UsersController@storePassword", 'before' => "auth|no-password"));
+Route::post('set/password/save', array('as' => "store-password", 'uses' => "AuthController@storePassword", 'before' => "auth|no-password"));
 
 /**
  * Logout
