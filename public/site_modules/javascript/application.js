@@ -29,5 +29,6 @@
  */
 //= require metaquiz/lib/auto-suggest.js
 //= require metaquiz/lib/functions.js
+//= require metaquiz/lib/selector.js
 //= require metaquiz/application/subjects.js
 //= require metaquiz/application/core.js

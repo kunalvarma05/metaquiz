@@ -35,4 +35,6 @@ jQuery(document).ready(function($) {
 		jQuery('.sub-menu-collapse').not(target).slideUp(100);
 		jQuery(target).slideToggle(200);
 	});
+
+	jQuery('[data-selector=true]').mqSelector();
 });
