@@ -3,12 +3,11 @@ namespace MetaQuiz\Events\User;
 use \Mail;
 
 class UserEventHandler {
-
   /**
    * When a user is created
    */
   public function onCreate( $data ) {
-    
+
   }
 
   /**
