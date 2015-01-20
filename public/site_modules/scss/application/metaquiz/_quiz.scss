@@ -149,10 +149,10 @@
 //Quiz Result Page
 .quiz-result-page{
 	.quiz-result-section{
-		min-height: 300px;
+		min-height: 250px;
 		//canvas
 		canvas{
-			background: rgba(0, 0, 0, 0.3);
+			background: #fff;
 			width: 100%;
 			max-width: 100%;
 		}
@@ -161,6 +161,13 @@
 	.section-title{
 		color: lighten($body-bg, 40%);
 		margin-bottom: 20px;
+	}
+	//challenge-section
+	.challenge-section{
+		//btn
+		.btn{
+			margin-bottom: 20px;
+		}
 	}
 	//Quiz Result Questions
 	.quiz-result-questions{

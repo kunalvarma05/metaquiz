@@ -4,26 +4,26 @@ var quizResultChart = function(chartLabels, chartData){
         datasets: [
         {
             label: "XP earned per question",
-            fillColor: "rgba(255,255,255,0.1)",
-            strokeColor: "#1E90FF",
-            pointColor: "#64cb3d",
-            pointStrokeColor: "#64cb3d",
-            pointHighlightFill: "#64cb3d",
-            pointHighlightStroke: "#64cb3d",
+            fillColor: "rgba(8, 192, 106, 0.1)",
+            strokeColor: "#08c06a",
+            pointColor: "#fff",
+            pointStrokeColor: "#08c06a",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "#08c06a",
             data: chartData
         }
         ]
     };
     var options = {
         scaleFontStyle: "bold",
-        tooltipFillColor: "#2291d7",
+        tooltipFillColor: "#4b4b74",
         scaleShowGridLines: true,
-        scaleGridLineColor: "rgba(255,255,255,0.1)",
+        scaleGridLineColor: "rgba(0,0,0,0.1)",
         scaleGridLineWidth: 1,
         datasetStroke: false,
-        scaleFontColor: "#fff",
-        datasetStrokeWidth : 4,
-        tooltipTemplate: "<%= value %>"
+        scaleFontColor: "rgba(0,0,0,0.6)",
+        datasetStrokeWidth : 2,
+        tooltipTemplate: "<%= value %> XP"
     };
     var element = document.getElementById("quiz-result-chart");
     var chartElement = element.getContext("2d");
