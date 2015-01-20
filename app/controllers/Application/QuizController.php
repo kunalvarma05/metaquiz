@@ -146,8 +146,9 @@ class QuizController extends \BaseController {
 		//All the questions asked
 			$questions_asked = QuestionQuiz::with(array("question", "question.options", "answer"))->where("quiz_id",$quiz->id)->where("is_answered", "=", 1)->get();
 			$bodyClass = "play-quiz-body";
+			$pageTitle = "Quiz Result";
 			$marksPerQuestion =  array_fetch($questions_asked->toArray(), 'answer.marks');
-			return View::make('app.quiz.result')->with(compact('quiz', 'questions_asked', 'bodyClass', 'marksPerQuestion'));
+			return View::make('app.quiz.result')->with(compact('quiz', 'questions_asked', 'bodyClass', 'pageTitle', 'marksPerQuestion'));
 		}
 	}
 
@@ -167,6 +168,7 @@ class QuizController extends \BaseController {
 			}))->findOrFail($question_asked->question_id);
 			return $question->toArray();
 		}else{
+			//The quiz finished!
 			$quiz->status = "finished";
 			if($quiz->save()){
 			//No questions left to answer
