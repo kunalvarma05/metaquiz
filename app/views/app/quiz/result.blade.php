@@ -11,6 +11,25 @@ quizResultChart(labels, data);
 <div class="quiz-result-page">
 	<div class="container">
 		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<div class="result-challenge-section">
+					<h3 class="section-title">Quiz Results</h3>
+					<div class="challenge-section">
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+								<a href="#" class="btn btn-primary btn-lg btn-block"><i class="glyphicon glyphicon-refresh"></i> New Quiz</a>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+								<a href="#" class="btn btn-success btn-lg btn-block"><i class="glyphicon glyphicon-flash"></i> Challenge your friends</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h3 class="section-title">Points earned per question</h3>
+				<div class="quiz-result-section">
+					<canvas class="quiz-result-chart block alert" height="300px" id="quiz-result-chart"></canvas>
+				</div>
+			</div>
 			<div class="colg-lg-6 col-md-6 col-sm-12 col-xs-12">
 				<div class="quiz-result-questions">
 					<h3 class="section-title">Questions Asked</h3>
@@ -18,8 +37,8 @@ quizResultChart(labels, data);
 						<div class="carousel-inner" role="listbox">
 							{{--Set the active flag as false--}}
 							<?php
-								$active = "active";
-								$qNo = 1;
+							$active = "active";
+							$qNo = 1;
 							?>
 							@foreach($questions_asked as $question)
 							<div class="item question-asked {{{$active}}}">
@@ -36,7 +55,7 @@ quizResultChart(labels, data);
 								<div class="question-options">
 									@foreach($question->question->options as $option)
 									<?php
-										$optionClass = '';
+									$optionClass = '';
 									?>
 									{{--If the option is the one selected by the user and was attempted--}}
 									@if($question->answer->option_id === $option->id && $question->answer->attempted)
@@ -80,10 +99,6 @@ quizResultChart(labels, data);
 						</a>
 					</div>
 				</div>
-			</div>
-			<div class="quiz-result-section col-lg-6 col-md-6 col-sm-12 col-xs-12">
-				<h3 class="section-title">Points per question</h3>
-				<canvas class="quiz-result-chart block alert" height="300px" id="quiz-result-chart"></canvas>
 			</div>
 		</div>
 	</div>

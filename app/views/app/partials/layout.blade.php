@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>MetaQuiz</title>
+		<title>MetaQuiz {{ isset($pageTitle) ? " - " . $pageTitle : "";}}</title>
 		<meta name="description" content="Challenge. Play. Learn.">
 		<meta name="author" content="Creation Machine">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
