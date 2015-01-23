@@ -33,9 +33,3 @@ require_once app_path('routes') . "/admin.php";
  * Routes for the Management Section
  */
 require_once app_path('routes') . "/management.php";
-
-/**
- * Faculty Routes
- * Routes for the Faculty Section
- */
-require_once app_path('routes') . "/faculty.php";
