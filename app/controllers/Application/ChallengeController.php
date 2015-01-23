@@ -32,26 +32,38 @@ class ChallengeController extends \BaseController {
 	 * @return Response
 	 */
 	public function create(){
+		//Fetch the input
 		$input = Input::only('friends', 'quiz_id');
 		$quiz_id = $input['quiz_id'];
+
+		//Find and verify the authenticated user
 		$user = $this->user->requireByID(Auth::user()->id);
+
+		//Find and verify the quiz submitted
 		$quiz = $user->quizes()->find($quiz_id);
+
+		//Find and check if this quiz is already part of a challenge
 		$challenge = $this->challenge->getFirstBy('quiz_id', $quiz->id);
-		//Check if the challenge is already created or not
+
+		//Check if the challenge exists
 		if(!$challenge){
+			//The Challene doesn't exist
 			//Create the challenge
 			$data = array('status' => "ongoing", 'challenger_id' => $user->id, 'quiz_id' => $quiz->id);
 			$challenge = $this->challenge->create($data);
+
 			//Attach the current quiz to the challenge
 			$challenge->quizes()->attach($quiz->id);
 		}
 
 		//Send the requests to all the users
 		$requests = array();
+
+		//Traverse over all the friends selected
 		foreach($input['friends'] as $friend){
-			//Check if the user has already been requested
+			//Check if the friend has already been requested
 			if(!$challenge->requests()->where('user_id', $friend)->first()){
-				//No request was sent
+				//No request was sent, so
 				//Find and verify the user
 				$u = $this->user->requireByID($friend);
 				//If the user exists
@@ -62,7 +74,7 @@ class ChallengeController extends \BaseController {
 			}
 		}
 
-			//Create a new Challenge Request
+		//Associate the created requests with the challenge
 		$challenge->requests()->saveMany($requests);
 
 		return $challenge->requests;
