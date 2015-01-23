@@ -116,30 +116,6 @@ class AuthController extends \BaseController {
 	}
 
 	/**
-	 * Return the friend ids of the user
-	 * @return JSON
-	 */
-	public function getFriends(){
-		$friends = $this->user->getFriends(Auth::user()->id);
-		$ids =  array_pluck($friends, 'id');
-		$names =  array_pluck($friends, 'name');
-		$friend_list = array();
-		for($i=0;$i<count($ids); $i++){
-			$friend_list[] = array('id' => $ids[$i], 'name' => $names[$i]);
-		}
-		return $friend_list;
-	}
-
-	/**
-	 * Return the info of the given user id
-	 * @param  int $id UserID
-	 * @return JSON
-	 */
-	public function getInfo($id){
-		return $this->user->requireByID($id);
-	}
-
-	/**
 	 * Facebook Connect Authentication
 	 *
 	 * @return unknown
