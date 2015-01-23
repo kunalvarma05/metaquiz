@@ -8,15 +8,16 @@ var quizResultChart = function(chartLabels, chartData){
             strokeColor: "#08c06a",
             pointColor: "#fff",
             pointStrokeColor: "#08c06a",
-            pointHighlightFill: "#fff",
+            pointHighlightFill: "#08c06a",
             pointHighlightStroke: "#08c06a",
             data: chartData
         }
         ]
     };
     var options = {
+        scaleBeginAtZero: true,
         scaleFontStyle: "bold",
-        tooltipFillColor: "#4b4b74",
+        tooltipFillColor: "#08c06a",
         scaleShowGridLines: true,
         scaleGridLineColor: "rgba(0,0,0,0.1)",
         scaleGridLineWidth: 1,

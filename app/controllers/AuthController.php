@@ -120,7 +120,14 @@ class AuthController extends \BaseController {
 	 * @return JSON
 	 */
 	public function getFriends(){
-		return array_pluck($this->user->getFriends(Auth::user()->id), 'id');
+		$friends = $this->user->getFriends(Auth::user()->id);
+		$ids =  array_pluck($friends, 'id');
+		$names =  array_pluck($friends, 'name');
+		$friend_list = array();
+		for($i=0;$i<count($ids); $i++){
+			$friend_list[] = array('id' => $ids[$i], 'name' => $names[$i]);
+		}
+		return $friend_list;
 	}
 
 	/**

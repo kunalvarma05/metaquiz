@@ -15,6 +15,7 @@ use MetaQuiz\Repositories\Question\EloquentQuestion;
 use MetaQuiz\Repositories\Activity\EloquentActivity;
 use MetaQuiz\Repositories\Activation\EloquentActivation;
 use MetaQuiz\Repositories\Organization\EloquentOrganization;
+use MetaQuiz\Repositories\Challenge\EloquentChallenge;
 
 /**
  * RepositoryService Provider
@@ -132,6 +133,17 @@ class RepositoryServiceProvider extends ServiceProvider {
 		 */
 		$activity = $this -> app -> bind('MetaQuiz\Repositories\Activity\ActivityInterface', function($app) {
 			return new EloquentActivity(new \Activity, new AppCache($app['cache'], 60));
+		});
+
+		/**
+		 * Challenge Repo
+		 *
+		 * ChallengeInterface
+		 * - Challenge
+		 * - AppCache
+		 */
+		$subject = $this -> app -> bind('MetaQuiz\Repositories\Challenge\ChallengeInterface', function($app) {
+			return new EloquentChallenge(new \Challenge, new AppCache($app['cache'], 60));
 		});
 	}
 }

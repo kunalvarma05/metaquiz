@@ -61,4 +61,9 @@ Route::group(array('prefix' => "app", 'before' => "auth|student_role|has-passwor
 	 */
 	Route::get('quiz/{quiz_id}/results', array('as' => "app.quiz.results", 'uses' => "QuizController@result"));
 
+	/**
+	 * Create Challenge
+	 */
+	Route::post('challenge/create', array('as' => "app.quiz.create-challenge", 'uses' => "ChallengeController@create"));
+
 });

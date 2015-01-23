@@ -20,10 +20,11 @@ quizResultChart(labels, data);
 								<a href="#" class="btn btn-primary btn-lg btn-block"><i class="glyphicon glyphicon-refresh"></i> New Quiz</a>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-								<a href="#" class="btn btn-success btn-lg btn-block"><i class="glyphicon glyphicon-flash"></i> Challenge your friends</a>
+								<button class="btn btn-lg btn-success btn-block" data-toggle="collapse" data-target="#challenge-friend-box" type="button">Challenge your friends</button>
 							</div>
 						</div>
 					</div>
+					@include('app.quiz.create-challenge')
 				</div>
 				<h3 class="section-title">Points earned per question</h3>
 				<div class="quiz-result-section">

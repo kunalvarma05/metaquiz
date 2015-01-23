@@ -6,7 +6,7 @@ class Challenge extends \Eloquent {
 	/**
 	 * The fillable fields
 	 */
-	protected $fillable = array();
+	protected $fillable = array('status', 'challenger_id', 'quiz_id', 'winner_id');
 
 	/**
 	 * The Table
@@ -32,21 +32,30 @@ class Challenge extends \Eloquent {
 	}
 
 	/**
-	 * Opponent
-	 * The User who has been challenged
+	 * Winner
+	 * The User who won the challenge
 	 * @return User Collection
 	 */
-	public function opponent() {
-		return $this -> belongsTo('User', 'opponent_id');
+	public function winner() {
+		return $this -> belongsTo('User', 'winner_id');
 	}
 
 	/**
-	 * Quiz
-	 * The Quiz, part of this Challenge
+	 * Quizes
+	 * The Quizes the belong to this Challenge
 	 * @return Quiz Collection
 	 */
-	public function quiz() {
-		return $this -> hasOne('Quiz');
+	public function quizes() {
+		return $this -> belongsToMany('Quiz');
+	}
+
+	/**
+	 * Requests
+	 * The Requests that belong to this Challenge
+	 * @return Quiz Collection
+	 */
+	public function requests() {
+		return $this -> hasMany('ChallengeRequest');
 	}
 
 }

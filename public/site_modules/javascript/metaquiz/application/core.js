@@ -2,7 +2,10 @@
  * The CORE Javascript file for the Application Part
  * @return {[type]} [description]
  */
-jQuery(document).ready(function() {
+ jQuery(document).ready(function($) {
+ 	$.ajaxSetup({
+ 		headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+ 	});
 
 	//Dropdown Fixes
 	jQuery(".dropdown").on("show.bs.dropdown", function() {
@@ -63,4 +66,10 @@ jQuery(document).ready(function() {
 		//Scrollbar
 		jQuery('.widget').perfectScrollbar();
 	});
+
+	//Call in the friend selector
+	/*jQuery('[data-trigger=challenge-friend]').friendSelector({
+		target: '#challenge-friend-input'
+	});*/
+
 });
