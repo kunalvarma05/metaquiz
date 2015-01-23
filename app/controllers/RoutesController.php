@@ -14,17 +14,17 @@ class RoutesController extends BaseController {
 			$type = $user -> accountable_type;
 			switch ($type) {
 				case 'Manager' :
-					return Redirect::to(URL::route('management'));
-					break;
+				return Redirect::to(URL::route('management'));
+				break;
 				case 'Faculty' :
-					return Redirect::to(URL::route('faculty'));
-					break;
+				return Redirect::to(URL::route('management'));
+				break;
 				case 'Student' :
-					return Redirect::to(URL::route('app'));
-					break;
+				return Redirect::to(URL::route('app'));
+				break;
 				default :
-					return View::make('splash.splash');
-					break;
+				return View::make('splash.splash');
+				break;
 			}
 		}
 		return View::make('splash.splash');
