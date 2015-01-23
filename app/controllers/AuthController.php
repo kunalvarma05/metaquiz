@@ -37,7 +37,7 @@ class AuthController extends \BaseController {
 	 *
 	 * @return unknown
 	 */
-	public function create()
+	public function signup()
 	{
 		return View::make( 'global.signup' ) -> with( array( 'pageTitle' => "Creat an Account" ) );
 	}
@@ -47,7 +47,7 @@ class AuthController extends \BaseController {
 	 *
 	 * @return unknown
 	 */
-	public function store()
+	public function doSignup()
 	{
 		$input = Input::only( array( 'name', 'email', 'username', 'password', 'picture' ) );
 		$user = $this -> userForm -> save( $input );
