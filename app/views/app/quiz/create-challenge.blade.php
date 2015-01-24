@@ -17,7 +17,7 @@
 		</div>
 		@endforeach
 	</div> -->
-	{{Form::select('friends[]', $friend_list, '', array('class' => "form-control", 'multiple' => "true"))}}
+	{{Form::select('friends[]', $friend_list, '', array('class' => "form-control", 'multiple' => "true", 'id' => "challenge-friends-select", 'placeholder' => "Select friends you wanna challenge..."))}}
 </div>
 {{--Form::hidden('friends', '', array('class' => "hidden", 'id' => "challenge-friend-input"))--}}
 {{Form::hidden('quiz_id', $quiz->id, array('class' => "hidden"))}}

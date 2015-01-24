@@ -71,5 +71,8 @@
 	/*jQuery('[data-trigger=challenge-friend]').friendSelector({
 		target: '#challenge-friend-input'
 	});*/
+	jQuery('#challenge-friends-select').select2({
+		theme: "classic"
+	});
 
 });
