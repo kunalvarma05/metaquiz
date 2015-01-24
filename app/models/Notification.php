@@ -7,7 +7,7 @@ class Notification extends \Eloquent {
 	/**
 	 * The Fillable Fields
 	 */
-	protected $fillable = array('message', 'targetable_type', 'targetable_id');
+	protected $fillable = array('message', 'user_id', 'targetable_type', 'targetable_id');
 
 	/**
 	 * The Target object of the notification
