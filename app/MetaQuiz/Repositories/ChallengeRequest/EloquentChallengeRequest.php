@@ -62,4 +62,26 @@ class EloquentChallengeRequest extends AbstractEloquentRepository implements Cha
 		return $this -> model -> create($input);
 	}
 
+	/**
+	 * Accept a given challenge request
+	 * @param  int $id ID of the ChallengeRequest
+	 * @return Object ChallengeRequest     Collection
+	 */
+	public function accept($id){
+		$request = $this->model->findOrFail($id);
+		$request->status = "accepted";
+		return $request->save();
+	}
+
+	/**
+	 * Reject a given challenge request
+	 * @param  int $id ID of the ChallengeRequest
+	 * @return Object ChallengeRequest     Collection
+	 */
+	public function reject($id){
+		$request = $this->model->findOrFail($id);
+		$request->status = "rejected";
+		return $request->save();
+	}
+
 }

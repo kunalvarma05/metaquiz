@@ -41,6 +41,15 @@ class Challenge extends \Eloquent {
 	}
 
 	/**
+	 * referenceQuiz
+	 * The Reference Quiz of this Challenge
+	 * @return Quiz Collection
+	 */
+	public function referenceQuiz() {
+		return $this -> belongsTo('Quiz', 'quiz_id');
+	}
+
+	/**
 	 * Quizes
 	 * The Quizes the belong to this Challenge
 	 * @return Quiz Collection

@@ -32,7 +32,10 @@ class ChallengeEventHandler {
    * When someone accepts a Challenge
    */
   public function onAccept( $data ) {
-
+    $data['targetable_id'] = $data['challenge_id'];
+    $data['targetable_type'] = 'Challenge';
+    //Create the notification
+    $notification = $this->notification->create($data);
   }
 
   /**
