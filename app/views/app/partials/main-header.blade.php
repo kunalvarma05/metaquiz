@@ -4,6 +4,22 @@
 <!--User-Account-Menu-->
 <div class="pull-right">
 	<div class="dropdown pull-left">
+		<a href="#" class="dropdown-toggle pull-right notifications-count btn btn-danger btn-lg" data-toggle="dropdown"> <i class="icon-bell icon"></i> <span class="count">{{count($notifications)}}</span></a>
+		<ul class="dropdown-menu">
+			@if(count($notifications))
+			@foreach($notifications as $notification)
+			<li>
+				<a href="#">{{$notification->message}}</a>
+			</li>
+			@endforeach
+			@else
+			<li class="dropdown-header">
+				No notifications!
+			</li>
+			@endif
+		</ul>
+	</div>
+	<div class="dropdown pull-left">
 		<a href="#" class="dropdown-toggle btn btn-hollow user-account-menu pull-right" data-toggle="dropdown" data-target="#account-dropdown"> <img src="{{profilePic(Auth::user()->picture)}}" alt="User"> <span class="inside">{{substr(Auth::user()->username, 0, 10)}}.. <i class="caret"></i></span> </a>
 		<ul class="dropdown-menu">
 			<li>
