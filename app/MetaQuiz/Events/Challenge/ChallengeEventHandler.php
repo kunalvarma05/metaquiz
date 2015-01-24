@@ -1,14 +1,31 @@
 <?php namespace MetaQuiz\Events\Challenge;
 
-use \Notification;
+use MetaQuiz\Repositories\Notification\NotificationInterface;
 
 class ChallengeEventHandler {
+
+  /**
+   * The Notification Object
+   * @var NotificationInterface
+   */
+  private $notification;
+
+  /**
+   * The Constructor
+   * @param NotificationInterface $notification
+   */
+  public function __construct(NotificationInterface $notification){
+    $this->notification = $notification;
+  }
 
   /**
    * When a Challenge is created
    */
   public function onCreate( $data ) {
-
+    $data['targetable_id'] = $data['challenge_id'];
+    $data['targetable_type'] = 'Challenge';
+    //Create the notification
+    $notification = $this->notification->create($data);
   }
 
   /**
@@ -33,11 +50,11 @@ class ChallengeEventHandler {
    */
   public function subscribe( $events ) {
     //Listen to the Challenge Create event
-    $events->listen( 'campaign.create', 'MetaQuiz\Events\Challenge\ChallengeEventHandler@onCreate' );
+    $events->listen( 'challenge.create', 'MetaQuiz\Events\Challenge\ChallengeEventHandler@onCreate' );
     //Listen to the Challenge Accept event
-    $events->listen( 'campaign.accept', 'MetaQuiz\Events\Challenge\ChallengeEventHandler@onAccept' );
+    $events->listen( 'challenge.accept', 'MetaQuiz\Events\Challenge\ChallengeEventHandler@onAccept' );
     //Listen to the Challenge Reject event
-    $events->listen( 'campaign.reject', 'MetaQuiz\Events\Challenge\ChallengeEventHandler@onReject' );
+    $events->listen( 'challenge.reject', 'MetaQuiz\Events\Challenge\ChallengeEventHandler@onReject' );
   }
 
 }
