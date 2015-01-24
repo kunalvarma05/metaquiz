@@ -114,6 +114,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->belongsToMany('Challenge');
 	}
 
+	/**
+	 * All the challenge requests of the user
+	 * @return Challenge Requests Collection
+	 */
+	public function challengeRequests(){
+		return $this->hasMany('ChallengeRequest');
+	}
+
 
 	/**
 	 * Stat
