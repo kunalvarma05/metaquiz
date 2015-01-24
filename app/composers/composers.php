@@ -8,6 +8,11 @@ View::composer(array('app.partials.main-navigation'), function($view){
 	$view->with('friend_requests',$friend_requests);
 });
 
+View::composer(array('app.partials.main-header'), function($view){
+	$notifications = Auth::user()->notifications;
+	$view->with('notifications', $notifications);
+});
+
 /**
  * Friend Suggestions
  */
