@@ -121,10 +121,11 @@ gulp.task('buildJS', function() {
  * Watch all the js files for BuildJS
  */
 gulp.task('watch', function() {
-	gulp.watch('site_modules/scss/application/**/*.scss', ['buildAppCSS']);
-	gulp.watch('site_modules/scss/global/**/*.scss', ['buildGlobalCSS']);
-	gulp.watch('site_modules/scss/backend/**/*.scss', ['buildBackendCSS']);
-	gulp.watch('site_modules/javascript/**/*.js', ['buildJS']);
+	gulp.watch('site_modules/scss/application/**/**/*.scss', ['buildAppCSS']);
+	gulp.watch('site_modules/scss/global/**/**/*.scss', ['buildGlobalCSS']);
+	gulp.watch('site_modules/scss/backend/**/**/*.scss', ['buildBackendCSS']);
+	gulp.watch('site_modules/scss/third-party/**/**/*.scss', ['buildAppCSS','buildGlobalCSS','buildBackendCSS']);
+	gulp.watch('site_modules/javascript/**/**/*.js', ['buildJS']);
 });
 
 //Default Task

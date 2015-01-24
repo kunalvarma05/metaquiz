@@ -72,7 +72,10 @@
 		target: '#challenge-friend-input'
 	});*/
 	jQuery('#challenge-friends-select').select2({
-		theme: "classic"
+		placeholder: "Select friends to challenge...",
+		theme: "default",
+		width: "style"
+
 	});
 
 });
