@@ -16,6 +16,8 @@ use MetaQuiz\Repositories\Activity\EloquentActivity;
 use MetaQuiz\Repositories\Activation\EloquentActivation;
 use MetaQuiz\Repositories\Organization\EloquentOrganization;
 use MetaQuiz\Repositories\Challenge\EloquentChallenge;
+use MetaQuiz\Repositories\ChallengeRequest\EloquentChallengeRequest;
+use MetaQuiz\Repositories\Notification\EloquentNotification;
 
 /**
  * RepositoryService Provider
@@ -142,8 +144,30 @@ class RepositoryServiceProvider extends ServiceProvider {
 		 * - Challenge
 		 * - AppCache
 		 */
-		$subject = $this -> app -> bind('MetaQuiz\Repositories\Challenge\ChallengeInterface', function($app) {
+		$challenge = $this -> app -> bind('MetaQuiz\Repositories\Challenge\ChallengeInterface', function($app) {
 			return new EloquentChallenge(new \Challenge, new AppCache($app['cache'], 60));
+		});
+
+		/**
+		 * ChallengeRequest Repo
+		 *
+		 * ChallengeRequestInterface
+		 * - ChallengeRequest
+		 * - AppCache
+		 */
+		$challengeRequest = $this -> app -> bind('MetaQuiz\Repositories\ChallengeRequest\ChallengeRequestInterface', function($app) {
+			return new EloquentChallengeRequest(new \ChallengeRequest, new AppCache($app['cache'], 60));
+		});
+
+		/**
+		 * Notification Repo
+		 *
+		 * NotificationInterface
+		 * - Notification
+		 * - AppCache
+		 */
+		$notification = $this -> app -> bind('MetaQuiz\Repositories\Notification\NotificationInterface', function($app) {
+			return new EloquentNotification(new \Notification, new AppCache($app['cache'], 60));
 		});
 	}
 }
