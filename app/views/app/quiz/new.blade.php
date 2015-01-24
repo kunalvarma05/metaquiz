@@ -6,7 +6,9 @@
 			Select the chapters you want to include the questions from, in the quiz
 		</div>
 		{{Form::open(array('route' => "app.quiz.generate"))}}
-		{{Form::select('chapters[]', $chapters, array(), array('class' => "form-control input-lg", 'required' => "required", 'placeholder' => "Chapters", 'rows' => '6', 'multiple' => "multiple", 'data-selector' => "true"))}}
+		<div class="form-group">
+			{{Form::select('chapters[]', $chapters, array(), array('class' => "form-control input-lg", 'required' => "required", 'placeholder' => "Chapters", 'rows' => '6', 'multiple' => "multiple", 'data-selector' => "true"))}}
+		</div>
 		{{Form::submit('Start Quiz', array('class' => "btn btn-lg btn-success btn-block"))}}
 		{{Form::close()}}
 	</div>
