@@ -159,3 +159,19 @@ function userLevel($points){
 		break;
 	}
 }
+
+/**
+ * Get a friendlist with the specified fields
+ * @param  Friends $friends Object of Friends Model
+ * @return array          An array of friends
+ */
+function friend_list($friends){
+	//Friend List
+	$ids =  array_pluck($friends, 'id');
+	$names =  array_pluck($friends, 'name');
+	$friend_list = array();
+	for($i=0;$i<count($ids); $i++){
+		$friend_list[$ids[$i]] = $names[$i];
+	}
+	return $friend_list;
+}
