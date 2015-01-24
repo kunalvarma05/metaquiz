@@ -9,12 +9,15 @@
 		<li class="{{HTML::activeState('app.subjects')}}">
 			<a href="{{route('app.subjects')}}" data-toggle="tooltip" data-placement="right" class="icon-grid subject-icon" title="Subjects"></a>
 		</li>
+		<li class="{{HTML::activeState('app.challenges')}}">
+			<a href="{{route('app.challenges')}}" data-toggle="tooltip" data-placement="right" class="icon-fire challenge-icon" title="Challenges"></a>
+		</li>
 		<li>
 			<a href="#" data-toggle="tooltip" data-placement="right" class="icon-trophy achievement-icon" title="Achievements"></a>
 		</li>
 		<li class="{{HTML::activeState('app.friends')}}">
 			@if($friend_requests > 0)
-				<span class="count">{{$friend_requests}}</span>
+			<span class="count">{{$friend_requests}}</span>
 			@endif
 			<a href="{{route('app.friends')}}" data-toggle="tooltip" data-placement="right" class="icon-users friend-icon" title="Friends"></a>
 		</li>
