@@ -147,13 +147,7 @@ class QuizController extends \BaseController {
 			$questions_asked = QuestionQuiz::with(array("question", "question.options", "answer"))->where("quiz_id",$quiz->id)->where("is_answered", "=", 1)->get();
 			//Friends of the user
 			$friends = $this->user->getFriends($user->id);
-			//Friend List
-			$ids =  array_pluck($friends, 'id');
-			$names =  array_pluck($friends, 'name');
-			$friend_list = array();
-			for($i=0;$i<count($ids); $i++){
-				$friend_list[$ids[$i]] = $names[$i];
-			}
+			$friend_list = friend_list($friends);
 			$bodyClass = "play-quiz-body";
 			$pageTitle = "Quiz Result";
 			$marksPerQuestion =  array_fetch($questions_asked->toArray(), 'answer.marks');
