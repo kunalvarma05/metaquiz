@@ -6,12 +6,15 @@
   display: block;
   position: absolute;
   left: -100000px;
+  min-width: 250px;
   width: 100%;
   z-index: 100;
+  display: block;
 }
 
 .select2-results {
   display: block;
+  width: 100%;
 }
 
 .select2-results__options {
@@ -31,6 +34,7 @@
 
 .select2-container--open .select2-dropdown {
   left: 0;
+  width: 100%;
 }
 
 .select2-container--open .select2-dropdown--above {

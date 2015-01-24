@@ -11,11 +11,13 @@
     overflow: hidden;
     padding-left: 8px;
     text-overflow: ellipsis;
+    width: 100%;
   }
 }
 
 .select2-search--inline {
-  float: left;
+  display: block;
+  width: 100%;
 
   .select2-search__field {
     border: none;

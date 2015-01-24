@@ -5,10 +5,10 @@
 .main{
   margin-left: $nav-main-width;
   margin-right: $sidebar-width;
-  padding: 15px;  
+  padding: 15px;
   //No Nav
   &.no-nav{
-    margin-left: 0;    
+    margin-left: 0;
   }
   //No Sidebar
   &.no-sidebar{
@@ -33,9 +33,18 @@
     }
     //Page Title
     .page-title{
-      float: left;      
+      float: left;
       color: #bcbcd8;
       margin: 10px 0;
+    }
+    //Notifications Count
+    .notifications-count{
+      margin: 2px 10px 0 0;
+      //Count
+      .count {
+        font-size: 20px;
+        line-height: 0;
+      }
     }
     //User Account Menu
     .user-account-menu{
@@ -43,22 +52,22 @@
       color: #bcbcd8;
       padding: 10px 12px;
       box-shadow: 0px 1px 0px rgba(255,255,255,0.1);
-      outline: none;           
+      outline: none;
       //Img
       img{
         width: 18px;
-        height: 18px;        
+        height: 18px;
         vertical-align: middle;
         float: left;
         background: rgba(255,255,255,0.8);
-        border-radius: 50%;        
+        border-radius: 50%;
       }
       //Inside
       .inside{
         margin-top:1px;
         display: inline-block;
         margin-left: 5px;
-      }      
+      }
     }
   }
   //Main Body

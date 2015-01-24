@@ -78,4 +78,10 @@
 
 	});
 
+	jQuery('[data-selector=true]').select2({
+		placeholder: "Select the chapters...",
+		theme: "default",
+		width: "style"
+	});
+
 });
