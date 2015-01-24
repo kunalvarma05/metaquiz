@@ -1,8 +1,8 @@
 <?php namespace MetaQuiz\Events;
 
+use MetaQuiz\Events\Challenge\ChallengeEventHandler;
 use MetaQuiz\Events\User\UserEventHandler;
 use MetaQuiz\Events\Faculty\FacultyEventHandler;
-use MetaQuiz\Events\Challenge\ChallengeEventHandler;
 use Illuminate\Support\ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider {
