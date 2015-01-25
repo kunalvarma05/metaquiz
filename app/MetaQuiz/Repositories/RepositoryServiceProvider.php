@@ -6,6 +6,7 @@ use \Activation;
 use MetaQuiz\Service\Cache\AppCache;
 use Illuminate\Support\ServiceProvider;
 use MetaQuiz\Repositories\User\EloquentUser;
+use MetaQuiz\Repositories\Quiz\EloquentQuiz;
 use MetaQuiz\Repositories\Course\EloquentCourse;
 use MetaQuiz\Repositories\Subject\EloquentSubject;
 use MetaQuiz\Repositories\Chapter\EloquentChapter;
@@ -13,11 +14,11 @@ use MetaQuiz\Repositories\Faculty\EloquentFaculty;
 use MetaQuiz\Repositories\Student\EloquentStudent;
 use MetaQuiz\Repositories\Question\EloquentQuestion;
 use MetaQuiz\Repositories\Activity\EloquentActivity;
+use MetaQuiz\Repositories\Challenge\EloquentChallenge;
 use MetaQuiz\Repositories\Activation\EloquentActivation;
 use MetaQuiz\Repositories\Organization\EloquentOrganization;
-use MetaQuiz\Repositories\Challenge\EloquentChallenge;
-use MetaQuiz\Repositories\ChallengeRequest\EloquentChallengeRequest;
 use MetaQuiz\Repositories\Notification\EloquentNotification;
+use MetaQuiz\Repositories\ChallengeRequest\EloquentChallengeRequest;
 
 /**
  * RepositoryService Provider
@@ -168,6 +169,17 @@ class RepositoryServiceProvider extends ServiceProvider {
 		 */
 		$notification = $this -> app -> bind('MetaQuiz\Repositories\Notification\NotificationInterface', function($app) {
 			return new EloquentNotification(new \Notification, new AppCache($app['cache'], 60));
+		});
+
+		/**
+		 * Quiz Repo
+		 *
+		 * QuizInterface
+		 * - Quiz
+		 * - AppCache
+		 */
+		$quiz = $this -> app -> bind('MetaQuiz\Repositories\Quiz\QuizInterface', function($app) {
+			return new EloquentQuiz(new \Quiz, new AppCache($app['cache'], 60));
 		});
 	}
 }
