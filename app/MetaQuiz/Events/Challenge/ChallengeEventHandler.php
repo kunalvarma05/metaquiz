@@ -42,7 +42,10 @@ class ChallengeEventHandler {
    * When someone rejects a Challenge
    */
   public function onReject( $data ) {
-
+    $data['targetable_id'] = $data['challenge_id'];
+    $data['targetable_type'] = 'Challenge';
+    //Create the notification
+    $notification = $this->notification->create($data);
   }
 
   /**
