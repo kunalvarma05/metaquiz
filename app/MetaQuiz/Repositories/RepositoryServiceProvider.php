@@ -7,6 +7,7 @@ use MetaQuiz\Service\Cache\AppCache;
 use Illuminate\Support\ServiceProvider;
 use MetaQuiz\Repositories\User\EloquentUser;
 use MetaQuiz\Repositories\Quiz\EloquentQuiz;
+use MetaQuiz\Repositories\Answer\EloquentAnswer;
 use MetaQuiz\Repositories\Course\EloquentCourse;
 use MetaQuiz\Repositories\Subject\EloquentSubject;
 use MetaQuiz\Repositories\Chapter\EloquentChapter;
@@ -180,6 +181,17 @@ class RepositoryServiceProvider extends ServiceProvider {
 		 */
 		$quiz = $this -> app -> bind('MetaQuiz\Repositories\Quiz\QuizInterface', function($app) {
 			return new EloquentQuiz(new \Quiz, new AppCache($app['cache'], 60));
+		});
+
+		/**
+		 * Answer Repo
+		 *
+		 * AnswerInterface
+		 * - Answer
+		 * - AppCache
+		 */
+		$answer = $this -> app -> bind('MetaQuiz\Repositories\Answer\AnswerInterface', function($app) {
+			return new EloquentAnswer(new \Answer, new AppCache($app['cache'], 60));
 		});
 	}
 }
