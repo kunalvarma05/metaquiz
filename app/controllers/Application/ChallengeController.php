@@ -143,7 +143,7 @@ class ChallengeController extends \BaseController {
 
 			//Send the challenger the notification that the user has accepted their challenge
 			$data = array(
-				'message' => $user->anem . " accepted your challenge.",
+				'message' => $user->name . " accepted your challenge.",
 				'challenge_id' => $challenge->id,
 				'user_id' => $challenge->challenger_id
 				);
