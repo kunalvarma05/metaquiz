@@ -1,9 +1,10 @@
 <?php
 use MetaQuiz\Repositories\User\UserInterface;
-use MetaQuiz\Repositories\Organization\OrganizationInterface;
+use MetaQuiz\Repositories\Quiz\QuizInterface;
 use MetaQuiz\Repositories\Course\CourseInterface;
 use MetaQuiz\Repositories\Subject\SubjectInterface;
 use MetaQuiz\Repositories\Challenge\ChallengeInterface;
+use MetaQuiz\Repositories\Organization\OrganizationInterface;
 use MetaQuiz\Repositories\ChallengeRequest\ChallengeRequestInterface;
 
 class ChallengeController extends \BaseController {
@@ -17,14 +18,19 @@ class ChallengeController extends \BaseController {
 	//The Challenge Interface Object
 	private $challenge;
 
+	//The Quiz Interface Object
+	private $quiz;
+
 	/**
 	 * The Constructor
 	 * @param UserInterface             $user
 	 * @param ChallengeInterface        $challenge
 	 * @param ChallengeRequestInterface $challengeRequest
+	 * @param QuizInterface 			$quiz
 	 */
-	public function __construct(UserInterface $user, ChallengeInterface $challenge, ChallengeRequestInterface $challengeRequest){
+	public function __construct(UserInterface $user, ChallengeInterface $challenge, ChallengeRequestInterface $challengeRequest, QuizInterface $quiz){
 		$this->user = $user;
+		$this->quiz = $quiz;
 		$this->challenge = $challenge;
 		$this->challengeRequest = $challengeRequest;
 	}
@@ -64,9 +70,9 @@ class ChallengeController extends \BaseController {
 		//Find and check if this quiz is already part of a challenge
 		$challenge = $this->challenge->getFirstBy('quiz_id', $quiz->id);
 
-		//Check if the challenge exists
+		//Check if the challenge doesn't exists
 		if(!$challenge){
-			//The Challene doesn't exist
+			//The Challene doesn't exist, therefore
 			//Create the challenge
 			$data = array('status' => "ongoing", 'challenger_id' => $user->id, 'quiz_id' => $quiz->id);
 			$challenge = $this->challenge->create($data);
@@ -156,28 +162,28 @@ class ChallengeController extends \BaseController {
 			$chapter_ids = array_pluck($chapters, 'id');
 
 
+
 			//Create a new Quiz
-			$quiz = new Quiz;
-			//Set Status as Unfinished
-			$quiz->status = "unfinished";
-			//Associate the user with the quiz
-			$quiz->user()->associate($user);
-			//Save the quiz
-			$quiz->save();
+			$quiz = $this->quiz->create(array(
+				'status' => "unfinished",
+				'user_id' => $user->id
+				));
+
 			//Attach the selected chapters to the quiz
 			$quiz->chapters()->sync($chapter_ids);
 
-
-
-			//Questions to be included in the quiz
+			//Fetch Questions asked in the reference quiz
 			$questionsAsked = $referenceQuiz->questionsAsked;
+			//Pluck the IDs of the questions asked
 			$questions = array_pluck($questionsAsked, 'id');
 
 			//Attach the aggregated questions to the quiz
 			$quiz->questionsAsked()->sync($questions);
+
 			//Redirect the user to the play quiz page
 			return Redirect::to(URL::route('app.quiz.play', array($quiz->id)));
 		}else{
+			//Abort!
 			App::abort(500, "Looks like something is wrong. Please try again later!");
 		}
 	}
