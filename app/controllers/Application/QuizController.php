@@ -1,8 +1,10 @@
 <?php
 use MetaQuiz\Repositories\User\UserInterface;
-use MetaQuiz\Repositories\Organization\OrganizationInterface;
+use MetaQuiz\Repositories\Quiz\QuizInterface;
+use MetaQuiz\Repositories\Answer\AnswerInterface;
 use MetaQuiz\Repositories\Course\CourseInterface;
 use MetaQuiz\Repositories\Subject\SubjectInterface;
+use MetaQuiz\Repositories\Organization\OrganizationInterface;
 
 class QuizController extends \BaseController {
 
@@ -18,15 +20,23 @@ class QuizController extends \BaseController {
 	//The Subject Interface Object
 	private $subject;
 
-	public function __construct(UserInterface $user, OrganizationInterface $organization, CourseInterface $course, SubjectInterface $subject){
+	//The Quiz Interface Object
+	private $quiz;
+
+	//The Answer Interface Object
+	private $answer;
+
+	public function __construct(UserInterface $user, OrganizationInterface $organization, CourseInterface $course, SubjectInterface $subject, QuizInterface $quiz, AnswerInterface $answer){
 		$this->user = $user;
 		$this->organization = $organization;
 		$this->course = $course;
 		$this->subject = $subject;
+		$this->quiz = $quiz;
+		$this->answer = $answer;
 	}
 
 	/**
-	 * Display a listing of the resource.
+	 * Display a listing of the quiz.
 	 * GET /application/quiz
 	 *
 	 * @return Response
@@ -37,7 +47,7 @@ class QuizController extends \BaseController {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Show the form for creating a new quiz.
 	 * GET /application/quiz/create
 	 *
 	 * @return Response
@@ -71,7 +81,7 @@ class QuizController extends \BaseController {
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Store a newly created quiz in storage.
 	 * POST /application/quiz
 	 *
 	 * @return Response
@@ -80,16 +90,17 @@ class QuizController extends \BaseController {
 	{
 		//The Input
 		$input = Input::only('chapters');
-		//Find the current user
-		$user = User::findOrFail(Auth::user()->id);
+
+		//Find the authorize the logged in user
+		$user = $this->user->requireByID(Auth::user()->id);
+
 		//Create a new Quiz
-		$quiz = new Quiz;
-		//Set Status as Unfinished
-		$quiz->status = "unfinished";
-		//Associate the user with the quiz
-		$quiz->user()->associate($user);
-		//Save the quiz
-		$quiz->save();
+		$quiz = $this->quiz->create(array(
+			'status' => "unfinished",
+			'user_id' => $user->id,
+			'marks' => 0
+			));
+
 		//Attach the selected chapters to the quiz
 		$quiz->chapters()->sync($input['chapters']);
 
@@ -113,7 +124,7 @@ class QuizController extends \BaseController {
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Display the specified quiz.
 	 * GET /application/quiz/{quiz_id}
 	 *
 	 * @param  int  $quiz_id
@@ -123,7 +134,7 @@ class QuizController extends \BaseController {
 	{
 		$quiz = Auth::user()->quizes()->findOrFail($quiz_id);
 		$marks = 0;
-		$answers = Answer::where('quiz_id',$quiz->id)->get();
+		$answers = $this->answer->byQuizID($quiz->id);
 		foreach ($answers as $answer) {
 			$marks += $answer->marks;
 		}
@@ -174,8 +185,11 @@ class QuizController extends \BaseController {
 			//The quiz finished!
 			$quiz->status = "finished";
 			if($quiz->save()){
-			//No questions left to answer
-				return array("all_answered" => true);
+				//Finish
+				if($this->finish($quiz)){
+					//No questions left to answer
+					return array("all_answered" => true);
+				}
 			}else{
 				return array("Cannot mark quiz as complete!");
 			}
@@ -251,8 +265,18 @@ class QuizController extends \BaseController {
 
 		//Save the answer
 		if($answer->save()){
+
+			//Set total marks on the quiz
+			$quiz->marks = $quiz->marks + $marks;
+
+			//Save the quiz
+			if(!$quiz->save()){
+				$response['error'] = "Looks like there is something wrong. Please try again!";
+			}
+
 			//Set the question asked as answered
 			$question_quiz->is_answered = 1;
+
 			//If the question asked is not saved
 			if(!$question_quiz->save()){
 				$response['error'] = "Looks like there is something wrong. Please try again!";
@@ -341,5 +365,37 @@ class QuizController extends \BaseController {
 		return $response;
 	}
 
+	/**
+	 * Finish The Quiz
+	 * @param  Eloquent $quiz Quiz Model
+	 */
+	private function finish($quiz){
+		//Challenge, the quiz belongs to
+		$challenge = $quiz->challenge;
+		//If the quiz is part of a challenge
+		if($challenge){
+			//The current winner of the quiz
+			$currentWinnerQuiz = $challenge->quizes()->where('user_id', $challenge->winner_id)->first();
+			//Marks of the current winner
+			$currentWinnerMarks = $currentWinnerQuiz->marks;
+
+			//If the marks of the current user is more than that of the current winner's marks
+			if($currentWinnerMarks < $quiz->marks){
+				//Swap the winner
+				$challenge->winner_id = $quiz->user_id;
+				//Send the challenger the notification that the user won the challenge
+				$data = array(
+					'message' => $quiz->user->name . " won against you.",
+					'challenge_id' => $challenge->id,
+					'user_id' => $challenge->challenger_id
+					);
+				Event::fire('challenge.winner', array($data));
+			}
+			//Save the challenge
+			return $challenge->save();
+		}else{
+			return true;
+		}
+	}
 
 }

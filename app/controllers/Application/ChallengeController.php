@@ -79,8 +79,8 @@ class ChallengeController extends \BaseController {
 
 			//Attach the challenger to the challenge as a player
 			$challenge->users()->attach($user->id);
-			//Attach the current quiz to the challenge
-			$challenge->quizes()->attach($quiz->id);
+			//Associate the current quiz to the challenge
+			$challenge->quizes()->save($quiz);
 		}
 
 		//Send the requests to all the users
@@ -120,6 +120,11 @@ class ChallengeController extends \BaseController {
 	public function show($id){
 		$user = $this->user->requireByID(Auth::user()->id);
 		$challenge = $user->challenges->find($id);
+		//Not yet part of the challenge
+		if(!$challenge){
+			//Abort!
+			App::abort(500, "Looks like something is wrong. Please try again later!");
+		}
 		$players = $challenge->users;
 		$status = $challenge->status;
 		$challenger = $challenge->challenger;
@@ -180,8 +185,39 @@ class ChallengeController extends \BaseController {
 			//Attach the aggregated questions to the quiz
 			$quiz->questionsAsked()->sync($questions);
 
+			//Associate the current quiz to the challenge
+			$challenge->quizes()->save($quiz);
+
 			//Redirect the user to the play quiz page
 			return Redirect::to(URL::route('app.quiz.play', array($quiz->id)));
+		}else{
+			//Abort!
+			App::abort(500, "Looks like something is wrong. Please try again later!");
+		}
+	}
+
+	/**
+	 * Accept a given challenge
+	 * @return Response
+	 */
+	public function reject(){
+		$id = Input::get('challenge_request_id');
+		$user = Auth::user();
+		$challengeRequest = $user->challengeRequests()->find($id);
+		$challenge = $challengeRequest->challenge;
+		$reject = $this->challengeRequest->reject($challengeRequest->id);
+		//If the challenge request is marked as rejected
+		if($reject){
+			//Send the challenger the notification that the user has rejected their challenge
+			$data = array(
+				'message' => $user->name . " rejected your challenge.",
+				'challenge_id' => $challenge->id,
+				'user_id' => $challenge->challenger_id
+				);
+			Event::fire('challenge.reject', array($data));
+
+			//Redirect the user to the play quiz page
+			return Redirect::to(URL::route('app.challenges'));
 		}else{
 			//Abort!
 			App::abort(500, "Looks like something is wrong. Please try again later!");
