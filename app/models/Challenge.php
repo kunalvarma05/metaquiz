@@ -55,7 +55,7 @@ class Challenge extends \Eloquent {
 	 * @return Quiz Collection
 	 */
 	public function quizes() {
-		return $this -> belongsToMany('Quiz');
+		return $this -> hasMany('Quiz', 'challenge_id');
 	}
 
 	/**
