@@ -48,6 +48,17 @@ class ChallengeEventHandler {
     $notification = $this->notification->create($data);
   }
 
+
+  /**
+   * When someone wins a Challenge
+   */
+  public function onWinning( $data ) {
+    $data['targetable_id'] = $data['challenge_id'];
+    $data['targetable_type'] = 'Challenge';
+    //Create the notification
+    $notification = $this->notification->create($data);
+  }
+
   /**
    * Register the listeners for the subscriber.
    *
@@ -61,6 +72,8 @@ class ChallengeEventHandler {
     $events->listen( 'challenge.accept', 'MetaQuiz\Events\Challenge\ChallengeEventHandler@onAccept' );
     //Listen to the Challenge Reject event
     $events->listen( 'challenge.reject', 'MetaQuiz\Events\Challenge\ChallengeEventHandler@onReject' );
+    //Listen to the Challenge Winner event
+    $events->listen( 'challenge.winner', 'MetaQuiz\Events\Challenge\ChallengeEventHandler@onWinning' );
   }
 
 }
