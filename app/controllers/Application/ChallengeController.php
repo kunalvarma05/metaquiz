@@ -74,7 +74,7 @@ class ChallengeController extends \BaseController {
 		if(!$challenge){
 			//The Challene doesn't exist, therefore
 			//Create the challenge
-			$data = array('status' => "ongoing", 'challenger_id' => $user->id, 'quiz_id' => $quiz->id);
+			$data = array('status' => "ongoing", 'challenger_id' => $user->id, 'quiz_id' => $quiz->id, 'winner_id' => $user->id);
 			$challenge = $this->challenge->create($data);
 
 			//Attach the challenger to the challenge as a player
