@@ -14,7 +14,7 @@ class AddTypeAndStatusColumnsToQuizesTable extends Migration {
 	{
 		Schema::table('quizes', function(Blueprint $table)
 		{
-			$table->string('type')->nullable();
+			$table->integer('marks')->nullable();
 			$table->string('status')->nullable();
 		});
 	}
@@ -29,7 +29,7 @@ class AddTypeAndStatusColumnsToQuizesTable extends Migration {
 	{
 		Schema::table('quizes', function(Blueprint $table)
 		{
-			$table->dropColumns(array('type'));
+			$table->dropColumns(array('marks'));
 			$table->dropColumns(array('status'));
 		});
 	}
