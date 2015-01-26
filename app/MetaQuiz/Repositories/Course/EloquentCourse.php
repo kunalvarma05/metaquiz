@@ -32,27 +32,6 @@ class EloquentCourse extends AbstractEloquentRepository implements CourseInterfa
 	}
 
 	/**
-	 * all Fetch all the Courses
-	 * @param  array $with Related Models for Eager Loading
-	 * @return Object The Course Collection
-	 */
-	public function all($with = array()) {
-		//Generate the key
-		$key = md5('courses.all');
-		//Check if it already exists
-		if ($this -> cache -> has($key)) {
-			//Return from cache
-			return $this -> cache -> get($key);
-		}
-		//Else query the data source
-		$Courses = parent::all($with);
-		//Store Cache
-		$this -> cache -> put($key, $Courses);
-		//And return
-		return $Courses;
-	}
-
-	/**
 	 * bySlug Get a Single Course by Slug
 	 * @param string $slug Slug of the Course
 	 * @return Object Course Collection
@@ -62,16 +41,6 @@ class EloquentCourse extends AbstractEloquentRepository implements CourseInterfa
 		$Course = $this -> getFirstBy('slug', $slug, $with);
 		//Return
 		return $Course;
-	}
-
-	/**
-	 * create Create a Course
-	 * @param Array $input Input Data to be stored
-	 * @return The Newly created Course Model Instance
-	 */
-	public function create(array $input) {
-		//Return the Model Create method
-		return $this -> model -> create($input);
 	}
 
 }

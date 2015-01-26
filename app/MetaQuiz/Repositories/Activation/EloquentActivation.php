@@ -63,16 +63,4 @@ class EloquentActivation extends AbstractEloquentRepository implements Activatio
 		}
 	}
 
-	/**
-	 * Create an Activation record
-	 * @param  array  $input Input Data
-	 * @return Mixed
-	 */
-	public function create(array $input) {
-		//Create the model
-		$activation = $this -> model -> create($input);
-		//Return the activation
-		return $activation;
-	}
-
 }

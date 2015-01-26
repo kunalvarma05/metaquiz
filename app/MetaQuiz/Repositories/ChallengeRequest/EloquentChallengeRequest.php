@@ -32,37 +32,6 @@ class EloquentChallengeRequest extends AbstractEloquentRepository implements Cha
 	}
 
 	/**
-	 * all Fetch all the ChallengeRequests
-	 * @param  array $with Related Models for Eager Loading
-	 * @return Object The ChallengeRequest Collection
-	 */
-	public function all($with = array()) {
-		//Generate the key
-		$key = md5('challenges.all');
-		//Check if it already exists
-		if ($this -> cache -> has($key)) {
-			//Return from cache
-			return $this -> cache -> get($key);
-		}
-		//Else query the data source
-		$challenges = parent::all($with);
-		//Store Cache
-		$this -> cache -> put($key, $challenges);
-		//And return
-		return $challenges;
-	}
-
-	/**
-	 * create Create a ChallengeRequest
-	 * @param Array $input Input Data to be stored
-	 * @return The Newly created ChallengeRequest Model Instance
-	 */
-	public function create(array $input) {
-		//Return the Model Create method
-		return $this -> model -> create($input);
-	}
-
-	/**
 	 * Accept a given challenge request
 	 * @param  int $id ID of the ChallengeRequest
 	 * @return Object ChallengeRequest     Collection

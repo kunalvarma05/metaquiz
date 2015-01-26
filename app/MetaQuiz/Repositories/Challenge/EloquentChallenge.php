@@ -32,13 +32,13 @@ class EloquentChallenge extends AbstractEloquentRepository implements ChallengeI
 	}
 
 	/**
-	 * create Create a Challenge
-	 * @param Array $input Input Data to be stored
-	 * @return The Newly created Challenge Model Instance
+	 * byQuizID Find Challenge by QuizID
+	 * @param  Integer $quiz_id   The QuizID of the Challenge
+	 * @param  array  $with Related Models for Eager Loading
+	 * @return Object The Challenge Collection
 	 */
-	public function create(array $input) {
-		//Return the Model Create method
-		return $this -> model -> create($input);
+	public function byQuizID($quiz_id, $with = array()){
+		return $this->getFirstBy('quiz_id', $quiz_id);
 	}
 
 }

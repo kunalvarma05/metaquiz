@@ -1,7 +1,7 @@
 <?php
 namespace MetaQuiz\Repositories;
 
-abstract class AbstractEloquentRepository {
+abstract class AbstractEloquentRepository implements RepositoryInterface {
 
 	/**
 	 * Make a new instance of the entity to query on
@@ -103,6 +103,19 @@ abstract class AbstractEloquentRepository {
 		$result -> items = $model -> all();
 
 		return $result;
+	}
+
+	/**
+	 * Create
+	 * Create a Resource
+	 * @param Input Data to be stored
+	 * @return bool
+	 */
+	public function create(array $input) {
+		//Create the model
+		$model = $this -> model -> create($input);
+		//Return the model
+		return $model;
 	}
 
 }

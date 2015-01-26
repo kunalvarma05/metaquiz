@@ -1,7 +1,9 @@
 <?php
 namespace MetaQuiz\Repositories\Activation;
 
-interface ActivationInterface {
+use MetaQuiz\Repositories\RepositoryInterface;
+
+interface ActivationInterface extends RepositoryInterface {
 
 	/**
 	 * Activate an Account
@@ -10,12 +12,5 @@ interface ActivationInterface {
 	 * @return Mixed|Boolean
 	 */
 	public function activate($user_id, $code);
-
-	/**
-	 * Create an Activation record
-	 * @param  array  $input Input Data
-	 * @return Mixed
-	 */
-	public function create(array $input);
 
 }

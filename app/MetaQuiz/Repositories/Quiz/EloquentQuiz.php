@@ -32,27 +32,6 @@ class EloquentQuiz extends AbstractEloquentRepository implements QuizInterface {
 	}
 
 	/**
-	 * all Fetch all the Quizs
-	 * @param  array $with Related Models for Eager Loading
-	 * @return Object The Quiz Collection
-	 */
-	public function all($with = array()) {
-		//Generate the key
-		$key = md5('quizes.all');
-		//Check if it already exists
-		if ($this -> cache -> has($key)) {
-			//Return from cache
-			return $this -> cache -> get($key);
-		}
-		//Else query the data source
-		$quizes = parent::all($with);
-		//Store Cache
-		$this -> cache -> put($key, $quizes);
-		//And return
-		return $quizes;
-	}
-
-	/**
 	 * byUserID Get a Single Quiz by UserID
 	 * @param string $user_id UserID of the Quiz
 	 * @return Object Quiz Collection
@@ -62,16 +41,6 @@ class EloquentQuiz extends AbstractEloquentRepository implements QuizInterface {
 		$quiz = $this -> getFirstBy('user_id', $user_id, $with);
 		//Return
 		return $quiz;
-	}
-
-	/**
-	 * create Create a Quiz
-	 * @param Array $input Input Data to be stored
-	 * @return The Newly created Quiz Model Instance
-	 */
-	public function create(array $input) {
-		//Return the Model Create method
-		return $this -> model -> create($input);
 	}
 
 }

@@ -32,34 +32,16 @@ class EloquentQuestion extends AbstractEloquentRepository implements QuestionInt
 	}
 
 	/**
-	 * all Fetch all the Questions
-	 * @param  array $with Related Models for Eager Loading
+	 * byChapterID Find Question by ChapterID
+	 * @param  Integer $chapter_id   The ChapterID of the Question
+	 * @param  array  $with Related Models for Eager Loading
 	 * @return Object The Question Collection
 	 */
-	public function all($with = array()) {
-		//Generate the key
-		$key = md5('questions.all');
-		//Check if it already exists
-		if ($this -> cache -> has($key)) {
-			//Return from cache
-			return $this -> cache -> get($key);
-		}
+	public function byChapterID($chapter_id, $with = array()){
 		//Else query the data source
-		$questions = parent::all($with);
-		//Store Cache
-		$this -> cache -> put($key, $questions);
-		//And return
-		return $questions;
-	}
-
-	/**
-	 * create Create a Question
-	 * @param Array $input Input Data to be stored
-	 * @return The Newly created Question Model Instance
-	 */
-	public function create(array $input) {
-		//Return the Model Create method
-		return $this -> model -> create($input);
+		$chapter = $this -> getFirstBy('chapter_id', $chapter_id, $with);
+		//Return
+		return $chapter;
 	}
 
 }

@@ -60,14 +60,5 @@ class EloquentActivity extends AbstractEloquentRepository implements ActivityInt
 	public function whereIn($field, $closure){
 		return $this->model->whereIn($field, $closure);
 	}
-		/**
-		 * create Create a Activity
-		 * @param Array $input Input Data to be stored
-		 * @return The Newly created Activity Model Instance
-		 */
-		public function create(array $input) {
-			//Return the Model Create method
-			return $this -> model -> create($input);
-		}
 
-	}
+}
