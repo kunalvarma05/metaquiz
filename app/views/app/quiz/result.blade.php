@@ -28,7 +28,7 @@ quizResultChart(labels, data);
 				</div>
 				<h3 class="section-title">Points earned per question</h3>
 				<div class="quiz-result-section">
-					<canvas class="quiz-result-chart block alert" height="300px" id="quiz-result-chart"></canvas>
+					<canvas class="quiz-result-chart white block alert" height="300px" id="quiz-result-chart"></canvas>
 				</div>
 			</div>
 			<div class="colg-lg-6 col-md-6 col-sm-12 col-xs-12">
