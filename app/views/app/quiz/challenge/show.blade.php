@@ -13,7 +13,7 @@ challengeResultChart(labels, data);
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="brick user-performance-brick">
 				<div class="brick-title">
-					Points earned per question by all challengers
+					Points earned per question by all players
 				</div>
 				<div class="quiz-result-section">
 					<canvas class="quiz-challenge-chart block well-sm" height="300px" id="quiz-result-chart"></canvas>
@@ -37,6 +37,21 @@ challengeResultChart(labels, data);
 							</div>
 						</div>
 						@endforeach
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+							<a href="#addPlayersForm" class="btn btn-lg btn-info btn-block" data-toggle="collapse" data-target="#addPlayersForm">
+								<i class="glyphicon glyphicon-plus"></i> Add Players
+							</a>
+						</div>
+					</div>
+					<div class="collapse" id="addPlayersForm">
+						{{Form::open(array('route' => "app.challenges.addPlayers", 'class' => "well"))}}
+						<div class="form-group" id="challenge-friend-box">
+							{{Form::label('friends', 'Select Friends to Challenge')}}
+							{{Form::select('friends[]', $friend_list, '', array('class' => "form-control", 'multiple' => "true", 'id' => "challenge-friends-select", 'placeholder' => "Select friends you wanna challenge..."))}}
+						</div>
+						{{Form::hidden('challenge_id', $challenge->id, array('class' => "hidden"))}}
+						{{Form::submit('Add Players', array('class' => "btn btn-lg btn-success"))}}
+						{{Form::close()}}
 					</div>
 				</div>
 			</div>
