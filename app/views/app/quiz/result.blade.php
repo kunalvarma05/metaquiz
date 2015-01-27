@@ -24,6 +24,7 @@ quizResultChart(labels, data);
 							</div>
 						</div>
 					</div>
+					{{--Create Challenge View--}}
 					@include('app.quiz.create-challenge')
 				</div>
 				<h3 class="section-title">Points earned per question</h3>
