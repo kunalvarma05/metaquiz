@@ -152,9 +152,11 @@
 		min-height: 250px;
 		//canvas
 		canvas{
-			background: #fff;
 			width: 100%;
 			max-width: 100%;
+			&.white{
+				background: #fff;
+			}
 		}
 	}
 	//Section Title

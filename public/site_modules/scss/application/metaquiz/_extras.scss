@@ -77,3 +77,27 @@
   font-weight: bold;
   font-size: 11px;
 }
+
+//Line Legend
+.line-legend{
+  margin: 0;
+  padding: 10px 15px;
+  background: #eee;
+  border-top: solid 1px #ddd;
+  @extend .clearfix;
+  //Li
+  li{
+    display: block;
+    float: left;
+    padding: 5px;
+    //span
+    span{
+      width: 10px;
+      height: 10px;
+      display: inline-block;
+      color: #fff;
+      border-radius: 2px;
+      margin-right: 5px;
+    }
+  }
+}
