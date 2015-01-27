@@ -9,7 +9,7 @@
 			@if(count($notifications))
 			@foreach($notifications as $notification)
 			<li>
-				<a href="#">{{$notification->message}}</a>
+				<a href="{{route('app.notifications.show', array($notification->id))}}">{{$notification->message}}</a>
 			</li>
 			@endforeach
 			@else
