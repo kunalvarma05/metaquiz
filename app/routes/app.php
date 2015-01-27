@@ -3,6 +3,9 @@
 //Application Routes
 Route::group(array('prefix' => "app", 'before' => "auth|student_role|has-password|activated"), function() {
 
+	//Notification Routes
+	require_once('application/notification.php');
+
 	//Dashboard Routes
 	require_once('application/dashboard.php');
 
@@ -17,5 +20,6 @@ Route::group(array('prefix' => "app", 'before' => "auth|student_role|has-passwor
 
 	//Challenge Routes
 	require_once('application/challenge.php');
+
 
 });
