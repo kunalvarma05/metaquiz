@@ -124,6 +124,7 @@ return array(
 		'MetaQuiz\Repositories\RepositoryServiceProvider',
 		'MetaQuiz\Service\Form\FormServiceProvider',
 		'MetaQuiz\Events\EventServiceProvider',
+		'MetaQuiz\Service\Process\ProcessServiceProvider',
 		'SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider',
 		'Zizaco\Entrust\EntrustServiceProvider',
 		'Cviebrock\EloquentSluggable\SluggableServiceProvider',
