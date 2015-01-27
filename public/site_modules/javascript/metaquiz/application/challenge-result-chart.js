@@ -1,23 +1,17 @@
 var challengeResultChart = function(chartLabels, chartData){
 
-    console.log(chartData);
-
     var datasets = [];
 
-    var colors = ['#08c06a','#1EA6E8','#F0C40F','#CA4FBD','#F46A0F'];
-
-    var getColor = function(colors, prevColor){
-        var num = Math.floor(Math.random()*colors.length);
-        var newColor = colors[num];
-
-        return newColor;
+    var getColor = function(){
+        // Return a hex code for a light color
+        return randomColor({
+            luminosity: 'bright'
+        });
     };
-
-    var lastColor = colors[0];
 
     //Generate dataset
     chartData.forEach(function(cData){
-        var color = getColor(colors, lastColor);
+        var color = getColor();
         var points = cData['points'];
         var label = cData['label'];
         var item = {
