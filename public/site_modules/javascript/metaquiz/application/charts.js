@@ -8,3 +8,4 @@
  Chart.defaults.global.scaleFontStyle = "bold";
 
 //= require quiz-result-chart.js
+//= require challenge-result-chart.js
