@@ -18,6 +18,7 @@ use MetaQuiz\Repositories\Activity\EloquentActivity;
 use MetaQuiz\Repositories\Challenge\EloquentChallenge;
 use MetaQuiz\Repositories\Activation\EloquentActivation;
 use MetaQuiz\Repositories\Organization\EloquentOrganization;
+use MetaQuiz\Repositories\QuestionQuiz\EloquentQuestionQuiz;
 use MetaQuiz\Repositories\Notification\EloquentNotification;
 use MetaQuiz\Repositories\ChallengeRequest\EloquentChallengeRequest;
 
@@ -192,6 +193,17 @@ class RepositoryServiceProvider extends ServiceProvider {
 		 */
 		$answer = $this -> app -> bind('MetaQuiz\Repositories\Answer\AnswerInterface', function($app) {
 			return new EloquentAnswer(new \Answer, new AppCache($app['cache'], 60));
+		});
+
+		/**
+		 * QuestionQuiz Repo
+		 *
+		 * QuestionQuizInterface
+		 * - QuestionQuiz
+		 * - AppCache
+		 */
+		$question_quiz = $this -> app -> bind('MetaQuiz\Repositories\QuestionQuiz\QuestionQuizInterface', function($app) {
+			return new EloquentQuestionQuiz(new \QuestionQuiz, new AppCache($app['cache'], 60));
 		});
 	}
 }

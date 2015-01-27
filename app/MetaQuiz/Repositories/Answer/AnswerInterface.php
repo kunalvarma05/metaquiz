@@ -1,7 +1,7 @@
 <?php
 namespace MetaQuiz\Repositories\Answer;
 
-use MetaQuiz\MetaQuiz\Repositories\RepositoryInterface;
+use MetaQuiz\Repositories\RepositoryInterface;
 
 interface AnswerInterface extends RepositoryInterface {
 
