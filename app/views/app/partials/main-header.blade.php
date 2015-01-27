@@ -4,7 +4,7 @@
 <!--User-Account-Menu-->
 <div class="pull-right">
 	<div class="dropdown pull-left">
-		<a href="#" class="dropdown-toggle pull-right notifications-count btn btn-danger btn-lg" data-toggle="dropdown"> <i class="icon-bell icon"></i> <span class="count">{{count($notifications)}}</span></a>
+		<a href="#" class="dropdown-toggle pull-right notifications-count btn {{ count($notifications) ? btn-danger : "btn-info"}} btn-lg" data-toggle="dropdown"> <i class="icon-bell icon"></i> <span class="count">{{count($notifications)}}</span></a>
 		<ul class="dropdown-menu">
 			@if(count($notifications))
 			@foreach($notifications as $notification)
