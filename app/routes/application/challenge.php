@@ -29,4 +29,9 @@ Route::group(array('prefix' => "challenges", 'before' => "auth|has-password|acti
 	 */
 	Route::post('reject', array('as' => "app.challenges.reject", 'uses' => "ChallengeController@reject"));
 
+	/**
+	 * AddPlayers to the Challenge
+	 */
+	Route::post('addPlayers', array('as' => "app.challenges.addPlayers", 'uses' => "ChallengeController@addPlayers"));
+
 });
