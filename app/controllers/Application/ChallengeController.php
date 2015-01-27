@@ -1,10 +1,8 @@
 <?php
 use MetaQuiz\Repositories\User\UserInterface;
 use MetaQuiz\Repositories\Quiz\QuizInterface;
-use MetaQuiz\Repositories\Course\CourseInterface;
-use MetaQuiz\Repositories\Subject\SubjectInterface;
 use MetaQuiz\Repositories\Challenge\ChallengeInterface;
-use MetaQuiz\Repositories\Organization\OrganizationInterface;
+use MetaQuiz\Service\Process\Quiz\QuizProcessInterface;
 use MetaQuiz\Repositories\ChallengeRequest\ChallengeRequestInterface;
 
 class ChallengeController extends \BaseController {
@@ -21,6 +19,9 @@ class ChallengeController extends \BaseController {
 	//The Quiz Interface Object
 	private $quiz;
 
+	//The QuizProcess Object
+	private $quizProcess;
+
 	/**
 	 * The Constructor
 	 * @param UserInterface             $user
@@ -28,10 +29,11 @@ class ChallengeController extends \BaseController {
 	 * @param ChallengeRequestInterface $challengeRequest
 	 * @param QuizInterface 			$quiz
 	 */
-	public function __construct(UserInterface $user, ChallengeInterface $challenge, ChallengeRequestInterface $challengeRequest, QuizInterface $quiz){
+	public function __construct(UserInterface $user, ChallengeInterface $challenge, ChallengeRequestInterface $challengeRequest, QuizInterface $quiz, QuizProcessInterface $quizProcess){
 		$this->user = $user;
 		$this->quiz = $quiz;
 		$this->challenge = $challenge;
+		$this->quizProcess = $quizProcess;
 		$this->challengeRequest = $challengeRequest;
 	}
 
@@ -149,16 +151,6 @@ class ChallengeController extends \BaseController {
 		$accept = $this->challengeRequest->accept($challengeRequest->id);
 		//If the challenge request is marked as accepted
 		if($accept){
-			//Attach the challenger to the challenge as a player
-			$challenge->users()->attach($user->id);
-
-			//Send the challenger the notification that the user has accepted their challenge
-			$data = array(
-				'message' => $user->name . " accepted your challenge.",
-				'challenge_id' => $challenge->id,
-				'user_id' => $challenge->challenger_id
-				);
-			Event::fire('challenge.accept', array($data));
 
 			//The referenceQuiz
 			$referenceQuiz = $challenge->referenceQuiz;
@@ -166,30 +158,32 @@ class ChallengeController extends \BaseController {
 			$chapters = $referenceQuiz->chapters;
 			$chapter_ids = array_pluck($chapters, 'id');
 
-
-
-			//Create a new Quiz
-			$quiz = $this->quiz->create(array(
-				'status' => "unfinished",
-				'user_id' => $user->id
-				));
-
-			//Attach the selected chapters to the quiz
-			$quiz->chapters()->sync($chapter_ids);
-
 			//Fetch Questions asked in the reference quiz
 			$questionsAsked = $referenceQuiz->questionsAsked;
 			//Pluck the IDs of the questions asked
 			$questions = array_pluck($questionsAsked, 'id');
 
-			//Attach the aggregated questions to the quiz
-			$quiz->questionsAsked()->sync($questions);
+			//Generate
+			$quiz = $this->quizProcess->generate($user->id, $chapter_ids, $questions, $challenge->id);
 
-			//Associate the current quiz to the challenge
-			$challenge->quizes()->save($quiz);
+			//If the quiz was generated
+			if($quiz){
+				//Attach the challenger to the challenge as a player
+				$challenge->users()->attach($user->id);
 
-			//Redirect the user to the play quiz page
-			return Redirect::to(URL::route('app.quiz.play', array($quiz->id)));
+				//Send the challenger the notification that the user has accepted their challenge
+				$data = array(
+					'message' => $user->name . " accepted your challenge.",
+					'challenge_id' => $challenge->id,
+					'user_id' => $challenge->challenger_id
+					);
+
+				Event::fire('challenge.accept', array($data));
+				//Redirect the user to the play quiz page
+				return Redirect::to(URL::route('app.quiz.play', array($quiz->id)));
+			}else{
+				App::abort(500, "Unable to generate quiz!");
+			}
 		}else{
 			//Abort!
 			App::abort(500, "Looks like something is wrong. Please try again later!");
