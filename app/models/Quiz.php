@@ -7,7 +7,7 @@ class Quiz extends \Eloquent {
 	/**
 	 * The Fillable Fields
 	 */
-	protected $fillable = array('status', 'type', 'user_id');
+	protected $fillable = array('status', 'type', 'user_id', 'marks', 'challenge_id');
 
 	/**
 	 * The Table
