@@ -10,10 +10,19 @@ class NotificationController extends \BaseController{
 	 */
 	private $notifier;
 
+	/**
+	 * The Constructor
+	 * @param NotificationInterface $notifier
+	 */
 	public function __construct(NotificationInterface $notifier){
 		$this->notifier = $notifier;
 	}
 
+	/**
+	 * Handle a sinel notification and redirect to the correct target
+	 * @param  int $id ID of the notification
+	 * @return Response
+	 */
 	public function show($id){
 		$notification = $this->notifier->requireByID($id);
 		$type = strtolower($notification->targetable_type);
