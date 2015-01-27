@@ -3,6 +3,7 @@ use MetaQuiz\Repositories\User\UserInterface;
 use MetaQuiz\Repositories\Quiz\QuizInterface;
 use MetaQuiz\Repositories\Challenge\ChallengeInterface;
 use MetaQuiz\Service\Process\Quiz\QuizProcessInterface;
+use MetaQuiz\Repositories\QuestionQuiz\QuestionQuizInterface;
 use MetaQuiz\Repositories\ChallengeRequest\ChallengeRequestInterface;
 
 class ChallengeController extends \BaseController {
@@ -19,6 +20,9 @@ class ChallengeController extends \BaseController {
 	//The Quiz Interface Object
 	private $quiz;
 
+	//The QuestionQuiz Interface Object
+	private $question_quiz;
+
 	//The QuizProcess Object
 	private $quizProcess;
 
@@ -29,11 +33,12 @@ class ChallengeController extends \BaseController {
 	 * @param ChallengeRequestInterface $challengeRequest
 	 * @param QuizInterface 			$quiz
 	 */
-	public function __construct(UserInterface $user, ChallengeInterface $challenge, ChallengeRequestInterface $challengeRequest, QuizInterface $quiz, QuizProcessInterface $quizProcess){
+	public function __construct(UserInterface $user, ChallengeInterface $challenge, ChallengeRequestInterface $challengeRequest, QuizInterface $quiz, QuestionQuizInterface $question_quiz, QuizProcessInterface $quizProcess){
 		$this->user = $user;
 		$this->quiz = $quiz;
 		$this->challenge = $challenge;
 		$this->quizProcess = $quizProcess;
+		$this->question_quiz = $question_quiz;
 		$this->challengeRequest = $challengeRequest;
 	}
 
@@ -120,11 +125,32 @@ class ChallengeController extends \BaseController {
 	 * @return Response
 	 */
 	public function show($id){
+		//Authorized user
 		$user = $this->user->requireByID(Auth::user()->id);
+		//The Challenge
 		$challenge = $user->challenges->find($id);
+
 		//Not yet part of the challenge
 		if(!$challenge){
 			return Redirect::route('app.challenges');
+		}
+
+		//All the quizes part of the challenge
+		$quizes = $challenge->quizes()->where('status','finished')->get();
+
+		//Questions Asked
+		$questions_asked = array();
+		//Marks per question
+		$marksandLabels =  array();
+
+		//Aggregate quiz questions
+		foreach ($quizes as $quiz) {
+			//Question Asked
+			$question_asked = $this->question_quiz->make(array("question", "question.options", "answer"))->where("quiz_id",$quiz->id)->where("is_answered", "=", 1)->get();
+			//All the questions asked
+			$questions_asked[] = $question_asked;
+			//Label and Marks
+			$marksandLabels[] = array('label' => $quiz->user->name, 'points' => array_fetch($question_asked->toArray(), 'answer.marks'));
 		}
 		$players = $challenge->users;
 		$status = $challenge->status;
@@ -134,7 +160,7 @@ class ChallengeController extends \BaseController {
 		//$friend_list = friend_list($friends);
 		$pageTitle = "Quiz Challenge";
 
-		return View::make('app.quiz.challenge.show')->with(compact('challenge','pageTitle','status','challenger','winner','players','friend_list','quiz'));
+		return View::make('app.quiz.challenge.show')->with(compact('challenge','pageTitle','status','challenger','winner','players','friend_list','quiz','marksandLabels'));
 	}
 
 
