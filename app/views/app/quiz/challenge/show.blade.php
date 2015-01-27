@@ -1,7 +1,25 @@
 @extends('app.partials.layout')
+@section('extra-footer')
+{{{javascript_include_tag('quiz-result.js')}}}
+<script type="text/javascript">
+var labels = ['Question 1', 'Question 2', 'Question 3', 'Question 4', 'Question 5'];
+var data = {{json_encode($marksandLabels)}};
+challengeResultChart(labels, data);
+</script>
+@stop
 @section('main')
-<div class="quiz-challenge-page">
+<div class="quiz-challenge-page quiz-result-page">
 	<div class="row">
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+			<div class="brick user-performance-brick">
+				<div class="brick-title">
+					Points earned per question by all challengers
+				</div>
+				<div class="quiz-result-section">
+					<canvas class="quiz-challenge-chart block well-sm" height="300px" id="quiz-result-chart"></canvas>
+				</div>
+			</div>
+		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="brick user-performance-brick">
 				<div class="brick-title">
@@ -19,12 +37,9 @@
 							</div>
 						</div>
 						@endforeach
-						{{--@include('app.quiz.create-challenge')--}}
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="brick user-performance-brick">
 				<div class="brick-title">
 					Details
