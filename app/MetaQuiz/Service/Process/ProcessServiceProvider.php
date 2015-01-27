@@ -15,6 +15,13 @@ class ProcessServiceProvider extends ServiceProvider {
 		$quizProcess = $this -> app -> bind('MetaQuiz\Service\Process\Quiz\QuizProcessInterface', function($app) {
 			return $this->app->make('MetaQuiz\Service\Process\Quiz\QuizProcess');
 		});
+
+		/**
+		 * ChallengeProcess
+		 */
+		$challengeProcess = $this -> app -> bind('MetaQuiz\Service\Process\Challenge\ChallengeProcessInterface', function($app) {
+			return $this->app->make('MetaQuiz\Service\Process\Challenge\ChallengeProcess');
+		});
 	}
 
 }
