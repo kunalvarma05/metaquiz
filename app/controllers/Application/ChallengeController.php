@@ -4,6 +4,7 @@ use MetaQuiz\Repositories\Quiz\QuizInterface;
 use MetaQuiz\Repositories\Challenge\ChallengeInterface;
 use MetaQuiz\Service\Process\Quiz\QuizProcessInterface;
 use MetaQuiz\Repositories\QuestionQuiz\QuestionQuizInterface;
+use MetaQuiz\Service\Process\Challenge\ChallengeProcessInterface;
 use MetaQuiz\Repositories\ChallengeRequest\ChallengeRequestInterface;
 
 class ChallengeController extends \BaseController {
@@ -26,18 +27,25 @@ class ChallengeController extends \BaseController {
 	//The QuizProcess Object
 	private $quizProcess;
 
+	//The ChallengeProcess Object
+	private $challengeProcess;
+
 	/**
 	 * The Constructor
 	 * @param UserInterface             $user
 	 * @param ChallengeInterface        $challenge
 	 * @param ChallengeRequestInterface $challengeRequest
-	 * @param QuizInterface 			$quiz
+	 * @param QuizInterface             $quiz
+	 * @param QuestionQuizInterface     $question_quiz
+	 * @param QuizProcessInterface      $quizProcess
+	 * @param ChallengeProcessInterface $challengeProcess
 	 */
-	public function __construct(UserInterface $user, ChallengeInterface $challenge, ChallengeRequestInterface $challengeRequest, QuizInterface $quiz, QuestionQuizInterface $question_quiz, QuizProcessInterface $quizProcess){
+	public function __construct(UserInterface $user, ChallengeInterface $challenge, ChallengeRequestInterface $challengeRequest, QuizInterface $quiz, QuestionQuizInterface $question_quiz, QuizProcessInterface $quizProcess, ChallengeProcessInterface $challengeProcess){
 		$this->user = $user;
 		$this->quiz = $quiz;
 		$this->challenge = $challenge;
 		$this->quizProcess = $quizProcess;
+		$this->challengeProcess = $challengeProcess;
 		$this->question_quiz = $question_quiz;
 		$this->challengeRequest = $challengeRequest;
 	}
@@ -90,31 +98,44 @@ class ChallengeController extends \BaseController {
 			$challenge->quizes()->save($quiz);
 		}
 
-		//Send the requests to all the users
-		$requests = array();
+		$addPlayers = $this->challengeProcess->addPlayers($challenge, $input['friends']);
 
-		//Traverse over all the friends selected
-		foreach($input['friends'] as $friend){
-			//Check if the friend has already been requested
-			if(!$challenge->requests()->where('user_id', $friend)->first()){
-				//No request was sent, so:
-				//Find and verify the user
-				$u = $this->user->requireByID($friend);
-				//If the user exists
-				if($u){
-					//Send a ChallengeRequest
-					$requests[] = $this->challengeRequest->create(array('status' => "pending", 'challenge_id' => $challenge->id, 'user_id' => $friend));
-					//Send a notification as well
-					$data = array( 'message' => $user->name . " challenged you for a quiz.", 'challenge_id' => $challenge->id, 'user_id' => $u->id);
-					Event::fire( 'challenge.create', array( $data ) );
-				}
-			}
+		if(!$addPlayers){
+			App::abort(500);
 		}
 
-		//Associate the created requests with the challenge
-		$challenge->requests()->saveMany($requests);
-
 		//Redirect to the created challenge's page
+		return Redirect::route('app.challenges.show', array($challenge->id));
+	}
+
+	/**
+	 * Add Players to a Challenge
+	 * @return Response
+	 */
+	public function addPlayers(){
+		//Input
+		$input = Input::only('friends','challenge_id');
+
+		//Authorized User
+		$user = $this->user->requireByID(Auth::user()->id);
+
+		//Challenge created by the user
+		$challenge = $user->challenges->find($input['challenge_id']);
+
+		//Error!
+		if(!$challenge){
+			App::abort(500);
+		}
+
+		//Add players to the challenge
+		$addPlayers = $this->challengeProcess->addPlayers($challenge, $input['friends'], $user);
+
+		//If there was an error
+		if(!$addPlayers){
+			App::abort(500);
+		}
+
+		//Redirect Back
 		return Redirect::route('app.challenges.show', array($challenge->id));
 	}
 
@@ -157,7 +178,7 @@ class ChallengeController extends \BaseController {
 		$challenger = $challenge->challenger;
 		$winner = $challenge->winner ? $challenge->winner->name : "-";
 		$friends = $this->user->getFriends($user->id);
-		//$friend_list = friend_list($friends);
+		$friend_list = friend_list($friends);
 		$pageTitle = "Quiz Challenge";
 
 		return View::make('app.quiz.challenge.show')->with(compact('challenge','pageTitle','status','challenger','winner','players','friend_list','quiz','marksandLabels'));
