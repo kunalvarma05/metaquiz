@@ -124,8 +124,7 @@ class ChallengeController extends \BaseController {
 		$challenge = $user->challenges->find($id);
 		//Not yet part of the challenge
 		if(!$challenge){
-			//Abort!
-			App::abort(500, "Looks like something is wrong. Please try again later!");
+			return Redirect::route('app.challenges');
 		}
 		$players = $challenge->users;
 		$status = $challenge->status;
