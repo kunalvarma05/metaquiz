@@ -17,7 +17,7 @@ quizResultChart(labels, data);
 					<div class="challenge-section">
 						<div class="row">
 							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-								<a href="#" class="btn btn-primary btn-lg btn-block"><i class="glyphicon glyphicon-refresh"></i> New Quiz</a>
+								<a href="{{route('app.subjects')}}" class="btn btn-primary btn-lg btn-block"><i class="glyphicon glyphicon-refresh"></i> New Quiz</a>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 								<button class="btn btn-lg btn-success btn-block" data-toggle="collapse" data-target="#challenge-friend-box" type="button">Challenge your friends</button>
