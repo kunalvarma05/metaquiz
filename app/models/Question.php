@@ -24,13 +24,6 @@ class Question extends \Eloquent {
 	public function options() {
 		return $this -> hasMany('Option', 'question_id');
 	}
-	/**
-	 * The Answer of this question
-	 * @return Option Collection
-	 */
-	public function answer(){
-		return $this -> hasOne('Answer')->where('is_answer', true);
-	}
 
 	/**
 	 * The Quizes the Question belongs tom
