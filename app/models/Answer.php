@@ -4,7 +4,7 @@ class Answer extends \Eloquent {
 	/**
 	 * The fillable fields
 	 */
-	protected $fillable = array("quiz_id","question_quiz_id","user_id","option_id");
+	protected $fillable = array("quiz_id","question_quiz_id","user_id","option_id", 'time_taken', 'marks', 'attempted');
 
 	/**
 	 * The Quiz this answer belongs to
