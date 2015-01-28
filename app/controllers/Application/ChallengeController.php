@@ -98,7 +98,7 @@ class ChallengeController extends \BaseController {
 			$challenge->quizes()->save($quiz);
 		}
 
-		$addPlayers = $this->challengeProcess->addPlayers($challenge, $input['friends']);
+		$addPlayers = $this->challengeProcess->addPlayers($challenge, $input['friends'], $user);
 
 		if(!$addPlayers){
 			App::abort(500);
