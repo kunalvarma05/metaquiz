@@ -19,7 +19,6 @@
 //= require third-party/handlebars.js
 //= require third-party/injector.js
 //= require third-party/scroll.js
-//= require third-party/pie-chart.js
 //= require third-party/select2.js
 //= require third-party/time.js
 //= require third-party/time-circle.js

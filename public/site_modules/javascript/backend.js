@@ -11,7 +11,7 @@
 /********************
  * Third Party
  ********************/
- //= require ./third-party/multiselect.js
+ //= require ./third-party/select2.js
  //= require ./third-party/time.js
 
 /********************
