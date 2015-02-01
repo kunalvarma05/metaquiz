@@ -13,19 +13,19 @@ var clean = require('gulp-clean');
  * Clean CSS
  * - Cleans all the CSS Files in the stylesheets directory
  */
-gulp.task('cleanCSS', function(){
-	return gulp.src('assets/stylesheets/*.css', {read: false})
-    .pipe(clean());
-});
+ gulp.task('cleanCSS', function(){
+ 	return gulp.src('assets/stylesheets/*.css', {read: false})
+ 	.pipe(clean());
+ });
 
 /**
  * Clean JS
  * - Cleans the complete javascripts directory
  */
-gulp.task('cleanJS', function(){
-	return gulp.src('assets/javascripts/*.js', {read: false})
-    .pipe(clean());
-});
+ gulp.task('cleanJS', function(){
+ 	return gulp.src('assets/javascripts/*.js', {read: false})
+ 	.pipe(clean());
+ });
 
 
 /**
@@ -40,16 +40,16 @@ gulp.task('cleanJS', function(){
  * - Checks the size
  * - Stores to the given destination
  */
-gulp.task('buildAppCSS', function() {
-	return gulp.src('site_modules/scss/application/master.scss')
-	.pipe(sass())
-	.pipe(autoprefixer('last 1 version', 'ie 9'))
-	.pipe(rename('assets/stylesheets/application.css'))
-	.pipe(minifycss({
-		keepBreaks : false
-	}))
-	.pipe(gulp.dest(''));
-});
+ gulp.task('buildAppCSS', function() {
+ 	return gulp.src('site_modules/scss/application/master.scss')
+ 	.pipe(sass())
+ 	.pipe(autoprefixer('last 1 version', 'ie 9'))
+ 	.pipe(rename('assets/stylesheets/application.css'))
+ 	.pipe(minifycss({
+ 		keepBreaks : false
+ 	}))
+ 	.pipe(gulp.dest(''));
+ });
 
 /**
  * Build Global CSS
@@ -63,16 +63,16 @@ gulp.task('buildAppCSS', function() {
  * - Checks the size
  * - Stores to the given destination
  */
-gulp.task('buildGlobalCSS', function() {
-	return gulp.src('site_modules/scss/global/master.scss')
-	.pipe(sass())
-	.pipe(autoprefixer('last 1 version', 'ie 9'))
-	.pipe(rename('assets/stylesheets/global.css'))
-	.pipe(minifycss({
-		keepBreaks : false
-	}))
-	.pipe(gulp.dest(''));
-});
+ gulp.task('buildGlobalCSS', function() {
+ 	return gulp.src('site_modules/scss/global/master.scss')
+ 	.pipe(sass())
+ 	.pipe(autoprefixer('last 1 version', 'ie 9'))
+ 	.pipe(rename('assets/stylesheets/global.css'))
+ 	.pipe(minifycss({
+ 		keepBreaks : false
+ 	}))
+ 	.pipe(gulp.dest(''));
+ });
 
 /**
  * Build backend CSS
@@ -86,16 +86,16 @@ gulp.task('buildGlobalCSS', function() {
  * - Checks the size
  * - Stores to the given destination
  */
-gulp.task('buildBackendCSS', function() {
-	return gulp.src('site_modules/scss/backend/master.scss')
-	.pipe(sass())
-	.pipe(autoprefixer('last 1 version', 'ie 9'))
-	.pipe(rename('assets/stylesheets/backend.css'))
-	.pipe(minifycss({
-		keepBreaks : false
-	}))
-	.pipe(gulp.dest(''));
-});
+ gulp.task('buildBackendCSS', function() {
+ 	return gulp.src('site_modules/scss/backend/master.scss')
+ 	.pipe(sass())
+ 	.pipe(autoprefixer('last 1 version', 'ie 9'))
+ 	.pipe(rename('assets/stylesheets/backend.css'))
+ 	.pipe(minifycss({
+ 		keepBreaks : false
+ 	}))
+ 	.pipe(gulp.dest(''));
+ });
 
 /**
  * Build JS
@@ -108,25 +108,25 @@ gulp.task('buildBackendCSS', function() {
  * - Saves to the assets/javascripts directory
  * - Outputs any errors
  */
-gulp.task('buildJS', function() {
-	gulp.src('site_modules/javascript/*.js')
-	.pipe(include())
-	.pipe(uglify())
-	.pipe(gulp.dest('assets/javascripts/'))
-	.on('error', gutil.log);
-});
+ gulp.task('buildJS', function() {
+ 	gulp.src('site_modules/javascript/*.js')
+ 	.pipe(include())
+ 	.pipe(uglify())
+ 	.pipe(gulp.dest('assets/javascripts/'))
+ 	.on('error', gutil.log);
+ });
 
 /**
  * Watch all the scss files for BuildCSS
  * Watch all the js files for BuildJS
  */
-gulp.task('watch', function() {
-	gulp.watch('site_modules/scss/application/**/**/*.scss', ['buildAppCSS']);
-	gulp.watch('site_modules/scss/global/**/**/*.scss', ['buildGlobalCSS']);
-	gulp.watch('site_modules/scss/backend/**/**/*.scss', ['buildBackendCSS']);
-	gulp.watch('site_modules/scss/third-party/**/**/*.scss', ['buildAppCSS','buildGlobalCSS','buildBackendCSS']);
-	gulp.watch('site_modules/javascript/**/**/*.js', ['buildJS']);
-});
+ gulp.task('watch', function() {
+ 	gulp.watch('site_modules/scss/application/**/*.scss', ['buildAppCSS']);
+ 	gulp.watch('site_modules/scss/global/**/*.scss', ['buildGlobalCSS']);
+ 	gulp.watch('site_modules/scss/backend/**/*.scss', ['buildBackendCSS']);
+ 	gulp.watch('site_modules/scss/third-party/**/*.scss', ['buildAppCSS','buildGlobalCSS','buildBackendCSS']);
+ 	gulp.watch('site_modules/javascript/**/*.js', ['buildJS']);
+ });
 
 //Default Task
 gulp.task('default', ['cleanCSS','cleanJS','buildAppCSS','buildGlobalCSS','buildBackendCSS','buildJS','watch']);
