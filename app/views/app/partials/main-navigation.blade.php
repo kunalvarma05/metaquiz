@@ -9,6 +9,9 @@
 		<li class="{{HTML::activeState('app.subjects')}}">
 			<a href="{{route('app.subjects')}}" data-toggle="tooltip" data-placement="right" class="icon-grid subject-icon" title="Subjects"></a>
 		</li>
+		<li class="{{HTML::activeState('app.quizzes')}}">
+			<a href="{{route('app.quizzes')}}" data-toggle="tooltip" data-placement="right" class="icon-pencil quiz-icon" title="Challenges"></a>
+		</li>
 		<li class="{{HTML::activeState('app.challenges')}}">
 			<a href="{{route('app.challenges')}}" data-toggle="tooltip" data-placement="right" class="icon-fire challenge-icon" title="Challenges"></a>
 		</li>
