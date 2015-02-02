@@ -15,9 +15,6 @@
 		jQuery(this).find(".dropdown-menu").first().stop(!0, !0).slideUp(200);
 	});
 
-	//User Performance Chart
-	jQuery('.user-performance-chart').circliful();
-
 	//Tooltips
 	jQuery("[data-toggle=tooltip]").tooltip({
 		container : "body"
