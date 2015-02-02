@@ -9,7 +9,7 @@
 			<div class="media well">
 				<div class="pull-left">
 					<a href="#">
-						<img src="{{profilePic($challengeRequest->challenge->challenger->picture)}}" class="activity-item-image" width="32px">
+						<img src="{{profilePic($challengeRequest->challenge->challenger->picture)}}" width="32px" height="32px" class="activity-item-image img-circle">
 					</a>
 				</div>
 				<div class="media-body">
@@ -47,7 +47,7 @@
 			<div class="media well">
 				<div class="pull-left">
 					<a href="#">
-						<img src="{{profilePic($challenge->challenger->picture)}}" class="activity-item-image" width="32px">
+						<img src="{{profilePic($challenge->challenger->picture)}}" width="32px" height="32px" class="activity-item-image img-circle">
 					</a>
 				</div>
 				<div class="media-body">
