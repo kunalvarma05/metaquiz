@@ -26,18 +26,16 @@ challengeResultChart(labels, data);
 					Players
 				</div>
 				<div class="brick-body">
-					<div class="row activity-feed">
+					<div class="list-boxes">
 						@foreach($players as $player)
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-							<div class="activity-item">
-								<img src="{{profilePic($player->picture)}}" class="activity-item-image">
-								<div class="activity-item-text">
-									<a href="#">{{$player->name}}</a>
-								</div>
+						<div class="list-box">
+							<img src="{{profilePic($player->picture)}}" class="list-box-item-image">
+							<div class="list-box-item">
+								<a href="#">{{$player->name}}</a>
 							</div>
 						</div>
 						@endforeach
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<div class="well-sm">
 							<a href="#addPlayersForm" class="btn btn-lg btn-info btn-block" data-toggle="collapse" data-target="#addPlayersForm">
 								<i class="glyphicon glyphicon-plus"></i> Add Players
 							</a>
