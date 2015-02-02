@@ -1,10 +1,11 @@
 <?php namespace MetaQuiz\Events;
 
 use \App;
-use MetaQuiz\Events\Challenge\ChallengeEventHandler;
+use Illuminate\Support\ServiceProvider;
 use MetaQuiz\Events\User\UserEventHandler;
 use MetaQuiz\Events\Faculty\FacultyEventHandler;
-use Illuminate\Support\ServiceProvider;
+use MetaQuiz\Events\Challenge\ChallengeEventHandler;
+use MetaQuiz\Events\Quiz\QuizEventHandler;
 
 class EventServiceProvider extends ServiceProvider {
 
@@ -22,10 +23,14 @@ class EventServiceProvider extends ServiceProvider {
 
     //The ChallengeEventSubscriber
     $this->app->events->subscribe(new ChallengeEventHandler(App::make('MetaQuiz\Repositories\Notification\NotificationInterface')));
+
+    //The QuizEventSubscriber
+    $this->app->events->subscribe(new QuizEventHandler(App::make('MetaQuiz\Repositories\Activity\ActivityInterface')));
   }
 
-  public function register()
-  {
+  /**
+   * Register
+   */
+  public function register(){}
 
-  }
 }
