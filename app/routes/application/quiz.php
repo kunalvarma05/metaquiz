@@ -8,7 +8,7 @@
 /**
  * Quiz List Page
  */
-Route::get('quiz', array('as' => "app.quiz.index", 'uses' => "QuizController@index"));
+Route::get('quiz', array('as' => "app.quizzes", 'uses' => "QuizController@index"));
 
 
 /**
