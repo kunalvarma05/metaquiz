@@ -14,23 +14,25 @@
     @extend .clearfix;
     //Activity Item Image
     .activity-item-image{
-      width: 40px;
-      height: 40px;
+      width: 32px;
+      height: 32px;
       margin-right: 10px;
       border-radius: 50%;
       display: inline-block;
+      vertical-align: middle;
     }
     //Activity Item Text
     .activity-item-text{
-      display: inline-block;
       color: #555;
       font-weight: 600;
+      display: inline-block;
+      vertical-align: middle;
     }
     //Activity Item Date
     .activity-item-date{
       float: right;
       color: #999;
-      padding: 10px 0;
+      padding: 8px 0;
       @extend .small;
     }
     //Activity Buttons
