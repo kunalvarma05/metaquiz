@@ -6,6 +6,12 @@
 
 
 /**
+ * Quiz List Page
+ */
+Route::get('quiz', array('as' => "app.quiz.index", 'uses' => "QuizController@index"));
+
+
+/**
  * New Quiz Page
  */
 Route::get('quiz/new/course/{course_id}/subject/{subject_id}', array('as' => "app.quiz.create", 'uses' => "QuizController@create"));

@@ -37,7 +37,9 @@ class QuizController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		$quizzes = Auth::user()->quizes;
+		$pageTitle = "Your Quiz List";
+		return View::make('app.quiz.index', compact('pageTitle','quizzes'));
 	}
 
 	/**
@@ -90,7 +92,10 @@ class QuizController extends \BaseController {
 
 		//If the quiz was generated
 		if($quiz){
-		//Redirect the user to the play quiz page
+			//Fire the quiz play event
+			$data = array('message' => "started playing a", 'user_id' => Auth::user()->id, 'quiz_id' => $quiz->id);
+			Event::fire('quiz.play', array($data));
+			//Redirect the user to the play quiz page
 			return Redirect::to(URL::route('app.quiz.play', array($quiz->id)));
 		}else{
 			App::abort(500, "Unable to generate quiz!");
