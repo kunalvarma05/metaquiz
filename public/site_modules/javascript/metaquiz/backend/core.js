@@ -11,9 +11,9 @@ jQuery(document).ready(function($) {
 	var fullHeight = jQuery(window).height() - (jQuery('.navbar-main').height() + jQuery('.links-menu').height() + jQuery('.sub-header').height());
 	jQuery('.full-height').css("min-height", fullHeight);
 
-	//Multi Select
-	jQuery('select[multiple]').multiselect({
-		buttonWidth: "100%",
-		maxHeight: 400
+	jQuery('select').select2({
+		placeholder: "Select the chapters...",
+		theme: "default",
+		width: "style"
 	});
 });
